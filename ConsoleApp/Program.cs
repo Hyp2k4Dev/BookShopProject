@@ -296,7 +296,7 @@ namespace BookShopSystem
         }
         public static void BackToMainMenu()
         {
-            Console.WriteLine("You have returnt to the main menu!");
+            Console.WriteLine("You have returned to the main menu!");
             Console.ReadLine();
         }
     }
