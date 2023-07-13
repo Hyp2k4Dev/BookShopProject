@@ -13,11 +13,11 @@ namespace BookShopSystem
 
         static async Task Main(string[] args)
         {
-            MySqlConnection connection = new MySqlConnection
-            {
-                ConnectionString = @"server=localhost;userid=root;password=hiepnb2004;port=3306;database=employees;"
-            };
-            connection.Open();
+            // MySqlConnection connection = new MySqlConnection
+            // {
+            //     ConnectionString = @"server=localhost;userid=root;password=hiepnb2004;port=3306;database=employees;"
+            // };
+            // connection.Open();
             var table = new Table();
             table.AddColumn(@"╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
 ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
