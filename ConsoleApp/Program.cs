@@ -6,7 +6,7 @@ using MySqlConnector;
 
 namespace ConsoleApp{
     class Program{
-        static void main(string[]args){
+        static void Main(string[]Args){
 
         }
     }
