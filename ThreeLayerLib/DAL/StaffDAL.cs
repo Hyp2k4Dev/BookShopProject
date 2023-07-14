@@ -1,3 +1,9 @@
 using Persistence;
-using BL;
+namespace DAL{
+    public class StaffDAL{
+
+    }
+}
+
+
 

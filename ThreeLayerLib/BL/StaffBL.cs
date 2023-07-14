@@ -1,19 +1,24 @@
-// using DAL;
+using DAL;
 using Persistence;
 
 namespace BL
 {
     public class StaffBL
     {
-        private StaffBL cdal = new StaffBL();
+        private StaffBL sDAL = new StaffDAL();
         public Customer? GetById(int customerId)
         {
-            return cdal.GetById(customerId);
+            return sDAL.GetById(customerId);
         }
 
         public int AddCustomer(Customer customer)
         {
-            return cdal.AddCustomer(customer);
+            return sDAL.AddCustomer(customer);
+        }
+
+        public static implicit operator StaffBL(StaffDAL v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
