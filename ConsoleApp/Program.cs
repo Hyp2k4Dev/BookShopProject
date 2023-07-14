@@ -8,14 +8,13 @@ using System.IO;
 using System.Text;
 using System.Data.SqlTypes;
 
-namespace ConsoleApp{
-    class Program{
+namespace ConsoleApp
+{
+    class Program
+    {
         static void Main(string[] Args)
         {
 
         }
-    }
-    class Login{
-        
     }
 }

@@ -8,26 +8,24 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\tuant\\.nuget\\packages\\": {}
+    "C:\\Users\\admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\Project\\BookShopProject\\ThreeLayerLib\\BL\\BL.csproj",
+      "projectUniqueName": "C:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\BL\\BL.csproj",
       "projectName": "BL",
-      "projectPath": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\Project\\BookShopProject\\ThreeLayerLib\\BL\\BL.csproj",
-      "packagesPath": "C:\\Users\\tuant\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\Project\\BookShopProject\\ThreeLayerLib\\BL\\obj\\",
+      "projectPath": "C:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\BL\\BL.csproj",
+      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\BL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\tuant\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -61,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }
