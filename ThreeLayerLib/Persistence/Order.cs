@@ -6,6 +6,6 @@ public class Order
     public Customer? Customer { get; set; }
     public Staff? Staff { get; set; }
     public DateTime OrderDate { get; set; }
-    public Book[]? Book { get; set; }
+    public List<Book>? Book { get; set; }
     public int status { get; set; }
 }
