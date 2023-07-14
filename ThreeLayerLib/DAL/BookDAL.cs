@@ -1,8 +1,10 @@
-namespace DAL;
+using MySqlConnector;
 using Persistence;
 
 
 
-public class BookDAL{
+
+public class BookDAL
+{
 
 }

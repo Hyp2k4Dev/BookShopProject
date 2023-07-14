@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "zISLMyg0VxHr3QwFamtWKvSBKqaER1bX0Xbnb2B60hbx97RuJ06enVcXUIxUKaZq/BFxlD8gSxV8ShgShC471Q==",
+  "dgSpecHash": "ny57wDGczRpm40PsaoYNvVxEvTOYqMCyfHFPE968qRJSiywLcKBlbWr1XybgNeIg9SwydfnzLEvnJrN/Q9W4zw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "c:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\admin\\.nuget\\packages\\mysqlconnector\\2.2.5\\mysqlconnector.2.2.5.nupkg.sha512"
+  ],
   "logs": []
 }

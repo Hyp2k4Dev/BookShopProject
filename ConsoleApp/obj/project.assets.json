@@ -43,6 +43,9 @@
       "ThreeLayerLib/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "MySqlConnector": "2.2.5"
+        },
         "compile": {
           "bin/placeholder/ThreeLayerLib.dll": {}
         },
@@ -140,11 +143,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\admin\\Desktop\\Project\\ConsoleApp\\ConsoleApp.csproj",
+      "projectUniqueName": "c:\\Users\\admin\\Desktop\\Project\\ConsoleApp\\ConsoleApp.csproj",
       "projectName": "ConsoleApp",
-      "projectPath": "C:\\Users\\admin\\Desktop\\Project\\ConsoleApp\\ConsoleApp.csproj",
+      "projectPath": "c:\\Users\\admin\\Desktop\\Project\\ConsoleApp\\ConsoleApp.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\admin\\Desktop\\Project\\ConsoleApp\\obj\\",
+      "outputPath": "c:\\Users\\admin\\Desktop\\Project\\ConsoleApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -159,8 +162,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj": {
-              "projectPath": "C:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj"
+            "c:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj": {
+              "projectPath": "c:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj"
             }
           }
         }

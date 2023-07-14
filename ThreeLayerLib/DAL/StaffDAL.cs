@@ -1,9 +1,13 @@
 using Persistence;
-namespace DAL{
-    public class StaffDAL{
+using MySqlConnector;
+namespace DAL
+{
+    public class StaffDAL
+    {
 
     }
 }
+
 
 
 
