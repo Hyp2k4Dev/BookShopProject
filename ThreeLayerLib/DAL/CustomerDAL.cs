@@ -19,7 +19,7 @@ namespace DAL
             try
             {
                 query = @"select customer_id, customer_name,
-                        ifnull(customer_address, '') as customer_address
+                        if null(customer_address, '') as customer_address
                         from Customers where customer_id=" + customerId + ";";
                 MySqlDataReader reader = (new MySqlCommand(query, connection)).ExecuteReader();
                 if (reader.Read())
@@ -34,7 +34,7 @@ namespace DAL
         internal Customer GetCustomer(MySqlDataReader reader)
         {
             Customer c = new Customer();
-            c.CustmerId = reader.GetInt32("customer_id");
+            c.CustomerId = reader.GetInt32("customer_id");
             c.CustomerName = reader.GetString("customer_name");
             c.CustomerAddress = reader.GetString("customer_address");
             return c;
