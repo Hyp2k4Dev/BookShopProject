@@ -1,6 +1,6 @@
 using MySqlConnector;
 
-namespace ThreeLayerLib.DAL
+namespace DAL
 {
     public class DbConfig
     {
@@ -8,7 +8,7 @@ namespace ThreeLayerLib.DAL
         private DbConfig() { }
         public static MySqlConnection GetDefaultConnection()
         {
-            return GetConnection("server=localhost;user id=root;password=Tuannb12345;port=3306;database=BookShop;IgnoreCommandTransaction=true;");
+            return GetConnection("server=localhost;userid=root;password=Tuannb12345;port=3306;database=BookShop;IgnoreCommandTransaction=true;");
         }
 
         public static MySqlConnection GetConnection()

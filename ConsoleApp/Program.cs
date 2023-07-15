@@ -6,7 +6,6 @@ using MySqlConnector;
 using Spectre.Console;
 using System.IO;
 using System.Text;
-using System.Data.SqlTypes;
 
 namespace ConsoleApp
 {

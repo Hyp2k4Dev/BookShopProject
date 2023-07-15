@@ -1,13 +1,13 @@
 using MySqlConnector;
-using ThreeLayerLib.Persistence;
+using Persistence;
 
-namespace ThreeLayerLib.DAL
+namespace DAL
 {
     public class CustomerDAL
     {
         private string query;
         private MySqlConnection connection;
-      
+
         public CustomerDAL()
         {
             connection = DbConfig.GetConnection();
