@@ -1,6 +1,6 @@
 using MySqlConnector;
 
-namespace ThreeLayerLib.DAL
+namespace DAL
 {
     public class DbConfig
     {

@@ -1,0 +1,5 @@
+C:\Users\tuant\OneDrive\Máy tính\Project\Project\BookShopProject\ThreeLayerLib\DAL\obj\Debug\net7.0\DAL.csproj.AssemblyReference.cache
+C:\Users\tuant\OneDrive\Máy tính\Project\Project\BookShopProject\ThreeLayerLib\DAL\obj\Debug\net7.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tuant\OneDrive\Máy tính\Project\Project\BookShopProject\ThreeLayerLib\DAL\obj\Debug\net7.0\DAL.AssemblyInfoInputs.cache
+C:\Users\tuant\OneDrive\Máy tính\Project\Project\BookShopProject\ThreeLayerLib\DAL\obj\Debug\net7.0\DAL.AssemblyInfo.cs
+C:\Users\tuant\OneDrive\Máy tính\Project\Project\BookShopProject\ThreeLayerLib\DAL\obj\Debug\net7.0\DAL.csproj.CoreCompileInputs.cache
