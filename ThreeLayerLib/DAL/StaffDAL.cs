@@ -34,7 +34,7 @@ namespace DAL
             s.StaffID = reader.GetInt32("staff_ID");
             s.UserName = reader.GetString("user_Name");
             s.Password = reader.GetString("Pass_word");
-            return staff;
+            return s;
         }
     }
 }
