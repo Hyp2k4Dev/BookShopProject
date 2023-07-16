@@ -7,7 +7,7 @@ public class BookDAL
 {
     private string query = "";
     private MySqlConnection connection = DbConfig.GetConnection();
-    public List<Book> GetBookDetails(Book newBook)
+    public List<Book> GetBookDetails()
     {
         Book book = new Book();
         List<Book> bookList = new List<Book>();
@@ -18,7 +18,7 @@ public class BookDAL
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                book = GetBook(reader);
+                book = GetBookDetails(reader);
                 bookList.Add(book);
             }
             reader.Close();
