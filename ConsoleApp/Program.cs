@@ -11,7 +11,7 @@ namespace ConsoleApp
 {
     class Program
     {
-        static void Main(string[] Args)
+        static void Main(string[] args)
         {
 
         }
