@@ -138,47 +138,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\tuant\\.nuget\\packages\\": {}
+    "C:\\Users\\admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj",
-      "projectName": "ConsoleApp",
-      "projectPath": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj",
-      "packagesPath": "C:\\Users\\tuant\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ConsoleApp\\obj\\",
-=======
       "projectUniqueName": "c:\\Users\\admin\\Desktop\\Project\\ConsoleApp\\ConsoleApp.csproj",
       "projectName": "ConsoleApp",
       "projectPath": "c:\\Users\\admin\\Desktop\\Project\\ConsoleApp\\ConsoleApp.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
       "outputPath": "c:\\Users\\admin\\Desktop\\Project\\ConsoleApp\\obj\\",
->>>>>>> c2e52dbbc4ff1761d14f3a1ce4e9643ba89ecd46
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\tuant\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-<<<<<<< HEAD
-            "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj": {
-              "projectPath": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj"
-=======
             "c:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj": {
               "projectPath": "c:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj"
->>>>>>> c2e52dbbc4ff1761d14f3a1ce4e9643ba89ecd46
             }
           }
         }
@@ -218,8 +203,16 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file c:\\Users\\admin\\Desktop\\Project\\ConsoleApp\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
