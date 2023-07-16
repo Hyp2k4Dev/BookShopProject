@@ -7,7 +7,7 @@ public class BookDAL
 {
     private string query = "";
     private MySqlConnection connection = DbConfig.GetConnection();
-    public List<Book> GetBookDetails()
+    public List<Book> GetBookDetails(Book newBook)
     {
         Book book = new Book();
         List<Book> bookList = new List<Book>();
@@ -56,7 +56,7 @@ public class BookDAL
         book.BookID = reader.GetInt32("book_ID");
         book.Title = reader.GetString("title");
         book.AuthorName = reader.GetString("");
-        product.Price = reader.GetDecimal("price");
+        // product.Price = reader.GetDecimal("price");
         return product;
     }
 }

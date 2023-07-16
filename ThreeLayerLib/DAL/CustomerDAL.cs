@@ -52,7 +52,7 @@ namespace DAL
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@customerName", c.CustomerName);
                 cmd.Parameters["@customerName"].Direction = System.Data.ParameterDirection.Input;
-                md.Parameters.AddWithValue("@customerPhone", c.phoneNumber);
+                cmd.Parameters.AddWithValue("@customerPhone", c.phoneNumber);
                 cmd.Parameters["@customerPhone"].Direction = System.Data.ParameterDirection.Input;
                 cmd.Parameters.AddWithValue("@customerAddress", c.CustomerAddress);
                 cmd.Parameters["@customerAddress"].Direction = System.Data.ParameterDirection.Input;
