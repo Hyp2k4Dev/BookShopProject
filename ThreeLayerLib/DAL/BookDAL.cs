@@ -54,7 +54,7 @@ public class BookDAL
     {
         Book book = new Book();
         book.BookID = reader.GetInt32("book_ID");
-        book.BookAuthor.AuthorID = reader.GetInt32("author_ID");
+        book.AuthorID = reader.GetInt32("author_ID");
         book.Title = reader.GetString("title");
         book.Price = reader.GetDecimal("price");
 
