@@ -13,14 +13,14 @@ namespace DAL
             connection = DbConfig.GetConnection();
             query = "";
         }
-        public Customer? GetById(int customerId)
+        public Customer? GetCustomerById(int customerID)
         {
             Customer? c = null;
             try
             {
-                query = @"select customer_id, customer_name,
-                        if null(customer_address, '') as customer_address
-                        from Customers where customer_id=" + customerId + ";";
+                query = @"select customer_ID, customer_name, phoneNumber,
+                        if null(address, '') as address
+                        from Customers where customer_ID=" + customerID + ";";
                 MySqlDataReader reader = (new MySqlCommand(query, connection)).ExecuteReader();
                 if (reader.Read())
                 {
@@ -34,7 +34,7 @@ namespace DAL
         internal Customer GetCustomer(MySqlDataReader reader)
         {
             Customer c = new Customer();
-            c.CustomerId = reader.GetInt32("customer_id");
+            c.CustomerId = reader.GetInt32("customer_ID");
             c.CustomerName = reader.GetString("customer_name");
             c.CustomerAddress = reader.GetString("customer_address");
             return c;
@@ -52,10 +52,12 @@ namespace DAL
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@customerName", c.CustomerName);
                 cmd.Parameters["@customerName"].Direction = System.Data.ParameterDirection.Input;
+                md.Parameters.AddWithValue("@customerPhone", c.phoneNumber);
+                cmd.Parameters["@customerPhone"].Direction = System.Data.ParameterDirection.Input;
                 cmd.Parameters.AddWithValue("@customerAddress", c.CustomerAddress);
                 cmd.Parameters["@customerAddress"].Direction = System.Data.ParameterDirection.Input;
                 cmd.Parameters.AddWithValue("@customerId", MySqlDbType.Int32);
-                cmd.Parameters["@customerId"].Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters["@customerID"].Direction = System.Data.ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
                 result = (int?)cmd.Parameters["@customerId"].Value ?? 0;
             }
