@@ -78,13 +78,18 @@ namespace ConsoleApp
                 await AnsiConsole.Progress()
 .StartAsync(async ctx =>
 {
+    // Define tasks
     var task1 = ctx.AddTask("[green]Progress[/]");
+    // var task2 = ctx.AddTask("Done!!!");
 
     while (!ctx.IsFinished)
     {
+        // Simulate some work
         await Task.Delay(100);
 
+        // Increment
         task1.Increment(4.5);
+        // task2.Increment(2);
     }
 });
             }
@@ -163,6 +168,7 @@ namespace ConsoleApp
             }
         }
 
+
         public static async void createOrder()
         {
             var table = new Table();
@@ -213,7 +219,6 @@ namespace ConsoleApp
         }
         public static async Task LoginAsync()
         {
-            Console.WriteLine("Please enter your username and password to log in !!!✉");
             Console.WriteLine("Please enter your account: ");
             string? username = Console.ReadLine();
             Console.WriteLine("Please enter your password: ");
@@ -264,4 +269,3 @@ namespace ConsoleApp
         }
     }
 }
-
