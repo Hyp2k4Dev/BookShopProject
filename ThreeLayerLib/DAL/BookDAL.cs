@@ -18,7 +18,7 @@ public class BookDAL
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                book = GetBookDetails(reader);
+                book = GetBook(reader);
                 bookList.Add(book);
             }
             reader.Close();
@@ -54,12 +54,10 @@ public class BookDAL
     {
         Book book = new Book();
         book.BookID = reader.GetInt32("book_ID");
-        book.AuthorID = reader.GetString("");
+        // book.AuthorID = reader.GetInt32("author_ID");
         book.Title = reader.GetString("title");
+        book.Price = reader.GetDecimal("price");
 
-        product.Price = reader.GetDecimal("price");
-        book.AuthorName = reader.GetString("");
-        // product.Price = reader.GetDecimal("price");
-        return product;
+        return book;
     }
 }
