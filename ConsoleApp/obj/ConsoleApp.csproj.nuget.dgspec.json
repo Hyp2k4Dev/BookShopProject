@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj": {}
+    "C:\\Users\\admin\\Desktop\\Project\\ConsoleApp\\ConsoleApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj": {
+    "C:\\Users\\admin\\Desktop\\Project\\ConsoleApp\\ConsoleApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\Project\\ConsoleApp\\ConsoleApp.csproj",
         "projectName": "ConsoleApp",
-        "projectPath": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj",
-        "packagesPath": "C:\\Users\\tuant\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ConsoleApp\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Desktop\\Project\\ConsoleApp\\ConsoleApp.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\Project\\ConsoleApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tuant\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj": {
-                "projectPath": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj"
+              "C:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj"
               }
             }
           }
@@ -73,14 +73,14 @@
         }
       }
     },
-    "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj": {
+    "C:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj",
         "projectName": "ThreeLayerLib",
-        "projectPath": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj",
-        "packagesPath": "C:\\Users\\tuant\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ThreeLayerLib\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tuant\\AppData\\Roaming\\NuGet\\NuGet.Config",

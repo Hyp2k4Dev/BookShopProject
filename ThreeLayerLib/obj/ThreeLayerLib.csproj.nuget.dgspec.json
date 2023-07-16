@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj": {}
   },
   "projects": {
@@ -12,6 +13,19 @@
         "projectPath": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj",
         "packagesPath": "C:\\Users\\tuant\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ThreeLayerLib\\obj\\",
+=======
+    "c:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj": {}
+  },
+  "projects": {
+    "c:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "c:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj",
+        "projectName": "ThreeLayerLib",
+        "projectPath": "c:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\obj\\",
+>>>>>>> c2e52dbbc4ff1761d14f3a1ce4e9643ba89ecd46
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tuant\\AppData\\Roaming\\NuGet\\NuGet.Config",
