@@ -58,6 +58,6 @@ public class BookDAL
         book.Title = reader.GetString("title");
         book.Price = reader.GetDecimal("price");
 
-        return ;
+        return book;
     }
 }
