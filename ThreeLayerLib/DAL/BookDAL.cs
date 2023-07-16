@@ -18,7 +18,7 @@ public class BookDAL
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                book = GetBookDetails(reader);
+                book = GetBook(reader);
                 bookList.Add(book);
             }
             reader.Close();
