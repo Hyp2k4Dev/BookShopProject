@@ -9,7 +9,7 @@ namespace DAL
         private MySqlConnection connection = DbConfig.GetConnection();
         public Staff GetStaffAccount(string staffName)
         {
-            Staff staff = new Staff();
+            Staff s = new Staff();
             try
             {
                 query = @"select * from Staffs where staff_name=@staffname;";
@@ -18,7 +18,7 @@ namespace DAL
                 MySqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    staff = GetStaff(reader);
+                    s = GetStaff(reader);
                 }
                 reader.Close();
             }
@@ -26,14 +26,14 @@ namespace DAL
             {
                 Console.WriteLine(ex.Message);
             }
-            return staff;
+            return s;
         }
         public Staff GetStaff(MySqlDataReader reader)
         {
-            Staff staff = new Staff();
-            staff.StaffID = reader.GetInt32("staff_ID");
-            staff.UserName = reader.GetString("user_Name");
-            staff.Password = reader.GetString("Pass_word");
+            Staff s = new Staff();
+            s.StaffID = reader.GetInt32("staff_ID");
+            s.UserName = reader.GetString("user_Name");
+            s.Password = reader.GetString("Pass_word");
             return staff;
         }
     }
