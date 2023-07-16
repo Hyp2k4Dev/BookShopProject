@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj": {}
+    "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj": {}
   },
   "projects": {
-    "C:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj": {
+    "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj",
+        "projectUniqueName": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj",
         "projectName": "ThreeLayerLib",
-        "projectPath": "C:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\ThreeLayerLib.csproj",
-        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\admin\\Desktop\\Project\\ThreeLayerLib\\obj\\",
+        "projectPath": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj",
+        "packagesPath": "C:\\Users\\tuant\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tuant\\OneDrive\\Máy tính\\Project\\BookShopProject\\ThreeLayerLib\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\tuant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -59,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     }
