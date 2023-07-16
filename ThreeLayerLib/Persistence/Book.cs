@@ -2,6 +2,8 @@ namespace Persistence;
 
 public class Book
 {
+    internal int AuthorID;
+
     public int BookID { get; set; }
     public int ISBN { get; set; }
     public string? Title { get; set; }
