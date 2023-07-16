@@ -8,8 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ThreeLayerLib
-<<<<<<< HEAD
-build_property.ProjectDir = c:\Users\tuant\OneDrive\Máy tính\Project\BookShopProject\ThreeLayerLib\
-=======
 build_property.ProjectDir = c:\Users\admin\Desktop\Project\ThreeLayerLib\
->>>>>>> c2e52dbbc4ff1761d14f3a1ce4e9643ba89ecd46
