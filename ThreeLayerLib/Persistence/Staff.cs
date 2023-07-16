@@ -6,10 +6,5 @@ public class Staff
     public string? StaffName { get; set; }
     public string UserName { get; set; } = "staff";
     public string Password { get; set; } = "staff";
-    // public enum Role { get, set }
 
 }
-// enum Role
-// {
-//     Staff
-// }
