@@ -1,5 +1,0 @@
-C:\Users\admin\Desktop\Project\ThreeLayerLib\BL\obj\Debug\net7.0\BL.csproj.AssemblyReference.cache
-C:\Users\admin\Desktop\Project\ThreeLayerLib\BL\obj\Debug\net7.0\BL.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\admin\Desktop\Project\ThreeLayerLib\BL\obj\Debug\net7.0\BL.AssemblyInfoInputs.cache
-C:\Users\admin\Desktop\Project\ThreeLayerLib\BL\obj\Debug\net7.0\BL.AssemblyInfo.cs
-C:\Users\admin\Desktop\Project\ThreeLayerLib\BL\obj\Debug\net7.0\BL.csproj.CoreCompileInputs.cache

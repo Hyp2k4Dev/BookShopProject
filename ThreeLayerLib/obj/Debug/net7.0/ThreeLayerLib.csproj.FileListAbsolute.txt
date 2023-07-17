@@ -10,11 +10,3 @@ C:\Users\admin\Desktop\Project\ThreeLayerLib\obj\Debug\net7.0\ThreeLayerLib.dll
 C:\Users\admin\Desktop\Project\ThreeLayerLib\obj\Debug\net7.0\refint\ThreeLayerLib.dll
 C:\Users\admin\Desktop\Project\ThreeLayerLib\obj\Debug\net7.0\ThreeLayerLib.pdb
 C:\Users\admin\Desktop\Project\ThreeLayerLib\obj\Debug\net7.0\ref\ThreeLayerLib.dll
-C:\Users\tuant\OneDrive\Máy tính\Project\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\ThreeLayerLib.csproj.AssemblyReference.cache
-C:\Users\tuant\OneDrive\Máy tính\Project\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\ThreeLayerLib.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\tuant\OneDrive\Máy tính\Project\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\ThreeLayerLib.AssemblyInfoInputs.cache
-C:\Users\tuant\OneDrive\Máy tính\Project\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\ThreeLayerLib.AssemblyInfo.cs
-C:\Users\tuant\OneDrive\Máy tính\Project\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\ThreeLayerLib.csproj.CoreCompileInputs.cache
-C:\Users\tuant\OneDrive\Máy tính\Project\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\ThreeLayerLib.dll
-C:\Users\tuant\OneDrive\Máy tính\Project\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\refint\ThreeLayerLib.dll
-C:\Users\tuant\OneDrive\Máy tính\Project\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\ThreeLayerLib.pdb
