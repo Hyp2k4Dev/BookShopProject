@@ -22,7 +22,7 @@ namespace ConsoleApp
                          ║  ║ ║║ ╦║║║║
                          ╩═╝╚═╝╚═╝╩╝╚╝");
             AnsiConsole.Write(table);
-            Console.WriteLine("Please enter your username and password to log in !!!✉");
+            Console.WriteLine("Please enter your username and password to log in !!!");
             Console.WriteLine("Please enter your account: ");
             string? username = Console.ReadLine();
             Console.WriteLine("Please enter your password: ");
@@ -62,6 +62,7 @@ namespace ConsoleApp
                 {
                     //Payment 
                     payment();
+
 
                 }
                 else if (choice == "3")
@@ -175,8 +176,6 @@ namespace ConsoleApp
               ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝            
               ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═");
             AnsiConsole.Write(table);
-            Console.WriteLine("Book's Name you want to search: ");
-            string? nameOfBook = Console.ReadLine();
             Console.WriteLine("Book's ID you want to search: ");
             int idOfBook = Console.Read();
             Console.WriteLine("Do you want to accept this order? Y/N");
@@ -193,7 +192,9 @@ namespace ConsoleApp
             else
             {
                 Console.WriteLine("Invalid choice !!!");
+                createOrder();
             }
+
             await AnsiConsole.Progress()
 .StartAsync(async ctx =>
 {
