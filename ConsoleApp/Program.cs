@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-// using Persistence;
-// using BL;
-// using DAL;
 using Spectre.Console;
 using System.IO;
 using System.Text;
+using Persistence;
 
 namespace ConsoleApp
 {
@@ -55,8 +53,6 @@ namespace ConsoleApp
                 {
                     //Create order
                     createOrder();
-
-
                 }
                 else if (choice == "2")
                 {
@@ -67,9 +63,7 @@ namespace ConsoleApp
                 }
                 else if (choice == "3")
                 {
-                    //exit
                     Console.WriteLine("Exiting ... Exited");
-                    // Implement the inventory functionality.
                 }
                 await AnsiConsole.Progress()
 .StartAsync(async ctx =>
@@ -132,13 +126,24 @@ namespace ConsoleApp
             table.AddRow(@"               ╔╦╗╔═╗╦╔╗╔  ╔╦╗╔═╗╔╗╔╦ ╦               
                ║║║╠═╣║║║║  ║║║║╣ ║║║║ ║               
                ╩ ╩╩ ╩╩╝╚╝  ╩ ╩╚═╝╝╚╝╚═╝               ");
-            Console.WriteLine(@"Click '1' to Create the order, Click '2' to Accept payment, Click '3' to exit app");
             table.AddRow(@"|1.Create order");
             table.AddEmptyRow();
             table.AddRow(@"|2.Payment");
             table.AddEmptyRow();
             table.AddRow(@"|3.Exit");
             AnsiConsole.Write(table);
+            Console.WriteLine(@"Click '1' to Create the order, Click '2' to Accept payment, Click '3' to exit app");
+            Console.WriteLine("Your Choice: ");
+            string? choice = Console.ReadLine();
+            if (choice == "1")
+            {
+                createOrderMain();
+            }
+            else if (choice == "2")
+            {
+                // Payment();
+            }
+
 
         }
         public static void payment()
@@ -175,10 +180,26 @@ namespace ConsoleApp
             table.AddRow(@"              ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗             
               ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝            
               ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═");
+            //   1.searchBookValue
+            string? choice = Console.ReadLine();
+            if (choice == "1")
+            {
+                _ = createOrderMain();
+            }
+            if (choice == "2")
+            {
+                // addBookToOrder();
+            }
+            else if (choice == "3")
+            {
+                mainMenu();
+            }
+
+            //      inputBookValue:DOne => displayBookDetail
+            //   2.addBookToOrder
+            //      displayAllBook => inputBookId => displayBookDetail => inputQuantity => Message: Success => addMore 1.Yes(Add new) 2.No (=> Input Cus If => Message: Success) => Main
+
             AnsiConsole.Write(table);
-            Console.WriteLine("Book's ID you want to search: ");
-            int idOfBook = Console.Read();
-            Console.WriteLine("Do you want to accept this order? Y/N");
             string? chooseY = Console.ReadLine();
             string? chooseN = Console.ReadLine();
             if (chooseY == "y" || chooseY == "Y")
@@ -244,6 +265,11 @@ namespace ConsoleApp
                     Console.WriteLine("Exiting ... Exited");
                     // Implement the inventory functionality.
                 }
+                else
+                {
+                    Console.WriteLine("Invalid choice!!!");
+                    mainMenu();
+                }
                 await AnsiConsole.Progress()
 .StartAsync(async ctx =>
 {
@@ -262,6 +288,67 @@ namespace ConsoleApp
                 Console.WriteLine("YOUR USERNAME OR PASSWORD IS WRONG !!! PLEASE RE-ENTER!!!");
                 _ = LoginAsync();
             }
+        }
+
+
+
+        public static Task createOrderMain()
+        {
+            var table = new Table();
+            table.AddColumn(@"╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
+╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
+╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩");
+            table.AddRow(@"         ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔╦╗╔═╗╔╗╔╦ ╦
+         ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ║║║║╣ ║║║║ ║
+         ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╩ ╩╚═╝╝╚╝╚═╝");
+            table.AddRow(@"|1.Search Book");
+            table.AddEmptyRow();
+            table.AddRow(@"|2.Add Book To Order");
+            table.AddEmptyRow();
+            table.AddRow(@"|3.Back To Main Menu");
+            AnsiConsole.Write(table);
+            string? choice = Console.ReadLine();
+            if (choice == "1")
+            {
+                Console.WriteLine("Enter the book name you are searching for:");
+                string bookName = Console.ReadLine() ?? "";
+                Book searchBook = new Book();
+                searchBook.SearchBookName(bookName);
+                if (searchBook.SearchBookName(bookName))
+                {
+                    Console.WriteLine($"Book ID: {bookId} found.");
+                }
+                else
+                {
+                    Console.WriteLine("Book ID not found.");
+                }
+
+            }
+            else if (choice == "2")
+            {
+                Console.WriteLine("Enter the book ID number:");
+                int bookId = int.Parse(Console.ReadLine() ?? "");
+                Console.WriteLine("Enter the book name:");
+                string name = Console.ReadLine() ?? "";
+                Console.WriteLine("Enter the book price:");
+                decimal price = int.Parse(Console.ReadLine() ?? "");
+                Book searchBook = new Book();
+                if (searchBook.SearchForBookByID(bookId))
+                {
+                    Console.WriteLine($"Book ID: {bookId} found.");
+                }
+                else
+                {
+                    Console.WriteLine("Book ID not found.");
+                }
+
+                Console.WriteLine("Press enter to continue");
+                Console.ReadKey();
+                mainMenu();
+            }
+
+
+            return Task.CompletedTask;
         }
     }
 }

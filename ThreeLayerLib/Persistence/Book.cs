@@ -13,4 +13,16 @@ public class Book
     public decimal Price { get; set; }
     public int Quantity { get; set; }
     public int Status { get; set; }
+
+    public void SearchBookName(string? bookName)
+    {
+        Console.WriteLine("You have searched for book name: {0}", bookName);
+        Console.ReadLine();
+    }
+
+    public bool SearchForBookByID(int bookId)
+    {
+        Console.WriteLine("Book ID: {0} not found.", bookId);
+        return true;
+    }
 }
