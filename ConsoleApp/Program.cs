@@ -314,14 +314,14 @@ namespace ConsoleApp
                 string bookName = Console.ReadLine() ?? "";
                 Book searchBook = new Book();
                 searchBook.SearchBookName(bookName);
-                if (searchBook.SearchBookName(bookName))
-                {
-                    Console.WriteLine($"Book ID: {bookId} found.");
-                }
-                else
-                {
-                    Console.WriteLine("Book ID not found.");
-                }
+                // if (searchBook.SearchBookName(bookName))
+                // {
+                //     Console.WriteLine($"Book Name: {bookName} found.");
+                // }
+                // else
+                // {
+                //     Console.WriteLine("Book ID not found.");
+                // }
 
             }
             else if (choice == "2")
@@ -342,7 +342,7 @@ namespace ConsoleApp
                     Console.WriteLine("Book ID not found.");
                 }
 
-                Console.WriteLine("Press enter to continue");
+                Console.WriteLine("Press enter and back to main menu");
                 Console.ReadKey();
                 mainMenu();
             }

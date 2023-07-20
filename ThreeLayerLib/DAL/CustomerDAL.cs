@@ -18,7 +18,7 @@ namespace DAL
             Customer? c = null;
             try
             {
-                query = @"select customer_ID, customer_name, phoneNumber,
+                query = @"select customer_ID, customer_name, phone,
                         if null(address, '') as address
                         from Customers where customer_ID=" + customerID + ";";
                 MySqlDataReader reader = (new MySqlCommand(query, connection)).ExecuteReader();
@@ -36,7 +36,7 @@ namespace DAL
             Customer c = new Customer();
             c.CustomerId = reader.GetInt32("customer_ID");
             c.CustomerName = reader.GetString("customer_name");
-            c.CustomerAddress = reader.GetString("customer_address");
+            c.CustomerAddress = reader.GetString("address");
             return c;
         }
         public int AddCustomer(Customer c)
@@ -50,16 +50,16 @@ namespace DAL
             try
             {
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@customerName", c.CustomerName);
-                cmd.Parameters["@customerName"].Direction = System.Data.ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@customerPhone", c.phoneNumber);
-                cmd.Parameters["@customerPhone"].Direction = System.Data.ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@customerAddress", c.CustomerAddress);
-                cmd.Parameters["@customerAddress"].Direction = System.Data.ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@customerId", MySqlDbType.Int32);
-                cmd.Parameters["@customerID"].Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.AddWithValue("@customer_Name", c.CustomerName);
+                cmd.Parameters["@customer_Name"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("@Phone", c.phoneNumber);
+                cmd.Parameters["@Phone"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("@Address", c.CustomerAddress);
+                cmd.Parameters["@Address"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("@customer_ID", MySqlDbType.Int32);
+                cmd.Parameters["@customer_ID"].Direction = System.Data.ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
-                result = (int?)cmd.Parameters["@customerId"].Value ?? 0;
+                result = (int?)cmd.Parameters["@customer_ID"].Value ?? 0;
             }
             catch { }
             finally

@@ -34,9 +34,9 @@ public class BookDAL
         Book book = new Book();
         try
         {
-            query = @"select * from Books WHERE book_ID = @BookId;";
+            query = @"select * from Books WHERE book_ID = @book_ID;";
             MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@bookId", bookID);
+            command.Parameters.AddWithValue("@book_ID", bookID);
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
