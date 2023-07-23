@@ -3,7 +3,7 @@ namespace Persistence;
 public class Book
 {
     internal int AuthorID;
-
+    public string? BookName { get; set; }
     public int BookID { get; set; }
     public int ISBN { get; set; }
     public string? Title { get; set; }

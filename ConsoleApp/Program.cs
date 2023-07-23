@@ -25,6 +25,8 @@ namespace ConsoleApp
             string? username = Console.ReadLine();
             Console.WriteLine("Please enter your password: ");
             string? password = GetPassword();
+            Console.WriteLine("Who are you?");
+            string? nameUser = Console.ReadLine();
             await AnsiConsole.Progress()
     .StartAsync(async ctx =>
     {
@@ -43,8 +45,9 @@ namespace ConsoleApp
         }
     });
 
-            if (username == "staff" && password == "staff" || username == "staff1" && password == "staff1" || username == "staff2" && password == "staff2" || username == "staff3" && password == "staff3" || username == "staff4" && password == "staff4" || username == "staff5" && password == "staff5")
+            if (username == "staff" && password == "staff" && nameUser == "Nguyen Hoang Hiep" || username == "staff1" && password == "staff1" || username == "staff2" && password == "staff2" || username == "staff3" && password == "staff3" || username == "staff4" && password == "staff4" || username == "staff5" && password == "staff5")
             {
+                Console.WriteLine("               Using staff: " + nameUser);
                 mainMenu();
                 string? choice = Console.ReadLine();
 
@@ -119,6 +122,7 @@ namespace ConsoleApp
         }
         public static void mainMenu()
         {
+
             var table = new Table();
             table.AddColumn(@"╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
 ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
@@ -126,6 +130,7 @@ namespace ConsoleApp
             table.AddRow(@"               ╔╦╗╔═╗╦╔╗╔  ╔╦╗╔═╗╔╗╔╦ ╦               
                ║║║╠═╣║║║║  ║║║║╣ ║║║║ ║               
                ╩ ╩╩ ╩╩╝╚╝  ╩ ╩╚═╝╝╚╝╚═╝               ");
+            table.AddEmptyRow();
             table.AddRow(@"|1.Create order");
             table.AddEmptyRow();
             table.AddRow(@"|2.Payment");
@@ -141,7 +146,7 @@ namespace ConsoleApp
             }
             else if (choice == "2")
             {
-                // Payment();
+                payment();
             }
 
 
@@ -160,7 +165,6 @@ namespace ConsoleApp
             table.AddRow(@"|2.Back to main menu");
             table.AddEmptyRow();
             AnsiConsole.Write(table);
-            // Console.WriteLine("Which id order do you want to process?✅ : ");
             Console.WriteLine("Your choice: ");
             int choice = Console.Read();
             if (true)
@@ -326,11 +330,8 @@ namespace ConsoleApp
             }
             else if (choice == "2")
             {
-                Console.WriteLine("Enter the book ID number:");
+                Console.WriteLine("Enter the order ID :");
                 int bookId = int.Parse(Console.ReadLine() ?? "");
-                Console.WriteLine("Enter the book name:");
-                string name = Console.ReadLine() ?? "";
-                Console.WriteLine("Enter the book price:");
                 decimal price = int.Parse(Console.ReadLine() ?? "");
                 Book searchBook = new Book();
                 if (searchBook.SearchForBookByID(bookId))
@@ -341,8 +342,10 @@ namespace ConsoleApp
                 {
                     Console.WriteLine("Book ID not found.");
                 }
-
-                Console.WriteLine("Press enter and back to main menu");
+            }
+            else
+            {
+                Console.WriteLine("Press ESC to back to Menu");
                 Console.ReadKey();
                 mainMenu();
             }
