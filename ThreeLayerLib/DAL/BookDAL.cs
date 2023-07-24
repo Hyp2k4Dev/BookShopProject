@@ -2,6 +2,11 @@ using MySqlConnector;
 using Persistence;
 
 namespace DAL;
+public static class BookFilter
+{
+    public const int GET_ALL = 0;
+    public const int FILTER_BY_BOOK_NAME = 1;
+}
 
 public class BookDAL
 {
@@ -54,10 +59,42 @@ public class BookDAL
     {
         Book book = new Book();
         book.BookID = reader.GetInt32("book_ID");
-        book.BookAuthor.AuthorID = reader.GetInt32("author_ID");
+        book.AuthorID = reader.GetInt32("author_ID");
         book.Title = reader.GetString("title");
         book.Price = reader.GetDecimal("price");
 
         return book;
     }
+
+    public List<Book> GetBooks(int bookFilter, Book book)
+    {
+        List<Book> books = new List<Book>();
+        try
+        {
+            MySqlCommand command = new MySqlCommand("", connection);
+            switch (bookFilter)
+            {
+                case BookFilter.GET_ALL:
+                    query = @"select book_id, book_name, price, book_status, ifnull(book_description, '') as book_description from Books";
+                    break;
+                case BookFilter.FILTER_BY_BOOK_NAME:
+                    query = @"select book_id, book_name, price, book_status, ifnull(book_description, '') as book_description from Books
+                                where book_name like concat('%',@bookName,'%');";
+                    command.Parameters.AddWithValue("@bookName", book.BookName);
+                    break;
+            }
+            command.CommandText = query;
+            MySqlDataReader reader = command.ExecuteReader();
+            books = new List<Book>();
+            while (reader.Read())
+            {
+                books.Add(GetBook(reader));
+            }
+            reader.Close();
+        }
+        catch { }
+        return books;
+    }
+
 }
+
