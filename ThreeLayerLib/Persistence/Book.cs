@@ -13,6 +13,7 @@ public class Book
     public decimal Price { get; set; }
     public int Quantity { get; set; }
     public int Status { get; set; }
+    public string? Description { set; get; }
 
     public void SearchBookName(string? bookName)
     {

@@ -12,15 +12,22 @@ namespace DAL
             Staff s = new Staff();
             try
             {
-                query = @"select * from Staffs where staff_name=@staffname;";
-                MySqlCommand command = new MySqlCommand(query, connection);
-                command.Parameters.AddWithValue("@staffname", staffName);
-                MySqlDataReader reader = command.ExecuteReader();
-                if (reader.Read())
+                if (connection.State == System.Data.ConnectionState.Closed)
                 {
-                    s = GetStaff(reader);
+                    connection.Open();
+
                 }
-                reader.Close();
+                {
+                    query = @"select * from Staffs where staff_name=@staffname;";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@staffname", staffName);
+                    MySqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        s = GetStaff(reader);
+                    }
+                    reader.Close();
+                }
             }
             catch (MySqlException ex)
             {
@@ -32,8 +39,10 @@ namespace DAL
         {
             Staff s = new Staff();
             s.StaffID = reader.GetInt32("staff_ID");
+            s.StaffName = reader.GetString("staff_Name");
             s.UserName = reader.GetString("user_Name");
-            s.Password = reader.GetString("Pass_word");
+            s.Password = reader.GetString("pass_Word");
+            s.StaffStatus = reader.GetInt32("staff_Status");
             return s;
         }
     }
