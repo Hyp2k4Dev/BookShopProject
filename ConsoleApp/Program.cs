@@ -14,30 +14,34 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             short mainChoose = 0, coChoose;
-            string[] mainMenu = { "Create Order ", " Payment", "Exit" };
-            string[] coMenu = { "Show All Items", "Search By Book Name", "Get By Book Id", "Back To Main Menu" };
+            string[] mainMenu = { "|Create Order", "|Payment", "|Exit" };
+            string[] coMenu = { "|Show All Items ", "|Search By Book Name ", "|Get By Book Id ", "|Back To Main Menu" };
             BookBL bookBL = new BookBL();
             CustomerBL customerBL = new CustomerBL();
             OrderBL orderBL = new OrderBL();
             List<Book> lst;
             do
             {
-                mainChoose = Menu(@" 
-╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
-╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
-╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
+                mainChoose = Menu(@"                                     
+                                    ╦  ╔═╗╔═╗╦╔╗╔
+                                    ║  ║ ║║ ╦║║║║
+                                    ╩═╝╚═╝╚═╝╩╝╚╝
 ", mainMenu);
                 switch (mainChoose)
                 {
                     case 1:
                         do
                         {
-                            coChoose = Menu("Create Order", coMenu);
+                            coChoose = Menu(@"                  
+                  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔╦╗╔═╗╔╗╔╦ ╦
+                  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ║║║║╣ ║║║║ ║
+                  ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╩ ╩╚═╝╝╚╝╚═╝
+", coMenu);
                             {
                                 switch (coChoose)
                                 {
                                     case 1:
-                                        Console.Write("\nInput Item Id: ");
+                                        Console.Write("\nInput Book Id: ");
                                         int bookId;
                                         if (Int32.TryParse(Console.ReadLine(), out bookId))
                                         {
@@ -126,14 +130,15 @@ namespace ConsoleApp
         }
         public static short Menu(string title, string[] menuBooks)
         {
-            string logo = @"
+            var LoginLogo = new Table();
+            LoginLogo.AddColumn(@"
 ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
 ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
 ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
-";
+");
+            AnsiConsole.Write(LoginLogo);
             short choose = 0;
-            Console.WriteLine(logo);
-            string line = "==============================================";
+            string line = "=======================================================================================";
             Console.WriteLine(line);
             Console.WriteLine(" " + title);
             Console.WriteLine(line);
@@ -144,6 +149,7 @@ namespace ConsoleApp
             Console.WriteLine(line);
             do
             {
+                Console.WriteLine("Click 1 to CREATE ORDER, 2 to PAYMENT, 3 to EXIT APP ");
                 Console.Write("Your choice: ");
                 try
                 {
