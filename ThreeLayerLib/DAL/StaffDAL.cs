@@ -7,20 +7,16 @@ namespace DAL
     {
         private string query = "";
         private MySqlConnection connection = DbConfig.GetConnection();
-        public Staff GetStaffAccount(string staffName)
+        public Staff GetStaffAccount(string userName)
         {
             Staff s = new Staff();
             try
             {
-                if (connection.State == System.Data.ConnectionState.Closed)
                 {
-                    connection.Open();
-
-                }
-                {
-                    query = @"select * from Staffs where staff_name=@staffname;";
+                    query = @"select * from Staffs where user_name=@user_name;";
                     MySqlCommand command = new MySqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@staffname", staffName);
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("@user_name", userName);
                     MySqlDataReader reader = command.ExecuteReader();
                     if (reader.Read())
                     {

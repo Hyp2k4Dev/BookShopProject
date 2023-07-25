@@ -6,23 +6,25 @@ namespace BL
 {
     public class StaffBL
     {
+        StaffDAL staffDAL = new StaffDAL();
+
         public Staff? Login()
         {
-            StaffDAL staffDAL = new StaffDAL();
             string userName;
             string password;
             Console.WriteLine("User Name: ");
             userName = Console.ReadLine() ?? "";
             Console.WriteLine("Password: ");
             password = GetPassword();
-            Staff staff = new Staff();
-            staff = staffDAL.GetStaffAccount(userName);
+            Staff staff = staffDAL.GetStaffAccount(userName);
             if (staff.Password == password && staff.StaffStatus == 1)
             {
-
                 return staff;
             }
-            return null;
+            else
+            {
+                return null;
+            }
         }
         public static string GetPassword()
         {
