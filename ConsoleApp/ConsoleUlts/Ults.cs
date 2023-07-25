@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using BL;
 using Persistence;
@@ -11,7 +12,7 @@ namespace Utilities
         ConsoleUI consoleUI = new ConsoleUI();
         string[] LoginMenu = { "| Login", "| Exit" };
         string[] mainMenu = { "| Create Order", "| Payment", "| Exit" };
-        // string[] coMenu = { "|Show All Items ", "|Search By Book Name ", "|Get By Book Id ", "|Back To Main Menu" };
+        string[] coMenu = { "|Show All Items ", "|Search By Book Name ", "|Get By Book Id ", "|Back To Main Menu" };
         BookBL bookBL = new BookBL();
         Staff? orderStaff;
         CustomerBL customerBL = new CustomerBL();
@@ -31,24 +32,33 @@ namespace Utilities
 ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
 ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
 ", LoginMenu);
-
                 switch (LoginChoice)
                 {
                     case 1:
                         Login();
                         break;
                     case 2:
+                        // ProgressAsync();
                         break;
                 }
             } while (LoginChoice != LoginMenu.Length);
         }
+
+
         public void Login()
         {
-            consoleUI.Title(@"
-╦  ╔═╗╔═╗╦╔╗╔
-║  ║ ║║ ╦║║║║
-╩═╝╚═╝╚═╝╩╝╚╝
+            Console.WriteLine(@"
+╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
+╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
+╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
 ");
+            consoleUI.Line();
+            consoleUI.Title(@"                       
+                                ╦  ╔═╗╔═╗╦╔╗╔
+                                ║  ║ ║║ ╦║║║║
+                                ╩═╝╚═╝╚═╝╩╝╚╝
+");
+            consoleUI.centreLine();
             orderStaff = staffBL.Login();
             if (orderStaff != null)
             {
@@ -63,6 +73,10 @@ namespace Utilities
                     case 1:
                         CreateOrder();
                         break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
                 }
             }
             else
@@ -75,7 +89,7 @@ namespace Utilities
         public void CreateOrder()
         {
             int bookId;
-            consoleUI.sLine();
+            consoleUI.centreLine();
             consoleUI.Title(@"
 ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔╦╗╔═╗╔╗╔╦ ╦
 ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ║║║║╣ ║║║║ ║
@@ -88,7 +102,7 @@ namespace Utilities
             {
                 if (ShowBooks == true) Console.WriteLine("Invalid input");
                 Console.Write("Choose id to add product to order: ");
-                int.TryParse(Console.ReadLine(), out bookId);
+                _ = int.TryParse(Console.ReadLine(), out bookId);
                 if (bookId < 0 || bookId > lst.Count()) ShowBooks = true;
             } while (bookId < 0 || bookId > lst.Count());
         }

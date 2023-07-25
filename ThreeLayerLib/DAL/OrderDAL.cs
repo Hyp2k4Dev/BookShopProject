@@ -1,10 +1,90 @@
 using Persistence;
 using MySqlConnector;
-
-public class OrderDAL
+namespace DAL
 {
-    internal bool CreateOrder(Order order)
+    public class OrderDAL
     {
-        throw new NotImplementedException();
+        private MySqlConnection connection = DbConfig.GetConnection();
+        public bool CreateOrder(Order order)
+        {
+            if (order == null || order.BooksList == null || order.BooksList.Count == 0)
+            {
+                return false;
+            }
+            bool result = false;
+            try
+            {
+                using (MySqlTransaction trans = connection.BeginTransaction())
+                using (MySqlCommand cmd = connection.CreateCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.Transaction = trans;
+                    //Lock update all tables
+                    cmd.CommandText = "lock tables Staff write, Orders write, Items write, OrderDetails write;";
+                    cmd.ExecuteNonQuery();
+
+                    MySqlDataReader? reader = null;
+
+
+                    //insert order
+                    cmd.CommandText = "insert into Orders(staff_id, order_status) values (@StaffId, @orderStatus);";
+                    cmd.Parameters.Clear();
+                    // cmd.Parameters.AddWithValue("@staffId", order.OrderStaff.StaffId);
+                    cmd.Parameters.AddWithValue("@orderStatus", OrderStatus.CREATE_NEW_ORDER);
+                    cmd.ExecuteNonQuery();
+                    //get new Order_ID
+                    cmd.CommandText = "select LAST_INSERT_ID() as order_id";
+                    reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        order.OrderID = reader.GetInt32("order_id");
+                    }
+                    reader.Close();
+
+                    //insert Order Details table
+                    foreach (var book in order.BooksList)
+                    {
+                        if (book.BookID == 0 || book.Quantity <= 0)
+                        {
+                            throw new Exception("Not Exists Product");
+                        }
+                        //get unit_price
+                        cmd.CommandText = "select unit_price from Items where item_id=@itemId";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@productId", book.BookID);
+                        reader = cmd.ExecuteReader();
+                        if (!reader.Read())
+                        {
+                            throw new Exception("Not Exists Item");
+                        }
+                        book.Price = reader.GetDecimal("unit_price");
+                        reader.Close();
+
+                        //insert to Order Details
+                        cmd.CommandText = @"insert into OrderDetails(order_id, item_id, unit_price, quantity) values 
+                            (" + order.OrderID + ", " + book.BookID + ", " + book.Price + ", " + book.Quantity + ");";
+                        cmd.ExecuteNonQuery();
+
+                        //update quantity in Items
+                        cmd.CommandText = "update Products set quantity=quantity-@quantity where item_id=" + book.BookID + ";";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@quantity", book.Quantity);
+                        cmd.ExecuteNonQuery();
+                    }
+                    //commit transaction
+                    trans.Commit();
+                    result = true;
+                    trans.Rollback();
+                    //unlock all tables;
+                    cmd.CommandText = "unlock tables;";
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR: {ex.Message}");
+            }
+            return result;
+        }
     }
 }

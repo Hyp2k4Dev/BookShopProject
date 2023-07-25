@@ -38,7 +38,7 @@ namespace UI
             Console.WriteLine(title);
         }
 
-        public static async void ProgressAsync()
+        public async void ProgressAsync()
         {
             await AnsiConsole.Progress().StartAsync(async ctx =>
                 {
@@ -67,11 +67,11 @@ namespace UI
         }
         public void Line()
         {
-            Console.WriteLine("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.WriteLine("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
         }
-        public void sLine()
+        public void centreLine()
         {
-            Console.WriteLine("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.WriteLine("              ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━                ");
         }
     }
 }
