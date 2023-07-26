@@ -1,5 +1,5 @@
-namespace Persistence;
-
+namespace Persistence
+{
 public class Staff
 {
     public int StaffID { get; internal set; }
@@ -8,4 +8,5 @@ public class Staff
     public string? Password { get; set; }
     public int StaffStatus { get; set; }
 
+}
 }

@@ -1,29 +1,41 @@
-namespace Persistence;
+namespace Persistence
+{
 
 public class Book
 {
-    internal int AuthorID;
-    public string? BookName { get; set; }
     public int BookID { get; set; }
     public int ISBN { get; set; }
-    public string? Title { get; set; }
+    public string? BookName { get; set; }
+    public Category? BookCategory { get; set; }
     public Author? BookAuthor { get; set; }
     public Publisher? BookPublisher { get; set; }
     public int PublishYear { get; set; }
-    public decimal Price { get; set; }
-    public int Quantity { get; set; }
-    public int Status { get; set; }
-    public string? Description { set; get; }
+    public string? Description { get; set; }
+    public decimal UnitPrice { get; set; }
+    public int Amount { get; set; }
+    public int BookStatus { get; set; }
 
-    public void SearchBookName(string? bookName)
-    {
-        Console.WriteLine("You have searched for book name: {0}", bookName);
-        Console.ReadLine();
-    }
 
-    public bool SearchForBookByID(int bookId)
-    {
-        Console.WriteLine("Book ID: {0} not found.", bookId);
-        return true;
-    }
+    public Book()
+        {
+            BookAuthor = new Author();
+            BookID = 0;
+            BookStatus = 0;
+        }
+
+        // public override bool Equals(object? obj)
+        // {
+        //     if (obj == null) return false;
+        //     if (obj is Book)
+        //     {
+        //         return ((Book)obj).BookID.Equals(BookID);
+        //     }
+        //     return false;
+        // }
+
+        public override int GetHashCode()
+        {
+            return BookID.GetHashCode();
+        }
+}
 }

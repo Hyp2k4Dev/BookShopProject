@@ -44,7 +44,7 @@ namespace DAL
                     //insert Order Details table
                     foreach (var book in order.BooksList)
                     {
-                        if (book.BookID == 0 || book.Quantity <= 0)
+                        if (book.BookID == 0 || book.Amount <= 0)
                         {
                             throw new Exception("Not Exists Product");
                         }
@@ -57,18 +57,18 @@ namespace DAL
                         {
                             throw new Exception("Not Exists Item");
                         }
-                        book.Price = reader.GetDecimal("unit_price");
+                        book.UnitPrice = reader.GetDecimal("unit_price");
                         reader.Close();
 
                         //insert to Order Details
                         cmd.CommandText = @"insert into OrderDetails(order_id, item_id, unit_price, quantity) values 
-                            (" + order.OrderID + ", " + book.BookID + ", " + book.Price + ", " + book.Quantity + ");";
+                            (" + order.OrderID + ", " + book.BookID + ", " + book.UnitPrice + ", " + book.Amount + ");";
                         cmd.ExecuteNonQuery();
 
                         //update quantity in Items
                         cmd.CommandText = "update Products set quantity=quantity-@quantity where item_id=" + book.BookID + ";";
                         cmd.Parameters.Clear();
-                        cmd.Parameters.AddWithValue("@quantity", book.Quantity);
+                        cmd.Parameters.AddWithValue("@quantity", book.Amount);
                         cmd.ExecuteNonQuery();
                     }
                     //commit transaction

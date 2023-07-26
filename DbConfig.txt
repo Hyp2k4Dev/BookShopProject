@@ -1,0 +1,1 @@
+server=localhost;user id=H&T;password=hiepnb2004;port=3306;database=BookShop;

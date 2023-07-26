@@ -1,0 +1,12 @@
+C:\Users\admin\Desktop\Project\ThreeLayerLib\bin\Release\net7.0\ThreeLayerLib.deps.json
+C:\Users\admin\Desktop\Project\ThreeLayerLib\bin\Release\net7.0\ThreeLayerLib.dll
+C:\Users\admin\Desktop\Project\ThreeLayerLib\bin\Release\net7.0\ThreeLayerLib.pdb
+C:\Users\admin\Desktop\Project\ThreeLayerLib\obj\Release\net7.0\ThreeLayerLib.csproj.AssemblyReference.cache
+C:\Users\admin\Desktop\Project\ThreeLayerLib\obj\Release\net7.0\ThreeLayerLib.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admin\Desktop\Project\ThreeLayerLib\obj\Release\net7.0\ThreeLayerLib.AssemblyInfoInputs.cache
+C:\Users\admin\Desktop\Project\ThreeLayerLib\obj\Release\net7.0\ThreeLayerLib.AssemblyInfo.cs
+C:\Users\admin\Desktop\Project\ThreeLayerLib\obj\Release\net7.0\ThreeLayerLib.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\Project\ThreeLayerLib\obj\Release\net7.0\ThreeLayerLib.dll
+C:\Users\admin\Desktop\Project\ThreeLayerLib\obj\Release\net7.0\refint\ThreeLayerLib.dll
+C:\Users\admin\Desktop\Project\ThreeLayerLib\obj\Release\net7.0\ThreeLayerLib.pdb
+C:\Users\admin\Desktop\Project\ThreeLayerLib\obj\Release\net7.0\ref\ThreeLayerLib.dll

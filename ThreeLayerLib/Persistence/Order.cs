@@ -1,5 +1,5 @@
-namespace Persistence;
-
+namespace Persistence
+{
 
 public static class OrderStatus
 {
@@ -9,13 +9,13 @@ public static class OrderStatus
 public class Order
 {
     public int OrderID { get; set; }
-    public Customer? Customer { get; set; }
     public Customer? OrderCustomer { set; get; }
     public Staff? Staff { get; set; }
     public DateTime OrderDate { get; set; }
-    public Book[]? Book { get; set; }
-    public int status { get; set; }
     public List<Book>? BooksList { set; get; }
+    public int Bookstatus { get; set; }
+
+
     public Book? this[int index]
     {
         get
@@ -30,4 +30,5 @@ public class Order
             BooksList.Add(value);
         }
     }
+}
 }
