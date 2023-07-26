@@ -9,7 +9,7 @@ namespace DAL
         private DbConfig() { }
         public static MySqlConnection GetDefaultConnection()
         {
-            return GetConnection("server=localhost;user id=root;password=hiepnb2004;port=3306;database=BookShop;IgnoreCommandTransaction=true;");
+            return GetConnection("server=localhost;user id=H&T;password=Tuannb12345;port=3306;database=BookShop;IgnoreCommandTransaction=true;");
         }
 
         public static MySqlConnection GetConnection()
@@ -20,7 +20,7 @@ namespace DAL
                 using (System.IO.FileStream fileStream = System.IO.File.OpenRead("DbConfig.txt"))
                 using (System.IO.StreamReader reader = new System.IO.StreamReader(fileStream))
                 {
-                    conString = reader.ReadLine() ?? "server=localhost;user id= root;password=hiepnb2004;port=3306;database=BookShop;IgnoreCommandTransaction=true;";
+                    conString = reader.ReadLine() ?? "server=localhost;user id=H&T;password=Tuannb12345;port=3306;database=BookShop;IgnoreCommandTransaction=true;";
                 }
 
                 if (!conString.Contains("IgnoreCommandTransaction=true"))

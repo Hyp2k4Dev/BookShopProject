@@ -209,9 +209,9 @@ select * from OrderDetails;
 
 
 -- /* CREATE & GRANT USER */
--- DROP USER if exists 'H&T'@'localhost';
--- create user if not exists 'H&T'@'localhost' identified by 'Tuannb12345';
--- grant all on BookShop.* to 'H&T'@'localhost';
+DROP USER if exists 'H&T'@'localhost';
+create user if not exists 'H&T'@'localhost' identified by 'Tuannb12345';
+grant all on BookShop.* to 'H&T'@'localhost';
 -- -- grant all on Items to 'vtca'@'localhost';
 -- -- grant all on Customers to 'vtca'@'localhost';
 -- -- grant all on Orders to 'vtca'@'localhost';

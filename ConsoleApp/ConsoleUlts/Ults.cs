@@ -124,28 +124,32 @@ namespace Utilities
             Console.Write("Input book name to search: ");
             string n = Console.ReadLine() ?? "";
             lst = bBL.GetByName(n);
-            Console.WriteLine("\n" + lst.Count);
-            if (lst.Count > 0)
-            {
-                ShowBooks($"Book Count By Name: {n}", lst);
-            }
+            ShowBooks($"Book Count By Name: {n}", lst);
+
         }
 
         static void ShowBooks(string title, List<Book> lst)
         {
-            Console.WriteLine(title);
-            Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            if (lst.Count() > 0)
+            {
+                Console.WriteLine(title);
+                Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ┃ Book ID ┃ Book name ┃    Price   ┃  Amount  ┃    Description   ┃
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-            foreach (Book book in lst)
-            {
-                if (book.BookStatus == 1)
+                foreach (Book book in lst)
                 {
-                    Console.WriteLine("┃ {0, 7:N0} ┃ {1, -9} ┃ {2, 10:N2} ┃ {3, 8:N0} ┃ {5, -16} ┃",
-                    book.BookID, book.BookName, book.UnitPrice, book.Amount, book.BookStatus, book.Description);
+                    if (book.BookStatus == 1)
+                    {
+                        Console.WriteLine("┃ {0, 7:N0} ┃ {1, -9} ┃ {2, 10:N2} ┃ {3, 8:N0} ┃ {5, -16} ┃",
+                        book.BookID, book.BookName, book.UnitPrice, book.Amount, book.BookStatus, book.Description);
+                    }
                 }
+                Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             }
-            Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            else
+            {
+                Console.WriteLine(" No Books Found.");
+            }
         }
     }
 }
