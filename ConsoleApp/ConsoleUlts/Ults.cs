@@ -69,7 +69,7 @@ namespace Utilities
         }
         public void CreateOrder()
         {
-
+            Console.WriteLine();
             Console.WriteLine(@"
 ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
 ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
@@ -144,8 +144,8 @@ namespace Utilities
         static void ShowBookName(string title, List<Book> lst)
         {
             var table = new Table();
-            table.AddColumns("ID     ", "Name     ", "Category  ", " Pyear ", "Description ", "Author           ", "Publisher        ", "Unit Price   ", "Amount ");
             table.BorderColor(Color.PaleGreen1);
+            table.AddColumns("ID     ", "Name     ", "Category  ", " Pyear ", "Description ", "Author           ", "Publisher        ", "Unit Price   ", "Amount ");
             if (lst.Count() > 0)
             {
                 foreach (Book b in lst)

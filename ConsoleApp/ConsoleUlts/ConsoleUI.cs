@@ -18,6 +18,7 @@ namespace UI
             int choice;
             if (title != null)
             {
+                Console.ForegroundColor = ConsoleColor.White;
                 Title(title);
             }
             for (i = 0; i < menuBooks.Count(); i++)
