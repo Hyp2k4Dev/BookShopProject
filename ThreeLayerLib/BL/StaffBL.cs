@@ -1,6 +1,7 @@
 using System.Text;
 using DAL;
 using Persistence;
+using Spectre.Console;
 
 namespace BL
 {
@@ -16,6 +17,7 @@ namespace BL
             userName = Console.ReadLine() ?? "";
             Console.WriteLine("Password: ");
             password = GetPassword();
+            
             Staff staff = staffDAL.GetStaffAccount(userName);
             if (staff.Password == staffDAL.CreateMD5(password) && staff.StaffStatus == 1)
             {
@@ -53,6 +55,26 @@ namespace BL
                 }
             }
             return pass.ToString();
+        }
+        public void ProgressAsync()
+        {
+            AnsiConsole.Progress().StartAsync(async ctx =>
+               {
+                   // Define tasks
+                   var task1 = ctx.AddTask("[green]Progress[/]");
+                   // var task2 = ctx.AddTask("Done!!!");
+
+                   while (!ctx.IsFinished)
+                   {
+                       // Simulate some work
+                       await Task.Delay(20);
+
+                       // Increment
+                       task1.Increment(4.5);
+                       // task2.Increment(2);
+                       // Console.Clear();
+                   }
+               });
         }
     }
 }

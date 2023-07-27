@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "DhzhszPJqz7YPG3eX6fIiPR2LjRYBwWDP+AzE+0RhfHFNBFInlOKo8jMnfAfWPTYwBVfSwW/aKX+XVBOOUg1XQ==",
+  "dgSpecHash": "15kVDjpdHQymNj3wT+XxB6tp+odd9h7fR59Wr6506v6az/YtJIEKEpyji77d+M4Dk0ZRP3XXrQa6DirCJGAeWA==",
   "success": true,
-  "projectFilePath": "c:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj",
+  "projectFilePath": "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\admin\\.nuget\\packages\\mysqlconnector\\2.2.5\\mysqlconnector.2.2.5.nupkg.sha512"
+    "C:\\Users\\admin\\.nuget\\packages\\mysqlconnector\\2.2.5\\mysqlconnector.2.2.5.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\spectre.console\\0.47.0\\spectre.console.0.47.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512"
   ],
   "logs": []
 }

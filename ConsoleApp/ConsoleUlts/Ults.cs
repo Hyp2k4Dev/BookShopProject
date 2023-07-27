@@ -11,7 +11,6 @@ namespace Utilities
     public class Ults
     {
         ConsoleUI consoleUI = new ConsoleUI();
-        string[] LoginMenu = { "| Login" };
         string[] mainMenu = { "| Create Order", "| Logout" };
         string[] coMenu = { "| Search By Book Name ", "| Get By ISBN ", "| Payment", "| Back To Main Menu" };
         BookBL bBL = new BookBL();
@@ -40,7 +39,6 @@ namespace Utilities
                 orderStaff = staffBL.Login();
                 if (orderStaff != null)
                 {
-
                     consoleUI.Line();
                     int mainMenuChoice = consoleUI.Menu(@"
 ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
@@ -68,31 +66,6 @@ namespace Utilities
                     consoleUI.PressAnyKeyToContinue();
                 }
             }
-        }
-        public void Title(string title)
-        {
-            Console.WriteLine(title);
-        }
-
-        public async void ProgressAsync()
-        {
-            await AnsiConsole.Progress().StartAsync(async ctx =>
-                {
-                    // Define tasks
-                    var task1 = ctx.AddTask("[green]Progress[/]");
-                    // var task2 = ctx.AddTask("Done!!!");
-
-                    while (!ctx.IsFinished)
-                    {
-                        // Simulate some work
-                        await Task.Delay(20);
-
-                        // Increment
-                        task1.Increment(4.5);
-                        // task2.Increment(2);
-                        // Console.Clear();
-                    }
-                });
         }
         public void CreateOrder()
         {
@@ -127,6 +100,9 @@ namespace Utilities
         }
         public void SearchBookByISBN()
         {
+            var table = new Table();
+            table.AddColumns("ID     ", "Name     ", "Category  ", " Pyear ", "Description ", "Author           ", "Publisher        ", "Unit Price   ", "Amount ");
+            table.BorderColor(Color.PaleGreen1);
             Console.WriteLine("Input book Code to search: ");
             int isbn;
             if (Int32.TryParse(Console.ReadLine(), out isbn))
@@ -136,31 +112,28 @@ namespace Utilities
                 {
                     if (b.BookStatus == 1)
                     {
-                        // Console.WriteLine("Book ID: " + b.BookID);
-                        // // Console.WriteLine("ISBN: " + b.ISBN);
-                        // Console.WriteLine("Book Name: " + b.BookName);
-                        // Console.WriteLine("Book Category: " + b.BookCategory!.CategoryName);
-                        // Console.WriteLine("Publish year: " + b.PublishYear);
-                        // Console.WriteLine("Author Name: " + b.BookAuthor!.AuthorName);
-                        // Console.WriteLine("Publisher Name: " + b.BookPublisher!.PublisherName);
-                        // Console.WriteLine("Book Price: " + b.UnitPrice);
-                        // Console.WriteLine("Amount: " + b.Amount);
-                        // Console.WriteLine("Description: " + b.Description);
-                        Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-┃ Book ID ┃ Book name ┃   Category ┃ publish Year ┃    Description   ┃   Author  ┃  Publisher  ┃ Unit Price ┃  Amount  ┃
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-                        Console.WriteLine("┃ {0, 7:N0} ┃ {1, -9} ┃ {2, -9} ┃ {3, 12} ┃ {4, -16} ┃ {5, -9} ┃ {6, -9} ┃ {7, 10:N2} ┃ {8, 8} ┃",
-                        b.BookID, b.BookName, b.BookCategory!.CategoryName, b.PublishYear, b.Description, b.BookAuthor!.AuthorName,
-                        b.BookPublisher!.PublisherName, b.UnitPrice, b.Amount);
-                        Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+
+
+
+                        table.AddRow("" + b.BookID, "" + b.BookName, "" + b.BookCategory!.CategoryName, "" + b.PublishYear, "" + b.Description, "" + b.BookAuthor!.AuthorName,
+                                                "" + b.BookPublisher!.PublisherName, "" + b.UnitPrice, "" + b.Amount);
+                        // table.AddRow("[green]" + b.BookName);
+                        // table.AddRow("[green]" + b.BookCategory);
+                        // table.AddRow("[green]" + b.BookPublisher);
+                        // table.AddRow("[green]" + b.Description);
+                        // table.AddRow("[green]" + b.BookAuthor);
+                        // table.AddRow("[green]" + b.BookPublisher);
+                        // table.AddRow("[green]" + b.UnitPrice);
+                        // table.AddRow("[green]" + b.Amount);
                     }
                     else
                     {
-                        Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-                        Console.WriteLine("|Book Not Found With code: " + isbn + "┃");
-                        Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                        table.AddEmptyRow();
                     }
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("                                               BOOK NOT FOUND WITH CODE:  " + isbn);
                 }
+                AnsiConsole.Write(table);
                 // else
                 // {
                 //     Console.WriteLine("Please enter a valid ISBN or Book Title!");
@@ -181,26 +154,30 @@ namespace Utilities
 
         static void ShowBookName(string title, List<Book> lst)
         {
+            var table = new Table();
+            table.AddColumns("ID     ", "Name     ", "Category  ", " Pyear ", "Description ", "Author           ", "Publisher        ", "Unit Price   ", "Amount ");
+            table.BorderColor(Color.PaleGreen1);
             if (lst.Count() > 0)
             {
-                Console.WriteLine(title);
-                Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-┃ Book ID ┃ Book name ┃   Category ┃ publish Year ┃    Description   ┃   Author  ┃  Publisher  ┃ Unit Price ┃  Amount  ┃
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
                 foreach (Book b in lst)
                 {
                     if (b.BookStatus == 1)
                     {
-                        Console.WriteLine("┃ {0, 7:N0} ┃ {1, -9} ┃ {2, -9} ┃ {3, 12} ┃ {4, -16} ┃ {5, -9} ┃ {6, -9} ┃ {7, 10:N2} ┃ {8, 8} ┃",
-                        b.BookID, b.BookName, b.BookCategory!.CategoryName, b.PublishYear, b.Description, b.BookAuthor!.AuthorName,
-                        b.BookPublisher!.PublisherName, b.UnitPrice, b.Amount);
+                        {
+                            table.AddRow("" + b.BookID, "" + b.BookName, "" + b.BookCategory!.CategoryName, "" + b.PublishYear, "" + b.Description, "" + b.BookAuthor!.AuthorName,
+                                        "" + b.BookPublisher!.PublisherName, "" + b.UnitPrice, "" + b.Amount);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine(" No Books Found.");
                     }
                 }
-                Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-            }
-            else
-            {
-                Console.WriteLine(" No Books Found.");
+                AnsiConsole.Write(table);
+                // else
+                // {
+                //     Console.WriteLine(" No Books Found.");
+                // }
             }
         }
     }

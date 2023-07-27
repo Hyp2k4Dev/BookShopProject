@@ -8,5 +8,8 @@
   <ItemGroup>
     <PackageReference Include="MySqlConnector" Version="2.2.5" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Spectre.Console" Version="0.47.0" />
+  </ItemGroup>
 
 </Project>

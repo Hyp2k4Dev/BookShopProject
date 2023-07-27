@@ -38,25 +38,25 @@ namespace UI
             Console.WriteLine(title);
         }
 
-        public async void ProgressAsync()
+        public void ProgressAsync()
         {
-            await AnsiConsole.Progress().StartAsync(async ctx =>
-                {
-                    // Define tasks
-                    var task1 = ctx.AddTask("[green]Progress[/]");
-                    // var task2 = ctx.AddTask("Done!!!");
+            AnsiConsole.Progress().StartAsync(async ctx =>
+               {
+                   // Define tasks
+                   var task1 = ctx.AddTask("[green]Progress[/]");
+                   // var task2 = ctx.AddTask("Done!!!");
 
-                    while (!ctx.IsFinished)
-                    {
-                        // Simulate some work
-                        await Task.Delay(20);
+                   while (!ctx.IsFinished)
+                   {
+                       // Simulate some work
+                       await Task.Delay(20);
 
-                        // Increment
-                        task1.Increment(4.5);
-                        // task2.Increment(2);
-                        // Console.Clear();
-                    }
-                });
+                       // Increment
+                       task1.Increment(4.5);
+                       // task2.Increment(2);
+                       // Console.Clear();
+                   }
+               });
         }
         public void PrintBooks(List<Book> lst)
         {

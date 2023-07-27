@@ -44,7 +44,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "MySqlConnector": "2.2.5"
+          "MySqlConnector": "2.2.5",
+          "Spectre.Console": "0.47.0"
         },
         "compile": {
           "bin/placeholder/ThreeLayerLib.dll": {}
@@ -143,11 +144,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj",
+      "projectUniqueName": "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj",
       "projectName": "ConsoleApp",
-      "projectPath": "c:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj",
+      "projectPath": "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ConsoleApp\\obj\\",
+      "outputPath": "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ConsoleApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -162,8 +163,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "c:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj": {
-              "projectPath": "c:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj"
+            "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj": {
+              "projectPath": "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj"
             }
           }
         }
