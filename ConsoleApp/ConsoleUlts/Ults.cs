@@ -19,34 +19,31 @@ namespace Utilities
         StaffBL staffBL = new StaffBL();
         OrderBL oBL = new OrderBL();
         List<Book>? lst;
+
         public void Login()
         {
             while (true)
             {
-                consoleUI.Line();
                 Console.WriteLine(@"
 ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
 ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
 ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
 ");
-                consoleUI.Line();
                 consoleUI.Title(@"                       
                                 ╦  ╔═╗╔═╗╦╔╗╔
                                 ║  ║ ║║ ╦║║║║
                                 ╩═╝╚═╝╚═╝╩╝╚╝
 ");
-                consoleUI.centreLine();
+
                 orderStaff = staffBL.Login();
                 if (orderStaff != null)
                 {
-                    consoleUI.Line();
                     int mainMenuChoice = consoleUI.Menu(@"
 ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
 ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
 ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ", mainMenu);
-                    consoleUI.Line();
+
                     do
                     {
                         switch (mainMenuChoice)
@@ -69,13 +66,11 @@ namespace Utilities
         }
         public void CreateOrder()
         {
-            Console.WriteLine();
             Console.WriteLine(@"
 ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
 ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
 ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
 ");
-            consoleUI.Line();
             int createOrderChoose = consoleUI.Menu(@"                 
                 ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔╦╗╔═╗╔╗╔╦ ╦
                 ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ║║║║╣ ║║║║ ║
@@ -102,7 +97,7 @@ namespace Utilities
         {
             var table = new Table();
             table.AddColumns("ID     ", "Name     ", "Category  ", " Pyear ", "Description ", "Author           ", "Publisher        ", "Unit Price   ", "Amount ");
-            table.BorderColor(Color.PaleGreen1);
+            table.BorderColor(Color.LightYellow3);
             Console.WriteLine("Input book Code to search: ");
             int isbn;
             if (Int32.TryParse(Console.ReadLine(), out isbn))
@@ -144,8 +139,8 @@ namespace Utilities
         static void ShowBookName(string title, List<Book> lst)
         {
             var table = new Table();
-            table.BorderColor(Color.PaleGreen1);
-            table.AddColumns("ID     ", "Name     ", "Category  ", " Pyear ", "Description ", "Author           ", "Publisher        ", "Unit Price   ", "Amount ");
+            table.BorderColor(Color.LightYellow3);
+            table.AddColumns("ID     ", "Name     ", "Category  ", " Publish Year ", "Description ", "Author           ", "Publisher        ", "Unit Price   ", "Amount ");
             if (lst.Count() > 0)
             {
                 foreach (Book b in lst)
