@@ -22,3 +22,15 @@ C:\Users\admin\Desktop\ProjectV1.2\BookShopProject\ThreeLayerLib\obj\Debug\net7.
 C:\Users\admin\Desktop\ProjectV1.2\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\refint\ThreeLayerLib.dll
 C:\Users\admin\Desktop\ProjectV1.2\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\ThreeLayerLib.pdb
 C:\Users\admin\Desktop\ProjectV1.2\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\ref\ThreeLayerLib.dll
+C:\Users\admin\Desktop\AllRelease\ProjectV1.2\BookShopProject\ThreeLayerLib\bin\Debug\net7.0\ThreeLayerLib.deps.json
+C:\Users\admin\Desktop\AllRelease\ProjectV1.2\BookShopProject\ThreeLayerLib\bin\Debug\net7.0\ThreeLayerLib.dll
+C:\Users\admin\Desktop\AllRelease\ProjectV1.2\BookShopProject\ThreeLayerLib\bin\Debug\net7.0\ThreeLayerLib.pdb
+C:\Users\admin\Desktop\AllRelease\ProjectV1.2\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\ThreeLayerLib.csproj.AssemblyReference.cache
+C:\Users\admin\Desktop\AllRelease\ProjectV1.2\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\ThreeLayerLib.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admin\Desktop\AllRelease\ProjectV1.2\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\ThreeLayerLib.AssemblyInfoInputs.cache
+C:\Users\admin\Desktop\AllRelease\ProjectV1.2\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\ThreeLayerLib.AssemblyInfo.cs
+C:\Users\admin\Desktop\AllRelease\ProjectV1.2\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\ThreeLayerLib.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\AllRelease\ProjectV1.2\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\ThreeLayerLib.dll
+C:\Users\admin\Desktop\AllRelease\ProjectV1.2\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\refint\ThreeLayerLib.dll
+C:\Users\admin\Desktop\AllRelease\ProjectV1.2\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\ThreeLayerLib.pdb
+C:\Users\admin\Desktop\AllRelease\ProjectV1.2\BookShopProject\ThreeLayerLib\obj\Debug\net7.0\ref\ThreeLayerLib.dll

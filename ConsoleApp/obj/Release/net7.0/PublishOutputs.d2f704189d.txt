@@ -1,0 +1,9 @@
+C:\Users\admin\Desktop\AllRelease\ProjectV1.3\ConsoleApp.exe
+C:\Users\admin\Desktop\AllRelease\ProjectV1.3\ConsoleApp.dll
+C:\Users\admin\Desktop\AllRelease\ProjectV1.3\ConsoleApp.deps.json
+C:\Users\admin\Desktop\AllRelease\ProjectV1.3\ConsoleApp.runtimeconfig.json
+C:\Users\admin\Desktop\AllRelease\ProjectV1.3\ConsoleApp.pdb
+C:\Users\admin\Desktop\AllRelease\ProjectV1.3\MySqlConnector.dll
+C:\Users\admin\Desktop\AllRelease\ProjectV1.3\Spectre.Console.dll
+C:\Users\admin\Desktop\AllRelease\ProjectV1.3\ThreeLayerLib.dll
+C:\Users\admin\Desktop\AllRelease\ProjectV1.3\ThreeLayerLib.pdb
