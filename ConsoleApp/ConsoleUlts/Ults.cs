@@ -112,25 +112,14 @@ namespace Utilities
                 {
                     if (b.BookStatus == 1)
                     {
-
-
-
                         table.AddRow("" + b.BookID, "" + b.BookName, "" + b.BookCategory!.CategoryName, "" + b.PublishYear, "" + b.Description, "" + b.BookAuthor!.AuthorName,
                                                 "" + b.BookPublisher!.PublisherName, "" + b.UnitPrice, "" + b.Amount);
-                        // table.AddRow("[green]" + b.BookName);
-                        // table.AddRow("[green]" + b.BookCategory);
-                        // table.AddRow("[green]" + b.BookPublisher);
-                        // table.AddRow("[green]" + b.Description);
-                        // table.AddRow("[green]" + b.BookAuthor);
-                        // table.AddRow("[green]" + b.BookPublisher);
-                        // table.AddRow("[green]" + b.UnitPrice);
-                        // table.AddRow("[green]" + b.Amount);
                     }
                     else
                     {
                         table.AddEmptyRow();
                     }
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("                                               BOOK NOT FOUND WITH CODE:  " + isbn);
                 }
                 AnsiConsole.Write(table);
@@ -170,9 +159,12 @@ namespace Utilities
                     }
                     else
                     {
-                        Console.WriteLine(" No Books Found.");
+                        table.AddEmptyRow();
                     }
+
                 }
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("                                                      BOOK FOUND");
                 AnsiConsole.Write(table);
                 // else
                 // {
