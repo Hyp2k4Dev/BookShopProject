@@ -40,7 +40,6 @@ namespace DAL
             if (connection.State == System.Data.ConnectionState.Closed)
             {
                 connection.ConnectionString = connectionString;
-                Console.WriteLine(connectionString);
                 connection.Open();
             }
             return connection;

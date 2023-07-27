@@ -25,25 +25,26 @@ namespace Utilities
             while (true)
             {
                 Console.WriteLine(@"
-╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
-╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
-╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
+   ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
+   ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
+   ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
 ");
-                consoleUI.Title(@"                       
-                                ╦  ╔═╗╔═╗╦╔╗╔
-                                ║  ║ ║║ ╦║║║║
-                                ╩═╝╚═╝╚═╝╩╝╚╝
+                consoleUI.Title(@"
+                                   ╦  ╔═╗╔═╗╦╔╗╔
+                                   ║  ║ ║║ ╦║║║║
+                                   ╩═╝╚═╝╚═╝╩╝╚╝
 ");
 
                 orderStaff = staffBL.Login();
+                Console.Clear();
                 if (orderStaff != null)
                 {
                     int mainMenuChoice = consoleUI.Menu(@"
-╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
-╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
-╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
+   ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
+   ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
+   ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
 ", mainMenu);
-
+                    Console.Clear();
                     do
                     {
                         switch (mainMenuChoice)
@@ -71,12 +72,12 @@ namespace Utilities
 ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
 ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
 ");
-            int createOrderChoose = consoleUI.Menu(@"                 
+            int createOrderChoose = consoleUI.Menu(@"   
                 ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔╦╗╔═╗╔╗╔╦ ╦
                 ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ║║║║╣ ║║║║ ║
                 ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╩ ╩╚═╝╝╚╝╚═╝
 ", coMenu);
-            consoleUI.centreLine();
+            Console.Clear();
             do
             {
                 switch (createOrderChoose)
@@ -97,7 +98,7 @@ namespace Utilities
         {
             var table = new Table();
             table.AddColumns("ID     ", "Name     ", "Category  ", " Pyear ", "Description ", "Author           ", "Publisher        ", "Unit Price   ", "Amount ");
-            table.BorderColor(Color.LightYellow3);
+            table.BorderColor(Color.NavajoWhite1);
             Console.WriteLine("Input book Code to search: ");
             int isbn;
             if (Int32.TryParse(Console.ReadLine(), out isbn))
@@ -118,28 +119,29 @@ namespace Utilities
                     Console.WriteLine("                                               BOOK NOT FOUND WITH CODE:  " + isbn);
                 }
                 AnsiConsole.Write(table);
-                // else
-                // {
-                //     Console.WriteLine("Please enter a valid ISBN or Book Title!");
-                // }
             }
-            Console.WriteLine("\n    Press Enter key to back menu...");
-            Console.ReadLine();
+            else
+            {
+                Console.WriteLine("\n    Press Enter key to back menu...");
+                Console.ReadLine();
+                Console.Clear();
+
+            }
 
         }
         public void SearchBookByName()
         {
-            Console.Write("Input book name to search: ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Click <ENTER> to Display All Book or <Input Book Name> you are searching for!!! ");
             string n = Console.ReadLine() ?? "";
             lst = bBL.GetByName(n);
-            ShowBookName($"Book Count By Name: {n}", lst);
-
+            ShowBookName($"{n}", lst);
         }
 
         static void ShowBookName(string title, List<Book> lst)
         {
             var table = new Table();
-            table.BorderColor(Color.LightYellow3);
+            table.BorderColor(Color.NavajoWhite1);
             table.AddColumns("ID     ", "Name     ", "Category  ", " Publish Year ", "Description ", "Author           ", "Publisher        ", "Unit Price   ", "Amount ");
             if (lst.Count() > 0)
             {
@@ -156,15 +158,13 @@ namespace Utilities
                     {
                         table.AddEmptyRow();
                     }
-
                 }
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("                                                      BOOK FOUND");
+                Console.WriteLine("                                                           BOOK FOUND", Console.ForegroundColor = ConsoleColor.Red);
                 AnsiConsole.Write(table);
-                // else
-                // {
-                //     Console.WriteLine(" No Books Found.");
-                // }
+            }
+            else
+            {
+                Console.WriteLine(" No result found!", title, Console.ForegroundColor = ConsoleColor.Red);
             }
         }
     }
