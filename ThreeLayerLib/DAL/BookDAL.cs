@@ -69,14 +69,8 @@ namespace DAL
                         query = @"select * from Books;";
                         break;
                     case BookFilter.FILTER_BY_BOOK_NAME:
-                        query = @"select b.book_ID, b.ISBN, b.book_name, c.category_name, b.publish_year, 
-	                    b.book_description, a.author_name, p.publisher_name, b.unit_price, b.amount, b.book_status
-                        from Books b inner join CategoryDetails cd on b.book_ID=cd.book_ID 
-	                    inner join Categories c on cd.category_ID=cd.category_ID 
-	                    inner join Authors_Books ab on b.book_ID = ab.book_ID 
-	                    inner join Authors a on ab.author_ID = a.author_ID 
-	                    inner join Publishers p on b.publisher_ID = p.publisher_ID
-                        where b.book_status = 1 and b.book_name like @bookName order by b.book_ID asc;";
+                        query = @"select * from Books
+                        where book_status = 1 and book_name like @bookName order by book_ID asc;";
                         // command.Parameters.AddWithValue("@bookName", book.BookName);
                         break;
                 }
@@ -98,21 +92,22 @@ namespace DAL
             {
                 Console.WriteLine(ex.Message);
             }
-            List<Book> output = new List<Book>();
-            foreach (var i in lb)
-            {
-                int count = 0;
-                foreach (var o in output)
-                {
-                    if (o.BookName == i.BookName) count++;
-                }
-                if (count == 0)
-                {
-                    Console.WriteLine(i.BookName);
-                    output.Add(i);
-                }
-            }
-            return output;
+            // List<Book> output = new List<Book>();
+            // foreach (var i in lb)
+            // {
+            //     int count = 0;
+            //     foreach (var o in output)
+            //     {
+            //         if (o.BookName == i.BookName) count++;
+            //     }
+            //     if (count == 0)
+            //     {
+            //         Console.WriteLine(i.BookName);
+            //         output.Add(i);
+            //     }
+            // }
+            // return output;
+            return lb;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Utilities
     {
         ConsoleUI consoleUI = new ConsoleUI();
         string[] LoginMenu = { "| Login" };
-        string[] mainMenu = { "| Create Order", "| Exit" };
+        string[] mainMenu = { "| Create Order", "| Logout" };
         string[] coMenu = { "| Search By Book Name ", "| Get By Book Code ", "| Payment", "| Back To Main Menu" };
         BookBL bBL = new BookBL();
         Staff? orderStaff;
@@ -52,7 +52,18 @@ namespace Utilities
                             CreateOrder();
                             break;
                         case 2:
+                            Console.WriteLine("DO YOU WANT TO LOGOUT? <Y/N>");
+                            string? choice = Console.ReadLine();
+                            if (choice == "y")
+                            {
+                                Logout();
+                            }
+                            else
+                            {
+                                consoleUI.PressAnyKeyToContinue();
+                            }
                             break;
+
                     }
                 }
                 else
@@ -62,6 +73,11 @@ namespace Utilities
                     consoleUI.PressAnyKeyToContinue();
                 }
             }
+        }
+        public void Logout()
+        {
+            Console.WriteLine("Logged out");
+            Console.ReadKey();
         }
         public void Title(string title)
         {
@@ -124,7 +140,7 @@ namespace Utilities
             Console.Write("Input book name to search: ");
             string n = Console.ReadLine() ?? "";
             lst = bBL.GetByName(n);
-            ShowBooks($"Book Count By Name: {n}", lst);
+            ShowBooks($"Here ís your result: {n}", lst);
 
         }
 
@@ -148,7 +164,7 @@ namespace Utilities
             }
             else
             {
-                Console.WriteLine(" No Books Found.");
+                Console.WriteLine("No Books Found.");
             }
         }
     }

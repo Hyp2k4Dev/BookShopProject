@@ -1,5 +1,4 @@
-namespace Persistence
-{
+using Persistence;
 
 public class Publisher
 {
@@ -7,6 +6,4 @@ public class Publisher
     public string? Address { get; set; }
     public string? Phone { get; set; }
     public string? Website { get; set; }
-    
-}
 }
