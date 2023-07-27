@@ -149,15 +149,16 @@ namespace Utilities
             if (lst.Count() > 0)
             {
                 Console.WriteLine(title);
-                Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-┃ Book ID ┃ Book name ┃    Price   ┃  Amount  ┃    Description   ┃
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-                foreach (Book book in lst)
+                Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+┃ Book ID ┃ Book name ┃   Category ┃ publish Year ┃    Description   ┃   Author  ┃  Publisher  ┃ Unit Price ┃  Amount  ┃
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                foreach (Book b in lst)
                 {
-                    if (book.BookStatus == 1)
+                    if(b.BookStatus == 1)
                     {
-                        Console.WriteLine("┃ {0, 7:N0} ┃ {1, -9} ┃ {2, 10:N2} ┃ {3, 8:N0} ┃ {5, -16} ┃",
-                        book.BookID, book.BookName, book.UnitPrice, book.Amount, book.BookStatus, book.Description);
+                    Console.WriteLine("┃ {0, 7:N0} ┃ {1, -9} ┃ {2, -9} ┃ {3, 12} ┃ {4, -16} ┃ {5, -9} ┃ {6, -9} ┃ {7, 10:N2} ┃ {8, 8} ┃",
+                    b.BookID, b.BookName, b.BookCategory!.CategoryName, b.PublishYear, b.Description, b.BookAuthor!.AuthorName, 
+                    b.BookPublisher!.PublisherName ,b.UnitPrice, b.Amount);
                     }
                 }
                 Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
