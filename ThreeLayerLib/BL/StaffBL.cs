@@ -17,10 +17,10 @@ namespace BL
             userName = Console.ReadLine() ?? "";
             Console.WriteLine("Password: ");
             password = GetPassword();
-            
             Staff staff = staffDAL.GetStaffAccount(userName);
             if (staff.Password == staffDAL.CreateMD5(password) && staff.StaffStatus == 1)
             {
+                
                 return staff;
             }
             else
