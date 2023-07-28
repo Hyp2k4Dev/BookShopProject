@@ -14,7 +14,7 @@ namespace ConsoleApp
         public static void Main()
         {
             Ults ults = new Ults();
-            ults.Login();
+            ults.Main();
         }
     }
 }

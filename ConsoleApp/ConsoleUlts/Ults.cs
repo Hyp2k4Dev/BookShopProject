@@ -11,16 +11,16 @@ namespace Utilities
     public class Ults
     {
         ConsoleUI consoleUI = new ConsoleUI();
-        string[] mainMenu = { "| Create Order", "| Logout" };
-        string[] coMenu = { "| Search By Book Name ", "| Get By ISBN ", "| Payment", "| Back To Main Menu" };
+        string[] mainMenu = { "| CREATE ORDER ", "| LOGOUT" };
+        string[] coMenu = { "| SEARCH BOOK BY NAME ", "| SEARCH BOOK BY ISBN ", "| PAYMENT", "| BACK TO MAIN MENU" };
         BookBL bBL = new BookBL();
-        Staff? orderStaff;
+        Staff? loginStaff;
         CustomerBL cBL = new CustomerBL();
         StaffBL staffBL = new StaffBL();
         OrderBL oBL = new OrderBL();
         List<Book>? lst;
 
-        public void Login()
+        public void Main()
         {
             var table = new Table().Centered();
             while (true)
@@ -35,20 +35,17 @@ namespace Utilities
                                                                   ║  ║ ║║ ╦║║║║
                                                                   ╩═╝╚═╝╚═╝╩╝╚╝
 ");
-                orderStaff = staffBL.Login();
-                Console.Clear();
-                table.BorderColor(Color.NavajoWhite3);
-                table.AddColumn("STAFF USING: " + orderStaff!.StaffName);
-                Console.ResetColor();
-                AnsiConsole.Write(table);
-                if (orderStaff != null)
+                loginStaff = staffBL.Login();
+                if (loginStaff != null)
                 {
+                    table.BorderColor(Color.NavajoWhite3);
+                    table.AddColumn("STAFF USING: " + loginStaff!.StaffName);
+                    AnsiConsole.Write(table);
                     int mainMenuChoice = consoleUI.Menu(@"
                                   ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
                                   ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
                                   ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
 ", mainMenu);
-                    Console.Clear();
                     do
                     {
                         switch (mainMenuChoice)
@@ -73,22 +70,21 @@ namespace Utilities
         {
             var table = new Table().Centered();
             table.BorderColor(Color.NavajoWhite3);
-            table.AddColumn("STAFF USING: " + orderStaff!.StaffName);
-            Console.ResetColor();
+            table.AddColumn("STAFF USING: " + loginStaff!.StaffName);
             AnsiConsole.Write(table);
             Console.WriteLine(@"
                                   ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
                                   ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
                                   ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
 ");
-            int createOrderChoose = consoleUI.Menu(@"   
+            int coChoose = consoleUI.Menu(@"   
                                                   ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔╦╗╔═╗╔╗╔╦ ╦
                                                   ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ║║║║╣ ║║║║ ║
                                                   ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╩ ╩╚═╝╝╚╝╚═╝
 ", coMenu);
             do
             {
-                switch (createOrderChoose)
+                switch (coChoose)
                 {
                     case 1:
                         SearchBookByName();
@@ -100,7 +96,7 @@ namespace Utilities
                         // Payment;
                         break;
                 }
-            } while (createOrderChoose != coMenu.Length);
+            } while (coChoose != coMenu.Length);
         }
         public void SearchBookByISBN()
         {
@@ -132,20 +128,16 @@ namespace Utilities
             {
                 Console.WriteLine("\n    Press Enter key to back menu...");
                 Console.ReadLine();
-                Console.Clear();
-
             }
 
         }
         public void SearchBookByName()
         {
-            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Click <ENTER> to Display All Book or <Input Book Name> you are searching for!!! ");
             string n = Console.ReadLine() ?? "";
             lst = bBL.GetByName(n);
             ShowBookName($"{n}", lst);
         }
-
         static void ShowBookName(string title, List<Book> lst)
         {
             var table = new Table();
