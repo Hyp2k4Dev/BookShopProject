@@ -19,7 +19,7 @@ namespace DAL
             try
             {
                 query = @"select b.book_ID, b.ISBN, b.book_name, c.category_name, b.publish_year, 
-	                    b.book_description, a.author_name, p.publisher_name, b.unit_price, b.amount, b.book_status
+	                    b.book_description, a.author_name, p.publisher_name, b.price, b.amount, b.book_status
                         from Books b inner join CategoryDetails cd on b.book_ID=cd.book_ID 
 	                    inner join Categories c on c.category_ID=cd.category_ID 
 	                    inner join Authors_Books ab on b.book_ID = ab.book_ID 
@@ -60,7 +60,7 @@ namespace DAL
             book.BookPublisher = new Publisher();
             Publisher p = book.BookPublisher;
             p.PublisherName = reader.GetString("publisher_name");
-            book.UnitPrice = reader.GetDecimal("unit_price");
+            book.UnitPrice = reader.GetDecimal("price");
             book.Amount = reader.GetInt32("amount");
             book.BookStatus = reader.GetInt16("book_status");
             return book;
@@ -71,7 +71,7 @@ namespace DAL
             try
             {
                 query = @"select b.book_ID, b.ISBN, b.book_name, c.category_name, b.publish_year, 
-	                    b.book_description, a.author_name, p.publisher_name, b.unit_price, b.amount, b.book_status
+	                    b.book_description, a.author_name, p.publisher_name, b.price, b.amount, b.book_status
                         from Books b inner join CategoryDetails cd on b.book_ID=cd.book_ID 
 	                    inner join Categories c on c.category_ID=cd.category_ID 
 	                    inner join Authors_Books ab on b.book_ID = ab.book_ID 

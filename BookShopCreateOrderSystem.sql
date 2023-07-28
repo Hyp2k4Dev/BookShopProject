@@ -59,7 +59,7 @@ create table Books(
     book_name varchar(50)not null,
     publish_year int,
     book_description varchar(200),
-    unit_price decimal(10,2) not null,
+    price decimal(10,2) not null,
     amount int not null default 0,
     book_status int not null,
     constraint fk_b_publisher foreign key(publisher_ID) references publishers(publisher_ID)
@@ -90,7 +90,7 @@ create table OrderDetails(
     Book_ID int not null,
     constraint fk_books foreign key(book_ID) references Books(book_ID),
     constraint pk_orders_books primary key (order_ID, book_ID),
-	unit_price decimal(20,2) not null,
+	price decimal(20,2) not null,
     quantity int not null default 1
 );
 
@@ -147,11 +147,8 @@ select @cusId;
 
 
 insert into Staffs(staff_name, user_name, pass_word, staff_status) values
-		('Dinh Thanh Tuan','staff1', 'staff1', '1'),
-        ('Nguyen Hoang Hiep','staff2', 'staff2', '1'),
-        ('Ma Van N','staff3', 'staff3', '2'),
-        ('xbvvcb','staff4', 'staff4', '2'),
-        ('dzvclvcb','staff5', 'staff5', '2');
+		('Dinh Thanh Tuan','staff1', '4D7D719AC0CF3D78EA8A94701913FE47', '1'),
+        ('Nguyen Hoang Hiep','staff2', '8BC01711B8163EC3F2AA0688D12CDF3B', '1');
 select * from Staffs;
 
 insert into Customers(customer_name, phoneNumber, customer_address) values
@@ -163,11 +160,11 @@ insert into Customers(customer_name, phoneNumber, customer_address) values
 select * from Customers;
 
 insert into Authors(author_name, phoneNumber, author_address) values
-	('Author 1','0987654321', 'Ha Noi'),
-    ('Author 2','098765231', 'Da Nang'),
-    ('Author 3','097865231', 'Hai Phong'),
-    ('Author 4','988765231', 'Italya'),
-    ('Author 5','123456789', 'Binh Duong');
+	('Auhtor 1','0987654321', 'Ha Noi'),
+    ('Auhtor 2','098765231', 'Da Nang'),
+    ('Auhtor 3','097865231', 'Hai Phong'),
+    ('Auhtor 4','988765231', 'Italya'),
+    ('Auhtor 5','123456789', 'Binh Duong');
 select * from Authors;
 
 insert into Publishers(publisher_name, phoneNumber, publisher_address, website) values
@@ -179,11 +176,11 @@ insert into Publishers(publisher_name, phoneNumber, publisher_address, website) 
 select * from Publishers;
 
 
-insert into Books(book_name, publisher_ID, ISBN, publish_year, book_description, unit_price, amount, book_status) values
-	('Book 1', 1, 1234567890, 1990, 'book1', 45.5, 1, 1),
-    ('Book 2', 2, 1234527890, 1992, 'book2', 44.5, 2, 1),
-    ('Book 3', 3, 1234525890, 1994, 'book3', 56.5, 3, 2),
-    ('Book 4', 4, 1264527890, 1996, 'book4', 50, 4, 1),
+insert into Books(book_name, publisher_ID, ISBN, publish_year, book_description, price, amount, book_status) values
+	('IT Liệu đã hết thời ?', 1, 1234567890, 1990, 'book1', 45.5, 1, 1),
+    ('English book1', 2, 1234527890, 1992, 'book2', 44.5, 2, 1),
+    ('English book2', 3, 1234525890, 1994, 'book3', 56.5, 3, 2),
+    ('EBook 4', 4, 1264527890, 1996, 'book4', 50, 4, 1),
     ('Book 5', 5, 1237527890, 1997, 'book5', 64.2, 2, 2);
 select * from Books;
 
@@ -199,16 +196,16 @@ insert into Orders(staff_ID, customer_ID, order_status) values
 (1, 1, 1), (1, 2, 1), (1, 3, 1);
 select * from Orders;
 
-insert into OrderDetails(order_ID, book_ID, unit_price, quantity) values
+insert into OrderDetails(order_ID, book_ID, price, quantity) values
 	(1, 1, 12.2, 2), (2, 2, 2, 3), (3, 4, 3, 3);
 select * from OrderDetails;
 
 insert into CategoryDetails(book_ID, category_ID) values
-	(1, 1), (2, 2), (3, 3), (4,1);
+	(1, 1), (2, 2), (3, 3),(4,1);
 select * from OrderDetails;
 
 insert into Authors_Books(book_ID, author_ID) values
-	(1, 1), (2, 2), (3, 3),(4,1);
+	(1, 1), (2, 2), (3, 3), (4,4),(5,5);
 select * from OrderDetails;
 
 
@@ -220,7 +217,17 @@ grant all on BookShop.* to 'H&T'@'localhost';
 -- -- grant all on Customers to 'vtca'@'localhost';
 -- -- grant all on Orders to 'vtca'@'localhost';
 -- -- grant all on OrderDetails to 'vtca'@'localhost';
+
+select b.book_ID, b.ISBN, b.book_name, c.category_name, b.publish_year, 
+	b.book_description, a.author_name, p.publisher_name, b.price, b.amount, b.book_status
+from Books b inner join CategoryDetails cd on b.book_ID=cd.book_ID 
+	inner join Categories c on cd.category_ID=cd.category_ID 
+	inner join Authors_Books ab on b.book_ID = ab.book_ID 
+	inner join Authors a on ab.author_ID = a.author_ID 
+	inner join Publishers p on b.publisher_ID = p.publisher_ID
+    where b.book_ID;
     
+
 -- select customer_ID, customer_name,
 --     ifnull(customer_address, '') as customer_address
 -- from Customers where customer_id=1;
