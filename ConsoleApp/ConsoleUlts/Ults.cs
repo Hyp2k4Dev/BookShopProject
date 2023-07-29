@@ -13,7 +13,7 @@ namespace Utilities
     {
         ConsoleUI consoleUI = new ConsoleUI();
         string[] mainMenu = { ". CREATE ORDER ", ". LOGOUT" };
-        string[] coMenu = { ". SEARCH BOOK BY NAME ", ". SEARCH BOOK BY ISBN ", ". PAYMENT", ". BACK TO MAIN MENU" };
+        string[] coMenu = { ". SEARCH BOOK BY NAME ", ". SEARCH BOOK BY ISBN ", ". ADD TO ORDER", ". PAYMENT", ". BACK TO MAIN MENU" };
         BookBL bBL = new BookBL();
         Staff? loginStaff;
         CustomerBL cBL = new CustomerBL();
@@ -103,10 +103,12 @@ namespace Utilities
                         SearchBookByISBN();
                         break;
                     case 3:
-                        // Payment;
+                        // Add Book To Order
                         break;
                     case 4:
-                        // PressEsc();
+                        // Payment;
+                        break;
+                    default:
                         break;
                 }
             } while (coChoose != coMenu.Length);
