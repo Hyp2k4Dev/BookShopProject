@@ -5,14 +5,15 @@ using BL;
 using Persistence;
 using Spectre.Console;
 using UI;
+using System.Linq;
 
 namespace Utilities
 {
     public class Ults
     {
         ConsoleUI consoleUI = new ConsoleUI();
-        string[] mainMenu = { "| CREATE ORDER ", "| LOGOUT" };
-        string[] coMenu = { "| SEARCH BOOK BY NAME ", "| SEARCH BOOK BY ISBN ", "| PAYMENT", "| BACK TO MAIN MENU" };
+        string[] mainMenu = { ". CREATE ORDER ", ". LOGOUT" };
+        string[] coMenu = { ". SEARCH BOOK BY NAME ", ". SEARCH BOOK BY ISBN ", ". PAYMENT", ". BACK TO MAIN MENU" };
         BookBL bBL = new BookBL();
         Staff? loginStaff;
         CustomerBL cBL = new CustomerBL();
@@ -22,30 +23,36 @@ namespace Utilities
 
         public void Main()
         {
-            var table = new Table().Centered();
             while (true)
             {
                 Console.WriteLine(@"            
-                                  ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
-                                  ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
-                                  ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                     │
+│ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
+│ ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║ │
+│ ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩ │
+│                                                                                     │
+│                              │ ╦  ╔═╗╔═╗╦╔╗╔ │                                      │
+│                              │ ║  ║ ║║ ╦║║║║ │                                      │
+│                              │ ╩═╝╚═╝╚═╝╩╝╚╝ │                                      │   
+└─────────────────────────────────────────────────────────────────────────────────────┘
 ");
-                consoleUI.Title(@"          
-                                                                  ╦  ╔═╗╔═╗╦╔╗╔
-                                                                  ║  ║ ║║ ╦║║║║
-                                                                  ╩═╝╚═╝╚═╝╩╝╚╝
-");
-                loginStaff = staffBL.Login();
+                loginStaff = staffBL.LoginAccount();
                 if (loginStaff != null)
                 {
-                    table.BorderColor(Color.NavajoWhite3);
-                    table.AddColumn("STAFF USING: " + loginStaff!.StaffName);
-                    AnsiConsole.Write(table);
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    Console.WriteLine("                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                    Console.WriteLine("                                 STAFF USING: " + loginStaff!.StaffName);
+                    Console.WriteLine("                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                    Console.ResetColor();
                     int mainMenuChoice = consoleUI.Menu(@"
-                                  ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
-                                  ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
-                                  ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
-", mainMenu);
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                     │
+│ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
+│ ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║ │
+│ ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩ │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘", mainMenu);
                     do
                     {
                         switch (mainMenuChoice)
@@ -61,26 +68,29 @@ namespace Utilities
                 else
                 {
                     Console.WriteLine("");
-                    Console.WriteLine("Invalid User Name/Password ");
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("INVALID USER NAME OR PASSWORD !! PLEASE ENTER TRUE YOUR ACCOUNT !");
+                    Console.ResetColor();
                     consoleUI.PressAnyKeyToContinue();
                 }
             }
         }
         public void CreateOrder()
         {
-            var table = new Table().Centered();
-            table.BorderColor(Color.NavajoWhite3);
-            table.AddColumn("STAFF USING: " + loginStaff!.StaffName);
-            AnsiConsole.Write(table);
-            Console.WriteLine(@"
-                                  ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
-                                  ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
-                                  ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
-");
-            int coChoose = consoleUI.Menu(@"   
-                                                  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔╦╗╔═╗╔╗╔╦ ╦
-                                                  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ║║║║╣ ║║║║ ║
-                                                  ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╩ ╩╚═╝╝╚╝╚═╝
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.WriteLine("                                 STAFF USING: " + loginStaff!.StaffName);
+            Console.WriteLine("                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.ResetColor();
+            int coChoose = consoleUI.Menu(@"┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                     │
+│ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
+│ ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║ │
+│ ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩ │
+│              │╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔╦╗╔═╗╔╗╔╦ ╦│                    │
+│              │║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ║║║║╣ ║║║║ ║│                    │
+│              │╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╩ ╩╚═╝╝╚╝╚═╝│                    │
+└─────────────────────────────────────────────────────────────────────────────────────┘   
 ", coMenu);
             do
             {
@@ -95,6 +105,9 @@ namespace Utilities
                     case 3:
                         // Payment;
                         break;
+                    case 4:
+                        // PressEsc();
+                        break;
                 }
             } while (coChoose != coMenu.Length);
         }
@@ -102,8 +115,7 @@ namespace Utilities
         {
             var table = new Table();
             table.AddColumns("ID     ", "NAME     ", "CATEGORY  ", " PUBLISHING YEAR ", " DESCRIPTION ", " AUTHOR  ", "    PUBLISHER     ", "  PRICE   ", "AMOUNT ");
-            table.BorderColor(Color.NavajoWhite1);
-            Console.WriteLine("Input book Code to search: ");
+            Console.WriteLine("INPUT BOOK'S CODE TO SEARCH: ");
             int isbn;
             if (Int32.TryParse(Console.ReadLine(), out isbn))
             {
@@ -112,36 +124,46 @@ namespace Utilities
                 {
                     if (b.BookStatus == 1)
                     {
+                        Console.WriteLine("                                                           BOOK FOUND", Console.ForegroundColor = ConsoleColor.Red);
+                        Console.ResetColor();
                         table.AddRow("" + b.BookID, "" + b.BookName, "" + b.BookCategory!.CategoryName, "" + b.PublishYear, "" + b.Description, "" + b.BookAuthor!.AuthorName,
                                                 "" + b.BookPublisher!.PublisherName, "" + b.UnitPrice, "" + b.Amount);
+
                     }
                     else
                     {
                         table.AddEmptyRow();
+                        Console.WriteLine("                                               BOOK NOT FOUND WITH CODE:  " + isbn);
                     }
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("                                               BOOK NOT FOUND WITH CODE:  " + isbn);
                 }
                 AnsiConsole.Write(table);
             }
             else
             {
-                Console.WriteLine("\n    Press Enter key to back menu...");
-                Console.ReadLine();
+                // Console.WriteLine("\n    PRESS ENTER TO BACK TO CREATE ORDER MENU");
+                // while (true)
+                // {
+                //     Console.ReadKey(true);
+                //     if (Console.ReadKey().Key == ConsoleKey.Enter)
+                //     {
+                //         Console.WriteLine("ADD TO ORDER SUCCESS !");
+                //         break;
+                //     }
+                // }
             }
-
         }
         public void SearchBookByName()
         {
-            Console.WriteLine("Click <ENTER> to Display All Book or <Input Book Name> you are searching for!!! ");
+            Console.WriteLine("CLICK <ENTER> TO DISPLAY ALL BOOK OR INPUT NAME OF BOOK YOU ARE SEARCHING FOR OR PRESS ESCAPE TO BACK TO CREATE ORDER MENU!!! ");
             string n = Console.ReadLine() ?? "";
+
             lst = bBL.GetByName(n);
             ShowBookName($"{n}", lst);
+
         }
         static void ShowBookName(string title, List<Book> lst)
         {
             var table = new Table();
-            table.BorderColor(Color.NavajoWhite1);
             table.AddColumns("ID     ", "NAME     ", "CATEGORY  ", " PUBLISHING YEAR ", " DESCRIPTION ", " AUTHOR  ", "    PUBLISHER     ", "  PRICE   ", "AMOUNT ");
             if (lst.Count() > 0)
             {
@@ -160,16 +182,43 @@ namespace Utilities
                     }
                 }
                 Console.WriteLine("                                                           BOOK FOUND", Console.ForegroundColor = ConsoleColor.Red);
+                Console.ResetColor();
                 AnsiConsole.Write(table);
+                Console.WriteLine("ENTER THE BOOK ID TO ADD TO ORDER: ");
+                int addOrder = int.Parse(Console.ReadLine() ?? "");
+                foreach (Book book in lst)
+                {
+                    if (addOrder == book.BookID)
+                    {
+                        Console.WriteLine("ADD BOOK " + book.BookName + " SUCCESS");
+                        break;
+                    }
+                    else
+                    {
+                    }
+                }
+                // Console.ForegroundColor = ConsoleColor.Red;
+                // Console.WriteLine("INVALID ID PLEASE ENTER VALID ID");
+                // Console.ResetColor();
             }
             else
             {
-                Console.WriteLine(" No result found!", title, Console.ForegroundColor = ConsoleColor.Red);
+                Console.WriteLine(" BOOK NOT FOUND ", Console.ForegroundColor = ConsoleColor.Red);
+                Console.ResetColor();
             }
         }
-        public void EscPress()
+        public void PressEsc()
         {
-            Console.ReadKey();
+            while (true)
+            {
+                Console.ReadKey(true);
+                if (Console.ReadKey().Key == ConsoleKey.Escape)
+                {
+                    Console.WriteLine("You pressed Escape!");
+                    CreateOrder();
+                    break;
+                }
+            }
         }
     }
 }

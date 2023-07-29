@@ -9,18 +9,21 @@ namespace BL
     {
         StaffDAL staffDAL = new StaffDAL();
 
-        public Staff? Login()
+        public Staff? LoginAccount()
         {
             string userName;
             string password;
-            Console.WriteLine("User Name: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("ENTER YOUR ACCOUNT TO LOGIN SYSTEM !!!");
+            Console.ResetColor();
+            Console.Write("│ USER NAME │: ");
             userName = Console.ReadLine() ?? "";
-            Console.WriteLine("Password: ");
+            Console.WriteLine();
+            Console.Write("│ PASSWORD │: ");
             password = GetPassword();
             Staff staff = staffDAL.GetStaffAccount(userName);
             if (staff.Password == staffDAL.CreateMD5(password) && staff.StaffStatus == 1)
             {
-                
                 return staff;
             }
             else
