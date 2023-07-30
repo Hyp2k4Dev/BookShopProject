@@ -103,6 +103,7 @@ namespace Utilities
                         SearchBookByISBN();
                         break;
                     case 3:
+                        // AddOrder();
                         // Add Book To Order
                         break;
                     case 4:
@@ -186,28 +187,47 @@ namespace Utilities
                 Console.WriteLine("                                                           BOOK FOUND", Console.ForegroundColor = ConsoleColor.Red);
                 Console.ResetColor();
                 AnsiConsole.Write(table);
-                Console.WriteLine("ENTER THE BOOK ID TO ADD TO ORDER: ");
-                int addOrder;
-                foreach (Book book in lst)
-                {
-                    if (Int32.TryParse(Console.ReadLine(), out addOrder))
-                    {
-                        Console.WriteLine("ADD BOOK " + book.BookName + " SUCCESS");
-                    }
-                    else
-                    {
-                        Console.WriteLine("UNKNOWN BOOK TO ADD IN ");
-                    }
-                }
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("INVALID ID PLEASE ENTER VALID ID");
-                Console.ResetColor();
+                // Console.WriteLine("ENTER THE BOOK ID TO ADD TO ORDER: ");
+                // int addOrder;
+                // foreach (Book book in lst)
+                // {
+                //     if (Int32.TryParse(Console.ReadLine(), out addOrder))
+                //     {
+                //         Console.WriteLine("ADD BOOK " + book.BookName + " SUCCESS");
+                //     }
+                //     else
+                //     {
+                //         Console.WriteLine("UNKNOWN BOOK TO ADD IN ");
+                //     }
+                // }
+                // Console.ForegroundColor = ConsoleColor.Red;
+                // Console.WriteLine("INVALID ID PLEASE ENTER VALID ID");
+                // Console.ResetColor();
             }
             else
             {
                 Console.WriteLine(" BOOK NOT FOUND ", Console.ForegroundColor = ConsoleColor.Red);
                 Console.ResetColor();
             }
+        }
+        public void AddOrder(List<Book> lst, string title)
+        {
+            Console.WriteLine("ENTER THE BOOK ID TO ADD TO ORDER: ");
+            int addOrder;
+            foreach (Book book in lst)
+            {
+                if (Int32.TryParse(Console.ReadLine(), out addOrder))
+                {
+                    Console.WriteLine("ADD BOOK " + book.BookName + " SUCCESS");
+                }
+                else
+                {
+                    Console.WriteLine("UNKNOWN BOOK TO ADD IN ");
+                }
+            }
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("INVALID ID PLEASE ENTER VALID ID");
+            Console.ResetColor();
         }
         public void PressEsc()
         {
