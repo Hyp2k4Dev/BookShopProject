@@ -187,21 +187,21 @@ namespace Utilities
                 Console.ResetColor();
                 AnsiConsole.Write(table);
                 Console.WriteLine("ENTER THE BOOK ID TO ADD TO ORDER: ");
-                int addOrder = int.Parse(Console.ReadLine() ?? "");
+                int addOrder;
                 foreach (Book book in lst)
                 {
-                    if (addOrder == book.BookID)
+                    if (Int32.TryParse(Console.ReadLine(), out addOrder))
                     {
                         Console.WriteLine("ADD BOOK " + book.BookName + " SUCCESS");
-                        break;
                     }
                     else
                     {
+                        Console.WriteLine("UNKNOWN BOOK TO ADD IN ");
                     }
                 }
-                // Console.ForegroundColor = ConsoleColor.Red;
-                // Console.WriteLine("INVALID ID PLEASE ENTER VALID ID");
-                // Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("INVALID ID PLEASE ENTER VALID ID");
+                Console.ResetColor();
             }
             else
             {
