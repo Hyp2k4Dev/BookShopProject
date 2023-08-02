@@ -34,7 +34,7 @@ namespace DAL
         internal Customer GetCustomer(MySqlDataReader reader)
         {
             Customer c = new Customer();
-            c.CustomerId = reader.GetInt32("customer_ID");
+            c.CustomerID = reader.GetInt32("customer_ID");
             c.CustomerName = reader.GetString("customer_name");
             c.CustomerAddress = reader.GetString("address");
             return c;
@@ -52,7 +52,7 @@ namespace DAL
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@customer_Name", c.CustomerName);
                 cmd.Parameters["@customer_Name"].Direction = System.Data.ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@Phone", c.phoneNumber);
+                cmd.Parameters.AddWithValue("@Phone", c.PhoneNumber);
                 cmd.Parameters["@Phone"].Direction = System.Data.ParameterDirection.Input;
                 cmd.Parameters.AddWithValue("@Address", c.CustomerAddress);
                 cmd.Parameters["@Address"].Direction = System.Data.ParameterDirection.Input;

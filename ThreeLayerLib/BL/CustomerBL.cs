@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DAL;
 using Persistence;
 
@@ -6,7 +7,7 @@ namespace BL
     public class CustomerBL
     {
         CustomerDAL customerDAL = new CustomerDAL();
-        public Customer? GetById(int customerId)
+        public Customer GetCustomerById(int customerId)
         {
             return customerDAL.GetCustomerById(customerId);
         }
@@ -16,5 +17,4 @@ namespace BL
             return customerDAL.AddCustomer(customer);
         }
     }
-
 }

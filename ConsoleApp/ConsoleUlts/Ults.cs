@@ -18,7 +18,7 @@ namespace Utilities
         int currentPage = 1;
         ConsoleUI consoleUI = new ConsoleUI();
         string[] mainMenu = { ". CREATE ORDER ", ". LOGOUT" };
-        string[] coMenu = { ". SEARCH BOOK BY NAME ", ". SEARCH BOOK BY ISBN ", ". ADD TO ORDER", ". PAYMENT", ". BACK TO MAIN MENU" };
+        string[] coMenu = { ". SEARCH BOOK BY NAME ", ". SEARCH BOOK BY CODE ", ". ADD TO ORDER", ". PAYMENT", ". BACK TO MAIN MENU" };
         BookBL bBL = new BookBL();
         Staff? loginStaff;
         Customer? GetCustomer;
@@ -68,6 +68,7 @@ namespace Utilities
 │ ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩ │
 │                                                                                     │
 └─────────────────────────────────────────────────────────────────────────────────────┘", mainMenu);
+                Console.Clear();
                 do
                 {
                     switch (mainMenuChoice)
@@ -80,6 +81,35 @@ namespace Utilities
                     }
                 } while (mainMenuChoice != mainMenu.Length);
             }
+            Console.Clear();
+        }
+        public void MainMenu()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.WriteLine("                                 STAFF USING: " + loginStaff!.StaffName);
+            Console.WriteLine("                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.ResetColor();
+            int mainMenuChoice = consoleUI.Menu(@"
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                     │
+│ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
+│ ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║ │
+│ ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩ │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘", mainMenu);
+            Console.Clear();
+            do
+            {
+                switch (mainMenuChoice)
+                {
+                    case 1:
+                        CreateOrder();
+                        break;
+                    case 2:
+                        break;
+                }
+            } while (mainMenuChoice != mainMenu.Length);
         }
 
         [Obsolete]
@@ -100,7 +130,6 @@ namespace Utilities
 │              │╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╩ ╩╚═╝╝╚╝╚═╝│                    │
 └─────────────────────────────────────────────────────────────────────────────────────┘   
 ", coMenu);
-
             do
             {
                 switch (coChoose)
@@ -112,19 +141,19 @@ namespace Utilities
                         SearchBookByISBN();
                         break;
                     case 3:
-                        // AddOrder();
-                        // Add Book To Order
+                        AddBooks();
                         break;
                     case 4:
-
-                        // Payment;
+                        Payment();
                         break;
                     default:
+                        MainMenu();
                         break;
                 }
             } while (coChoose != coMenu.Length);
         }
 
+        [Obsolete]
         public void SearchBookByISBN()
         {
             var table = new Table();
@@ -141,36 +170,40 @@ namespace Utilities
                         Console.WriteLine("                                                           BOOK FOUND", Console.ForegroundColor = ConsoleColor.Red);
                         Console.ResetColor();
                         table.AddRow("" + b.BookID, "" + b.BookName, "" + b.BookCategory!.CategoryName, "" + b.PublishYear, "" + b.Description, "" + b.BookAuthor!.AuthorName,
-                                                "" + b.BookPublisher!.PublisherName, "" + b.UnitPrice, "" + b.Amount);
+                                    "" + b.BookPublisher!.PublisherName, "" + b.Price, "" + b.Amount);
 
+                        AnsiConsole.Write(table);
+                        Console.WriteLine("PRESS ESC TO BACK TO CREATE ORDER MENU OR PRESS ENTER TO CONTINUE SEARCH!!!");
+                        var key = Console.ReadKey(true).Key;
+                        if (key == ConsoleKey.Escape)
+                        {
+                            BackToCreateOrderMenu();
+                        }
                     }
                     else
                     {
                         table.AddEmptyRow();
                         Console.WriteLine("                                               BOOK NOT FOUND WITH CODE:  " + isbn);
+                        AnsiConsole.Write(table);
+                        Console.WriteLine("PRESS ESC TO BACK TO CREATE ORDER MENU OR PRESS ENTER TO CONTINUE SEARCH!!!");
+                        var key = Console.ReadKey(true).Key;
+                        if (key == ConsoleKey.Escape)
+                        {
+                            BackToCreateOrderMenu();
+                        }
                     }
                 }
-                AnsiConsole.Write(table);
             }
             else
             {
-                // Console.WriteLine("\n    PRESS ENTER TO BACK TO CREATE ORDER MENU");
-                // while (true)
-                // {
-                //     Console.ReadKey(true);
-                //     if (Console.ReadKey().Key == ConsoleKey.Enter)
-                //     {
-                //         Console.WriteLine("ADD TO ORDER SUCCESS !");
-                //         break;
-                //     }
-                // }
             }
         }
+
 
         [Obsolete]
         public void SearchBookByName()
         {
-            Console.WriteLine("INPUT NAME OF BOOK YOU ARE SEARCHING FOR OR PRESS ESCAPE TO BACK TO CREATE ORDER MENU!!! ");
+            Console.WriteLine("INPUT NAME OF BOOK YOU ARE SEARCHING FOR: ");
             string n = Console.ReadLine() ?? "";
 
             lst = bBL.GetByName(n);
@@ -184,7 +217,7 @@ namespace Utilities
                 var key = Console.ReadKey(true).Key;
                 if (key == ConsoleKey.Escape)
                 {
-                    EscToCreateOrderMenu();
+                    BackToCreateOrderMenu();
                     break;
                 }
                 else if (key == ConsoleKey.Enter)
@@ -213,7 +246,7 @@ namespace Utilities
         [Obsolete]
         void ShowBookName(string title, List<Book> lst, int currentPage)
         {
-            int itemsPerPage = 3;
+            int itemsPerPage = 5;
             int startIndex = (currentPage - 1) * itemsPerPage;
             int endIndex = Math.Min(startIndex + itemsPerPage, lst.Count);
 
@@ -227,69 +260,202 @@ namespace Utilities
                 {
                     table.AddRow("" + b.BookID, "" + b.BookName, "" + b.BookCategory!.CategoryName, "" + b.PublishYear,
                                  "" + b.Description, "" + b.BookAuthor!.AuthorName, "" + b.BookPublisher!.PublisherName,
-                                 "" + b.UnitPrice, "" + b.Amount);
+                                 "" + b.Price, "" + b.Amount);
                 }
                 else
                 {
                     table.AddEmptyRow();
                 }
             }
-
+            Console.WriteLine(" PRESS ESCAPE TO BACK TO CREATE ORDER MENU!!! ");
             AnsiConsole.Render(table);
             Console.WriteLine($"Page {currentPage}/{totalPages}");
         }
 
 
         [Obsolete]
-        public void EscToCreateOrderMenu()
+        public void BackToCreateOrderMenu()
         {
             Console.WriteLine("GOING BACK TO CREATE ORDER MENU...");
             Console.Clear();
             CreateOrder();
         }
 
-        
-        public void AddBookToOrder(Book book)
-        {
-            if (book != null)
-            {
-                // Add the selected book to the order
-                oBL.AddBookToOrder(book);
 
-                // For simplicity, let's assume we have access to the current customer.
-                // Replace "GetCustomer" with the method or property that retrieves the current customer.
-                Customer customer = GetCustomer;
 
-                // Assuming you have a method to get the current order from the OrderBL class.
-                Order currentOrder = oBL.GetCurrentOrder(customer);
-
-                // Print both customer and order details
-                Console.WriteLine($"Customer: {customer.CustomerName}");
-                Console.WriteLine("Current Order:");
-                Console.WriteLine($"Order ID: {currentOrder.OrderID}");
-                Console.WriteLine($"Order Date: {currentOrder.OrderDate}");
-                // Add more order details as needed
-
-                // You can also print the details of the book added to the order
-                Console.WriteLine("Book Added to Order:");
-                Console.WriteLine($"Book ID: {book.BookID}");
-                Console.WriteLine($"Book Name: {book.BookName}");
-                // Add more book details as needed
-
-                // Show some message or confirmation that the book is added to the order.
-                Console.WriteLine($"Book '{book.BookName}' added to the order.");
-            }
-            else
-            {
-                Console.WriteLine("Book not found.");
-            }
-        }
         private int totalPages
         {
             get
             {
                 return (int)Math.Ceiling((double)lst.Count / booksPerPage);
             }
+        }
+        public void AddCustomer()
+        {
+            Console.WriteLine("ADD NEW CUSTOMER");
+            Console.Write("CUSTOMER NAME: ");
+            string name = Console.ReadLine() ?? "no name";
+            Console.WriteLine("PHONE NUMBER: ");
+            int phone = Convert.ToInt32(Console.ReadLine() ?? "No Phone Number");
+            Console.Write("CUSTOMER ADDRESS: ");
+            string address = Console.ReadLine() ?? "";
+            Customer c = new Customer { CustomerName = name, PhoneNumber = phone, CustomerAddress = address };
+            c.CustomerID = cBL.AddCustomer(c);
+            if (c.CustomerID > 0)
+            {
+                Console.WriteLine($"ADD CUSTOMER COMPLETED WITH ID:  {c.CustomerID}");
+            }
+        }
+        public void SearchCustomer()
+        {
+            Console.WriteLine("Input ID to search: ");
+            int c;
+            if (Int32.TryParse(Console.ReadLine(), out c))
+            {
+                Customer? ctr = cBL.GetCustomerById(c);
+                if (ctr != null)
+                {
+
+                    // Console.WriteLine("Book ID: " + ctr.CustomerID);
+                    Console.WriteLine("CUSTOMER NAME: " + ctr.CustomerName);
+                    Console.WriteLine("PHONE NUMBER: " + ctr.PhoneNumber);
+                    Console.WriteLine("CUSTOMER ADDRESS: " + ctr.CustomerAddress);
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("PLEASE ENTER VALID CUSTOMER NAME!");
+            }
+        }
+
+        public void AddBooks()
+        {
+            var table = new Table();
+            Order o = new Order();
+            bool addAnotherBook = true;
+
+            while (addAnotherBook)
+            {
+                int isbn;
+                Console.WriteLine("INPUT BOOK CODE: ");
+                if (Int32.TryParse(Console.ReadLine(), out isbn))
+                {
+                    Book book = bBL.GetBookByISBN(isbn);
+                    if (book != null)
+                    {
+                        // table.AddColumns("BOOK CODE", "BOOK NAME", "BOOK PRICE");
+                        if (book.BookStatus == 1)
+                        {
+                            // table.AddRow("" + book.ISBN, "" + book.BookName, "" + book.Price);
+                            Console.WriteLine($"BOOK NAME: {book.BookName}");
+                            Console.WriteLine($"BOOK CATEGORY: {book.BookCategory!.CategoryName}");
+                            Console.WriteLine($"BOOK DESCRIPTION: {book.Description}");
+                            Console.WriteLine($"BOOK AUTHOR: {book.BookAuthor!.AuthorName}");
+                            Console.WriteLine($"BOOK QUANTITY: {book.Amount}");
+                            Console.WriteLine($"PRICE: {book.Price}");
+                            Console.WriteLine();
+                            int amount;
+                            Console.WriteLine("INPUT BOOK QUANTITY:");
+                            if (Int32.TryParse(Console.ReadLine(), out amount))
+                            {
+                                Console.WriteLine($"ADD BOOK COMPLETED: {amount} ");
+                                book.Amount = amount; // Set the amount for the book.
+                                o.BooksList.Add(book);
+                            }
+                            else
+                            {
+                                Console.WriteLine("INVALID QUANTITY INPUT.BOOK ADD FAILED");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("THIS BOOK IS OUT OF STOCK!!PLEASE CHOOSE ANOTHER BOOK");
+                            AddBooks();
+                        }
+                    }
+                    // else
+                    // {
+                    //     Console.WriteLine("BOOK NOT FOUND!");
+                    // }
+                }
+                else
+                {
+                    Console.WriteLine("INVALID CODE. BOOK NOT FOUND!");
+                    AddBooks();
+                }
+
+                Console.Write("DO YOU WANT TO ADD ANOTHER BOOK? (Y/N): ");
+                Console.WriteLine();
+                string? answer = Console.ReadLine();
+                if (answer?.Trim().ToLower() != "y")
+                {
+                    addAnotherBook = false;
+                }
+            }
+            Console.WriteLine("                         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.WriteLine("                         |               ADD NEW CUSTOMER             |");
+            Console.WriteLine("                         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.Write("CUSTOMER NAME: ");
+            string name = Console.ReadLine() ?? "no name";
+            Console.WriteLine("PHONE NUMBER: ");
+            int phone = Convert.ToInt32(Console.ReadLine().Trim() ?? "0");
+            Console.Write("CUSTOMER ADDRESS: ");
+            string address = Console.ReadLine() ?? "";
+            o.OrderCustomer = new Customer { CustomerName = name, PhoneNumber = phone, CustomerAddress = address };
+            Console.Clear();
+            o.OrderStaff = loginStaff;
+            Console.WriteLine("                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.WriteLine("                             STAFF CREATE ORDER: " + o.OrderStaff!.StaffName);
+            Console.WriteLine("                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.WriteLine("CUSTOMER NAME: " + o.OrderCustomer!.CustomerName);
+            Console.WriteLine("PHONE NUMBER: " + o.OrderCustomer.PhoneNumber);
+            Console.WriteLine("CUSTOMER ADDRESS: " + o.OrderCustomer.CustomerAddress);
+            table.AddColumns("BOOK NAME ", "PRICE ", "AMOUNT ", "TOTAL PRICE ");
+            foreach (Book b in o.BooksList)
+            {
+                table.AddRow("" + b.BookName, "" + b.Price, "" + b.Amount, "" + b.Price * b.Amount);
+            }
+            AnsiConsole.Write(table);
+            Console.WriteLine("CREATE ORDER: " + (oBL.SaveOrder(o) ? "COMPLETED!" : "NOT COMPLETED!"));
+            Console.WriteLine("\n    PRESS ENTER TO CONTINUE...");
+            Console.ReadLine();
+        }
+
+
+
+        public void Payment()
+        {
+            Console.WriteLine("INPUT ORDER ID: ");
+            if (Int32.TryParse(Console.ReadLine(), out int orderID))
+            {
+                Order o = oBL.GetOrderByID(orderID);
+                if (o != null)
+                {
+                    Console.WriteLine("ORDER DATE: " + o.OrderDate);
+                    Console.WriteLine("CUSTOMER NAME: " + o.OrderCustomer!.CustomerName);
+                    Console.WriteLine("PHONE NUMBER: " + o.OrderCustomer.PhoneNumber);
+                    Console.WriteLine("CUSTOMER ADDRESS: " + o.OrderCustomer.CustomerAddress);
+                    Console.WriteLine("\t");
+                    foreach (Book b in o.BooksList)
+                    {
+
+                        Console.WriteLine("BOOK NAME: " + b.BookName);
+                        Console.WriteLine("PRICE: " + b.Price);
+                        Console.WriteLine("AMOUNT: " + b.Amount);
+                        Console.WriteLine($"TOTAL: {b.Price * b.Amount}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                    Console.WriteLine("| Order Not Found With ID: " + orderID + " ┃");
+                    Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                }
+            }
+
+            Console.WriteLine("\n    PRESS ESCAPE TO BACK TO CREATE ORDER MENU...");
+            Console.ReadLine();
         }
     }
 }

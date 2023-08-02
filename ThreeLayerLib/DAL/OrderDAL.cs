@@ -4,86 +4,197 @@ namespace DAL
 {
     public class OrderDAL
     {
+        private string query = "";
         private MySqlConnection connection = DbConfig.GetConnection();
+        public Order GetOrderByID(int orderId)
+        {
+            Order order = new Order();
+            try
+            {
+                query = @"SELECT o.order_ID, o.order_date, c.customer_name, c.phoneNumber, c.customer_address, b.book_name, b.price, b.amount
+                                FROM Orders o
+                                INNER JOIN Customers c ON o.customer_ID = c.customer_ID
+                                INNER JOIN OrderDetails od ON o.order_ID = od.order_ID
+                                INNER JOIN Books b ON b.Book_ID = od.Book_ID
+                                WHERE o.order_ID = @orderId;";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@orderId", orderId);
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    order = GetOrder(reader);
+                }
+                reader.Close();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return order;
+        }
+        internal Order GetOrder(MySqlDataReader reader)
+        {
+            Order o = new Order();
+            o.OrderID = reader.GetInt32("order_ID");
+            o.OrderDate = reader.GetDateTime("order_date");
+            o.OrderCustomer = new Customer();
+            o.OrderCustomer.CustomerName = reader.GetString("customer_name");
+            o.OrderCustomer.PhoneNumber = reader.GetInt32("phoneNumber");
+            o.OrderCustomer.CustomerAddress = reader.GetString("customer_address");
+            o.BooksList = new List<Book>();
+            Book book = new Book();
+            book.BookName = reader.GetString("book_name");
+            book.Price = reader.GetDecimal("price");
+            book.Amount = reader.GetInt32("amount");
+            o.BooksList.Add(book);
+            return o;
+        }
+
+
+
         public bool CreateOrder(Order order)
         {
-            if (order == null || order.BooksList == null || order.BooksList.Count == 0)
-            {
-                return false;
-            }
+
             bool result = false;
             try
             {
+                if (connection.State == System.Data.ConnectionState.Closed)
+                    connection.Open();
+
                 using (MySqlTransaction trans = connection.BeginTransaction())
                 using (MySqlCommand cmd = connection.CreateCommand())
                 {
-                    cmd.Connection = connection;
                     cmd.Transaction = trans;
                     //Lock update all tables
-                    cmd.CommandText = "lock tables Staff write, Orders write, Items write, OrderDetails write;";
+                    cmd.CommandText = "lock tables Customers write, Orders write, Books write, OrderDetails write;";
                     cmd.ExecuteNonQuery();
 
-                    MySqlDataReader? reader = null;
-
-
-                    //insert order
-                    cmd.CommandText = "insert into Orders(staff_id, order_status) values (@StaffId, @orderStatus);";
-                    cmd.Parameters.Clear();
-                    // cmd.Parameters.AddWithValue("@staffId", order.OrderStaff.StaffId);
-                    cmd.Parameters.AddWithValue("@orderStatus", OrderStatus.CREATE_NEW_ORDER);
-                    cmd.ExecuteNonQuery();
-                    //get new Order_ID
-                    cmd.CommandText = "select LAST_INSERT_ID() as order_id";
-                    reader = cmd.ExecuteReader();
-                    if (reader.Read())
+                    try
                     {
-                        order.OrderID = reader.GetInt32("order_id");
-                    }
-                    reader.Close();
-
-                    //insert Order Details table
-                    foreach (var book in order.BooksList)
-                    {
-                        if (book.BookID == 0 || book.Amount <= 0)
+                        if (order.OrderCustomer == null || string.IsNullOrEmpty(order.OrderCustomer.CustomerName))
                         {
-                            throw new Exception("Not Exists Product");
+                            order.OrderCustomer = new Customer();
                         }
-                        //get unit_price
-                        cmd.CommandText = "select unit_price from Items where item_id=@itemId";
+
+                        if (order.OrderCustomer.CustomerID == 0)
+                        {
+                            // Insert new Customer
+                            cmd.CommandText = @"INSERT INTO Customers (customer_name, phoneNumber, customer_address)
+                                            VALUES (@customerName, @phoneNumber, @customerAddress);";
+
+                            cmd.Parameters.AddWithValue("@customerName", order.OrderCustomer.CustomerName);
+                            cmd.Parameters.AddWithValue("@phoneNumber", order.OrderCustomer.PhoneNumber);
+                            cmd.Parameters.AddWithValue("@customerAddress", order.OrderCustomer.CustomerAddress);
+
+                            cmd.ExecuteNonQuery();
+
+                            // Get new customer id
+                            cmd.CommandText = "SELECT LAST_INSERT_ID() AS customer_ID;";
+                            order.OrderCustomer.CustomerID = Convert.ToInt32(cmd.ExecuteScalar());
+                        }
+                        else
+                        {
+                            // Get Customer by Id
+                            cmd.CommandText = "SELECT * FROM Customers WHERE customer_ID = @customerId;";
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.AddWithValue("@customerId", order.OrderCustomer.CustomerID);
+                            using (MySqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    order.OrderCustomer = new CustomerDAL().GetCustomer(reader);
+                                }
+                            }
+                        }
+
+                        if (order.OrderCustomer == null || order.OrderCustomer.CustomerID == 0)
+                        {
+                            throw new Exception("Can't find Customer!");
+                        }
+
+                        if (order.OrderStaff == null || string.IsNullOrEmpty(order.OrderStaff.StaffName))
+                        {
+                            order.OrderStaff = new Staff();
+                        }
+
+                        // Insert Order
+                        cmd.CommandText = "INSERT INTO Orders (staff_ID, customer_ID, order_status) VALUES (@staffId, @customerId, @orderStatus);";
                         cmd.Parameters.Clear();
-                        cmd.Parameters.AddWithValue("@productId", book.BookID);
-                        reader = cmd.ExecuteReader();
-                        if (!reader.Read())
-                        {
-                            throw new Exception("Not Exists Item");
-                        }
-                        book.UnitPrice = reader.GetDecimal("unit_price");
-                        reader.Close();
-
-                        //insert to Order Details
-                        cmd.CommandText = @"insert into OrderDetails(order_id, item_id, unit_price, quantity) values 
-                            (" + order.OrderID + ", " + book.BookID + ", " + book.UnitPrice + ", " + book.Amount + ");";
+                        cmd.Parameters.AddWithValue("@staffId", order.OrderStaff.StaffID);
+                        cmd.Parameters.AddWithValue("@customerId", order.OrderCustomer.CustomerID);
+                        cmd.Parameters.AddWithValue("@orderStatus", OrderStatus.CREATE_NEW_ORDER);
                         cmd.ExecuteNonQuery();
 
-                        //update quantity in Items
-                        cmd.CommandText = "update Products set quantity=quantity-@quantity where item_id=" + book.BookID + ";";
-                        cmd.Parameters.Clear();
-                        cmd.Parameters.AddWithValue("@quantity", book.Amount);
+                        // Get new Order_ID
+                        cmd.CommandText = "SELECT LAST_INSERT_ID() AS order_id;";
+                        order.OrderID = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        // Insert Order Details table
+                        foreach (Book book in order.BooksList)
+                        {
+                            if (book.BookID == 0 || book.Amount <= 0)
+                            {
+                                throw new Exception("Not Exists Book");
+                            }
+
+                            // Get unit_price
+                            cmd.CommandText = "SELECT price FROM Books WHERE book_ID = @bookId;";
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.AddWithValue("@bookId", book.BookID);
+                            using (MySqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    book.Price = reader.GetDecimal("price");
+                                }
+                                else
+                                {
+                                    throw new Exception("Not Exists Book");
+                                }
+                            }
+
+                            // Insert to Order Details
+                            cmd.CommandText = @"INSERT INTO OrderDetails (order_ID, book_ID, unit_price, quantity) VALUES 
+                                            (@orderId, @bookId, @unitPrice, @quantity);";
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.AddWithValue("@orderId", order.OrderID);
+                            cmd.Parameters.AddWithValue("@bookId", book.BookID);
+                            cmd.Parameters.AddWithValue("@unitPrice", book.Price);
+                            cmd.Parameters.AddWithValue("@quantity", book.Amount);
+                            cmd.ExecuteNonQuery();
+
+                            // Update amount in Books
+                            cmd.CommandText = "UPDATE Books SET amount = amount - @quantity WHERE book_ID = @bookId;";
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // Commit transaction
+                        trans.Commit();
+                        result = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"ERROR: {ex.Message}");
+                        try
+                        {
+                            trans.Rollback();
+                        }
+                        catch { }
+                    }
+                    finally
+                    {
+                        // Unlock all tables
+                        cmd.CommandText = "UNLOCK TABLES;";
                         cmd.ExecuteNonQuery();
                     }
-                    //commit transaction
-                    trans.Commit();
-                    result = true;
-                    trans.Rollback();
-                    //unlock all tables;
-                    cmd.CommandText = "unlock tables;";
-                    cmd.ExecuteNonQuery();
                 }
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"ERROR: {ex.Message}");
             }
+
             return result;
         }
     }

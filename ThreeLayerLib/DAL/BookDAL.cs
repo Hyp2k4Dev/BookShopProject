@@ -60,7 +60,7 @@ namespace DAL
             book.BookPublisher = new Publisher();
             Publisher p = book.BookPublisher;
             p.PublisherName = reader.GetString("publisher_name");
-            book.UnitPrice = reader.GetDecimal("price");
+            book.Price = reader.GetDecimal("price");
             book.Amount = reader.GetInt32("amount");
             book.BookStatus = reader.GetInt16("book_status");
             return book;

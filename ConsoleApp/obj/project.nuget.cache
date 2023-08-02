@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7Xkj4TEo62cgXBfY6fEsXbyAOwbgzveW6FrBHL1NKYnWyfE+pBHOKskPGFTQxLTiVQbMoiQUjZB58No77BjHDA==",
+  "dgSpecHash": "oS3Nnb/ddkMgT9Hoh+FjIjAc6mTnieip9pnIyXhkqIg16u9+GQcCJ/FMDsjKpkT0NpeBH1kirRqWAAIo6Nxrkg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj",
+  "projectFilePath": "c:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\mysqlconnector\\2.2.6\\mysqlconnector.2.2.6.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\spectre.console\\0.47.0\\spectre.console.0.47.0.nupkg.sha512",

@@ -1,5 +1,3 @@
-using DAL;
-
 namespace Persistence;
 
 
@@ -10,17 +8,12 @@ public static class OrderStatus
 }
 public class Order
 {
-    // private OrderDAL odl = new OrderDAL();
     public int OrderID { get; set; }
-    public Customer? Customer { get; set; }
     public Customer? OrderCustomer { set; get; }
-    public Staff? Staff { get; set; }
+    public Staff? OrderStaff { get; set; }
     public DateTime OrderDate { get; set; }
-    public Book[]? Book { get; set; }
-    public int status { get; set; }
-    public List<Book>? BooksList { set; get; }
-    public int StaffID { get; set; }
-
+    public int OrderStatus { get; set; }
+    public List<Book> BooksList { set; get; }
     public Book? this[int index]
     {
         get
@@ -34,5 +27,12 @@ public class Order
             if (value == null) return;
             BooksList.Add(value);
         }
+    }
+
+    public Order()
+    {
+        BooksList = new List<Book>();
+        OrderID = 0;
+        OrderStatus = 0;
     }
 }
