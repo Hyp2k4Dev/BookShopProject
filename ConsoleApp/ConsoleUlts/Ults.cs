@@ -7,20 +7,27 @@ using Spectre.Console;
 using UI;
 using System.Linq;
 
+
 namespace Utilities
 {
-    public class Ults
+
+    class Ults
     {
+
+        int booksPerPage = 5;
+        int currentPage = 1;
         ConsoleUI consoleUI = new ConsoleUI();
         string[] mainMenu = { ". CREATE ORDER ", ". LOGOUT" };
         string[] coMenu = { ". SEARCH BOOK BY NAME ", ". SEARCH BOOK BY ISBN ", ". ADD TO ORDER", ". PAYMENT", ". BACK TO MAIN MENU" };
         BookBL bBL = new BookBL();
         Staff? loginStaff;
+        Customer? GetCustomer;
         CustomerBL cBL = new CustomerBL();
         StaffBL staffBL = new StaffBL();
         OrderBL oBL = new OrderBL();
         List<Book>? lst;
 
+        [Obsolete]
         public void Main()
         {
             while (true)
@@ -37,15 +44,23 @@ namespace Utilities
 │                              │ ╩═╝╚═╝╚═╝╩╝╚╝ │                                      │   
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ");
-                loginStaff = staffBL.LoginAccount();
-                if (loginStaff != null)
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkCyan;
-                    Console.WriteLine("                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-                    Console.WriteLine("                                 STAFF USING: " + loginStaff!.StaffName);
-                    Console.WriteLine("                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-                    Console.ResetColor();
-                    int mainMenuChoice = consoleUI.Menu(@"
+                LoginAccount();
+            }
+        }
+
+        [Obsolete]
+        public void LoginAccount()
+        {
+            loginStaff = staffBL.LoginAccount();
+            if (loginStaff != null)
+            {
+
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                Console.WriteLine("                                 STAFF USING: " + loginStaff!.StaffName);
+                Console.WriteLine("                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                Console.ResetColor();
+                int mainMenuChoice = consoleUI.Menu(@"
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                                                                                     │
 │ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
@@ -53,28 +68,21 @@ namespace Utilities
 │ ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩ │
 │                                                                                     │
 └─────────────────────────────────────────────────────────────────────────────────────┘", mainMenu);
-                    do
-                    {
-                        switch (mainMenuChoice)
-                        {
-                            case 1:
-                                CreateOrder();
-                                break;
-                            case 2:
-                                break;
-                        }
-                    } while (mainMenuChoice != mainMenu.Length);
-                }
-                else
+                do
                 {
-                    Console.WriteLine("");
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("INVALID USER NAME OR PASSWORD !! PLEASE ENTER TRUE YOUR ACCOUNT !");
-                    Console.ResetColor();
-                    consoleUI.PressAnyKeyToContinue();
-                }
+                    switch (mainMenuChoice)
+                    {
+                        case 1:
+                            CreateOrder();
+                            break;
+                        case 2:
+                            break;
+                    }
+                } while (mainMenuChoice != mainMenu.Length);
             }
         }
+
+        [Obsolete]
         public void CreateOrder()
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -92,6 +100,7 @@ namespace Utilities
 │              │╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╩ ╩╚═╝╝╚╝╚═╝│                    │
 └─────────────────────────────────────────────────────────────────────────────────────┘   
 ", coMenu);
+
             do
             {
                 switch (coChoose)
@@ -107,6 +116,7 @@ namespace Utilities
                         // Add Book To Order
                         break;
                     case 4:
+
                         // Payment;
                         break;
                     default:
@@ -114,6 +124,7 @@ namespace Utilities
                 }
             } while (coChoose != coMenu.Length);
         }
+
         public void SearchBookByISBN()
         {
             var table = new Table();
@@ -155,91 +166,129 @@ namespace Utilities
                 // }
             }
         }
+
+        [Obsolete]
         public void SearchBookByName()
         {
-            Console.WriteLine("CLICK <ENTER> TO DISPLAY ALL BOOK OR INPUT NAME OF BOOK YOU ARE SEARCHING FOR OR PRESS ESCAPE TO BACK TO CREATE ORDER MENU!!! ");
+            Console.WriteLine("INPUT NAME OF BOOK YOU ARE SEARCHING FOR OR PRESS ESCAPE TO BACK TO CREATE ORDER MENU!!! ");
             string n = Console.ReadLine() ?? "";
 
             lst = bBL.GetByName(n);
-            ShowBookName($"{n}", lst);
+            currentPage = 1;
 
-        }
-        static void ShowBookName(string title, List<Book> lst)
-        {
-            var table = new Table();
-            table.AddColumns("ID     ", "NAME     ", "CATEGORY  ", " PUBLISHING YEAR ", " DESCRIPTION ", " AUTHOR  ", "    PUBLISHER     ", "  PRICE   ", "AMOUNT ");
-            if (lst.Count() > 0)
+            while (true)
             {
-                foreach (Book b in lst)
+                Console.Clear();
+                ShowBookName($"{n}", lst, currentPage);
+
+                var key = Console.ReadKey(true).Key;
+                if (key == ConsoleKey.Escape)
                 {
-                    if (b.BookStatus == 1)
+                    EscToCreateOrderMenu();
+                    break;
+                }
+                else if (key == ConsoleKey.Enter)
+                {
+                    // Handle Enter key if needed, e.g., show more details about the selected book.
+                    Console.ReadKey();
+                }
+                else if (key == ConsoleKey.LeftArrow || key == ConsoleKey.UpArrow)
+                {
+                    if (currentPage > 1)
                     {
-                        {
-                            table.AddRow("" + b.BookID, "" + b.BookName, "" + b.BookCategory!.CategoryName, "" + b.PublishYear, "" + b.Description, "" + b.BookAuthor!.AuthorName,
-                                        "" + b.BookPublisher!.PublisherName, "" + b.UnitPrice, "" + b.Amount);
-                        }
-                    }
-                    else
-                    {
-                        table.AddEmptyRow();
+                        currentPage--;
                     }
                 }
-                Console.WriteLine("                                                           BOOK FOUND", Console.ForegroundColor = ConsoleColor.Red);
-                Console.ResetColor();
-                AnsiConsole.Write(table);
-                // Console.WriteLine("ENTER THE BOOK ID TO ADD TO ORDER: ");
-                // int addOrder;
-                // foreach (Book book in lst)
-                // {
-                //     if (Int32.TryParse(Console.ReadLine(), out addOrder))
-                //     {
-                //         Console.WriteLine("ADD BOOK " + book.BookName + " SUCCESS");
-                //     }
-                //     else
-                //     {
-                //         Console.WriteLine("UNKNOWN BOOK TO ADD IN ");
-                //     }
-                // }
-                // Console.ForegroundColor = ConsoleColor.Red;
-                // Console.WriteLine("INVALID ID PLEASE ENTER VALID ID");
-                // Console.ResetColor();
-            }
-            else
-            {
-                Console.WriteLine(" BOOK NOT FOUND ", Console.ForegroundColor = ConsoleColor.Red);
-                Console.ResetColor();
+                else if (key == ConsoleKey.RightArrow || key == ConsoleKey.DownArrow)
+                {
+                    // Go to next page if possible
+                    if (currentPage < totalPages)
+                    {
+                        currentPage++;
+                    }
+                }
             }
         }
-        public void AddOrder(List<Book> lst, string title)
+
+        [Obsolete]
+        void ShowBookName(string title, List<Book> lst, int currentPage)
         {
-            Console.WriteLine("ENTER THE BOOK ID TO ADD TO ORDER: ");
-            int addOrder;
-            foreach (Book book in lst)
+            int itemsPerPage = 3;
+            int startIndex = (currentPage - 1) * itemsPerPage;
+            int endIndex = Math.Min(startIndex + itemsPerPage, lst.Count);
+
+            var table = new Table();
+            table.AddColumns("ID", "NAME", "CATEGORY", "PUBLISHING YEAR", "DESCRIPTION", "AUTHOR", "PUBLISHER", "PRICE", "AMOUNT");
+
+            for (int i = startIndex; i < endIndex; i++)
             {
-                if (Int32.TryParse(Console.ReadLine(), out addOrder))
+                Book b = lst[i];
+                if (b.BookStatus == 1)
                 {
-                    Console.WriteLine("ADD BOOK " + book.BookName + " SUCCESS");
+                    table.AddRow("" + b.BookID, "" + b.BookName, "" + b.BookCategory!.CategoryName, "" + b.PublishYear,
+                                 "" + b.Description, "" + b.BookAuthor!.AuthorName, "" + b.BookPublisher!.PublisherName,
+                                 "" + b.UnitPrice, "" + b.Amount);
                 }
                 else
                 {
-                    Console.WriteLine("UNKNOWN BOOK TO ADD IN ");
+                    table.AddEmptyRow();
                 }
             }
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("INVALID ID PLEASE ENTER VALID ID");
-            Console.ResetColor();
+
+            AnsiConsole.Render(table);
+            Console.WriteLine($"Page {currentPage}/{totalPages}");
         }
-        public void PressEsc()
+
+
+        [Obsolete]
+        public void EscToCreateOrderMenu()
         {
-            while (true)
+            Console.WriteLine("GOING BACK TO CREATE ORDER MENU...");
+            Console.Clear();
+            CreateOrder();
+        }
+
+        
+        public void AddBookToOrder(Book book)
+        {
+            if (book != null)
             {
-                Console.ReadKey(true);
-                if (Console.ReadKey().Key == ConsoleKey.Escape)
-                {
-                    Console.WriteLine("You pressed Escape!");
-                    CreateOrder();
-                    break;
-                }
+                // Add the selected book to the order
+                oBL.AddBookToOrder(book);
+
+                // For simplicity, let's assume we have access to the current customer.
+                // Replace "GetCustomer" with the method or property that retrieves the current customer.
+                Customer customer = GetCustomer;
+
+                // Assuming you have a method to get the current order from the OrderBL class.
+                Order currentOrder = oBL.GetCurrentOrder(customer);
+
+                // Print both customer and order details
+                Console.WriteLine($"Customer: {customer.CustomerName}");
+                Console.WriteLine("Current Order:");
+                Console.WriteLine($"Order ID: {currentOrder.OrderID}");
+                Console.WriteLine($"Order Date: {currentOrder.OrderDate}");
+                // Add more order details as needed
+
+                // You can also print the details of the book added to the order
+                Console.WriteLine("Book Added to Order:");
+                Console.WriteLine($"Book ID: {book.BookID}");
+                Console.WriteLine($"Book Name: {book.BookName}");
+                // Add more book details as needed
+
+                // Show some message or confirmation that the book is added to the order.
+                Console.WriteLine($"Book '{book.BookName}' added to the order.");
+            }
+            else
+            {
+                Console.WriteLine("Book not found.");
+            }
+        }
+        private int totalPages
+        {
+            get
+            {
+                return (int)Math.Ceiling((double)lst.Count / booksPerPage);
             }
         }
     }

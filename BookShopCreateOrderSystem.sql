@@ -156,7 +156,12 @@ insert into Customers(customer_name, phoneNumber, customer_address) values
     ('Customer 2','098765231', 'Da Nang'),
     ('Customer 3','097865231', 'Hai Phong'),
     ('Customer 4','988765231', 'Italya'),
-    ('Customer 5','123456789', 'Binh Duong');
+    ('Customer 5','123456789', 'Binh Duong'),
+    ('Customer 6','0917654321', 'Ha Noi'),
+    ('Customer 7','092765231', 'Da Nang'),
+    ('Customer 8','093865231', 'Hai Phong'),
+    ('Customer 9','0984765231', 'Italya'),
+    ('Customer 10','153456789', 'Binh Duong');
 select * from Customers;
 
 insert into Authors(author_name, phoneNumber, author_address) values
@@ -164,15 +169,25 @@ insert into Authors(author_name, phoneNumber, author_address) values
     ('Auhtor 2','098765231', 'Da Nang'),
     ('Auhtor 3','097865231', 'Hai Phong'),
     ('Auhtor 4','988765231', 'Italya'),
-    ('Auhtor 5','123456789', 'Binh Duong');
+    ('Auhtor 5','123456789', 'Binh Duong'),
+    ('Auhtor 6','0987654321', 'Ha Noi'),
+    ('Auhtor 7','098765231', 'Da Nang'),
+    ('Auhtor 8','097865231', 'Hai Phong'),
+    ('Auhtor 9','988765231', 'Italya'),
+    ('Auhtor 10','123456789', 'Binh Duong');
 select * from Authors;
 
 insert into Publishers(publisher_name, phoneNumber, publisher_address, website) values
 	('Publisher 1','0987634321', 'Ha Noi', 'pu1.com'),
     ('Publisher 2','0945765231', 'Da Nang', 'pu2.com'),
     ('Publisher 3','0978565231', 'Hai Phong', 'pu3.com'),
-    ('Publisher 4','9887656231', 'Italya', 'pu4.com'),
-    ('Publisher 5','1234566789', 'Binh Duong', 'pu5.com');
+    ('Publisher 4','09887656231', 'Italya', 'pu4.com'),
+    ('Publisher 5','9428342058', 'Binh Duong', 'pu5.com'),
+    ('Publisher 6','0670563280', 'Binh Duong', 'pu5.com'),
+    ('Publisher 7','1622026688', 'Binh Duong', 'pu5.com'),
+    ('Publisher 8','3181349953', 'Binh Duong', 'pu5.com'),
+    ('Publisher 9','5006582541', 'Binh Duong', 'pu5.com'),
+    ('Publisher 10','6427637737', 'Binh Duong', 'pu5.com');
 select * from Publishers;
 
 
@@ -181,7 +196,12 @@ insert into Books(book_name, publisher_ID, ISBN, publish_year, book_description,
     ('English book1', 2, 1234527890, 1992, 'book2', 44.5, 2, 1),
     ('English book2', 3, 1234525890, 1994, 'book3', 56.5, 3, 2),
     ('EBook 4', 4, 1264527890, 1996, 'book4', 50, 4, 1),
-    ('Book 5', 5, 1237527890, 1997, 'book5', 64.2, 2, 2);
+    ('Book 5', 5, 1237527890, 1997, 'book5', 64.2, 20, 2),
+    ('Book 6', 6, 1237527890, 1997, 'book6', 64.2, 12, 1),
+    ('Book 7', 7, 1237527890, 1997, 'book7', 64.2, 54, 1),
+    ('Book 8', 8, 1237527890, 1997, 'book8', 64.2, 1, 1),
+    ('Book 9', 9, 1237527890, 1997, 'book9', 64.2, 11, 1),
+    ('Book 10', 10, 1237527890, 1997, 'book10', 64.2, 5, 1);
 select * from Books;
 
 insert into Categories(category_name) values
@@ -189,7 +209,12 @@ insert into Categories(category_name) values
     ('category 2'),
     ('category 3'),
     ('category 4'),
-    ('category 5');
+    ('category 5'),
+    ('category 6'),
+    ('category 7'),
+    ('category 8'),
+    ('category 9'),
+    ('category 10');
 select * from Categories;
 
 insert into Orders(staff_ID, customer_ID, order_status) values
@@ -201,11 +226,11 @@ insert into OrderDetails(order_ID, book_ID, price, quantity) values
 select * from OrderDetails;
 
 insert into CategoryDetails(book_ID, category_ID) values
-	(1, 1), (2, 2), (3, 3),(4,1);
+	(1, 1), (2, 2), (3, 3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10);
 select * from OrderDetails;
 
 insert into Authors_Books(book_ID, author_ID) values
-	(1, 1), (2, 2), (3, 3), (4,4),(5,5);
+	(1, 1), (2, 2), (3, 3), (4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10);
 select * from OrderDetails;
 
 
