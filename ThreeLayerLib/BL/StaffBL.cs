@@ -14,7 +14,7 @@ namespace BL
             string userName;
             string password;
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("ENTER YOUR ACCOUNT TO LOGIN SYSTEM !!!");
+            Console.WriteLine("ENTER YOUR ACCOUNT TO LOGIN INTO SYSTEM !!!");
             Console.ResetColor();
             Console.Write("│ USER NAME │: ");
             userName = Console.ReadLine() ?? "";
