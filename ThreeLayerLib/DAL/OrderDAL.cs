@@ -39,7 +39,7 @@ namespace DAL
             o.OrderDate = reader.GetDateTime("order_date");
             o.OrderCustomer = new Customer();
             o.OrderCustomer.CustomerName = reader.GetString("customer_name");
-            o.OrderCustomer.PhoneNumber = reader.GetInt32("phoneNumber");
+            o.OrderCustomer.PhoneNumber = reader.GetString("phoneNumber");
             o.OrderCustomer.CustomerAddress = reader.GetString("customer_address");
             o.BooksList = new List<Book>();
             Book book = new Book();

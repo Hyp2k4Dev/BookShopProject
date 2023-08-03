@@ -13,7 +13,7 @@ namespace Utilities
 
     class Ults
     {
-
+        int amount;
         int booksPerPage = 5;
         int currentPage = 1;
         ConsoleUI consoleUI = new ConsoleUI();
@@ -141,7 +141,7 @@ namespace Utilities
                         SearchBookByISBN();
                         break;
                     case 3:
-                        AddBooks();
+                        CreateNewOrder();
                         break;
                     case 4:
                         Payment();
@@ -296,7 +296,7 @@ namespace Utilities
             Console.Write("CUSTOMER NAME: ");
             string name = Console.ReadLine() ?? "no name";
             Console.WriteLine("PHONE NUMBER: ");
-            int phone = Convert.ToInt32(Console.ReadLine() ?? "No Phone Number");
+            string phone = Console.ReadLine() ?? "No Phone Number";
             Console.Write("CUSTOMER ADDRESS: ");
             string address = Console.ReadLine() ?? "";
             Customer c = new Customer { CustomerName = name, PhoneNumber = phone, CustomerAddress = address };
@@ -329,100 +329,104 @@ namespace Utilities
             }
         }
 
-        public void AddBooks()
+        [Obsolete]
+        public void CreateNewOrder()
         {
             var table = new Table();
             Order o = new Order();
-            bool addAnotherBook = true;
-
-            while (addAnotherBook)
+            int isbn = 0;
+            Console.WriteLine("INPUT ORDER ID: ");
+            if (Int32.TryParse(Console.ReadLine(), out isbn))
             {
-                int isbn;
-                Console.WriteLine("INPUT BOOK CODE: ");
-                if (Int32.TryParse(Console.ReadLine(), out isbn))
+                Book book = bBL.GetBookByISBN(isbn);
+                if (book != null)
                 {
-                    Book book = bBL.GetBookByISBN(isbn);
-                    if (book != null)
+                    if (book.BookStatus == 1 && book.Amount > 0)
                     {
-                        // table.AddColumns("BOOK CODE", "BOOK NAME", "BOOK PRICE");
-                        if (book.BookStatus == 1)
+                        Console.WriteLine("BOOK NAME: " + book.BookName);
+                        Console.WriteLine("PRICE: " + book.Price);
+                        Console.WriteLine("AMOUNT: " + book.Amount);
+                        do
                         {
-                            // table.AddRow("" + book.ISBN, "" + book.BookName, "" + book.Price);
-                            Console.WriteLine($"BOOK NAME: {book.BookName}");
-                            Console.WriteLine($"BOOK CATEGORY: {book.BookCategory!.CategoryName}");
-                            Console.WriteLine($"BOOK DESCRIPTION: {book.Description}");
-                            Console.WriteLine($"BOOK AUTHOR: {book.BookAuthor!.AuthorName}");
-                            Console.WriteLine($"BOOK QUANTITY: {book.Amount}");
-                            Console.WriteLine($"PRICE: {book.Price}");
-                            Console.WriteLine();
-                            int amount;
-                            Console.WriteLine("INPUT BOOK QUANTITY:");
-                            if (Int32.TryParse(Console.ReadLine(), out amount))
+                            Console.Write("ENTER QUANTITY: ");
+                            int.TryParse(Console.ReadLine(), out amount);
+                            if (amount <= 0 || amount > bBL.GetBookByISBN(isbn).Amount)
                             {
-                                Console.WriteLine($"ADD BOOK COMPLETED: {amount} ");
-                                book.Amount = amount; // Set the amount for the book.
-                                o.BooksList.Add(book);
+                                Console.WriteLine("INVALID AMOUNT!");
                             }
                             else
                             {
-                                Console.WriteLine("INVALID QUANTITY INPUT.BOOK ADD FAILED");
+                                book.Amount = amount;
                             }
-                        }
-                        else
-                        {
-                            Console.WriteLine("THIS BOOK IS OUT OF STOCK!!PLEASE CHOOSE ANOTHER BOOK");
-                            AddBooks();
-                        }
+                        } while (amount <= 0 || amount > bBL.GetBookByISBN(isbn).Amount);
+                        Console.WriteLine("ADD TO ORDER COMPLETED");
+                        o.BooksList.Add(book);
                     }
-                    // else
-                    // {
-                    //     Console.WriteLine("BOOK NOT FOUND!");
-                    // }
+                    else
+                    {
+                        Console.WriteLine("THIS BOOK IS OUT OF STOCK!!");
+                        return;
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("INVALID CODE. BOOK NOT FOUND!");
-                    AddBooks();
-                }
-
-                Console.Write("DO YOU WANT TO ADD ANOTHER BOOK? (Y/N): ");
-                Console.WriteLine();
-                string? answer = Console.ReadLine();
-                if (answer?.Trim().ToLower() != "y")
-                {
-                    addAnotherBook = false;
+                    Console.WriteLine("BOOK NOT FOUND!");
+                    return;
                 }
             }
-            Console.WriteLine("                         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-            Console.WriteLine("                         |               ADD NEW CUSTOMER             |");
-            Console.WriteLine("                         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-            Console.Write("CUSTOMER NAME: ");
-            string name = Console.ReadLine() ?? "no name";
-            Console.WriteLine("PHONE NUMBER: ");
-            int phone = Convert.ToInt32(Console.ReadLine().Trim() ?? "0");
-            Console.Write("CUSTOMER ADDRESS: ");
-            string address = Console.ReadLine() ?? "";
-            o.OrderCustomer = new Customer { CustomerName = name, PhoneNumber = phone, CustomerAddress = address };
-            Console.Clear();
-            o.OrderStaff = loginStaff;
-            Console.WriteLine("                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-            Console.WriteLine("                             STAFF CREATE ORDER: " + o.OrderStaff!.StaffName);
-            Console.WriteLine("                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-            Console.WriteLine("CUSTOMER NAME: " + o.OrderCustomer!.CustomerName);
-            Console.WriteLine("PHONE NUMBER: " + o.OrderCustomer.PhoneNumber);
-            Console.WriteLine("CUSTOMER ADDRESS: " + o.OrderCustomer.CustomerAddress);
-            table.AddColumns("BOOK NAME ", "PRICE ", "AMOUNT ", "TOTAL PRICE ");
-            foreach (Book b in o.BooksList)
+            else
             {
-                table.AddRow("" + b.BookName, "" + b.Price, "" + b.Amount, "" + b.Price * b.Amount);
+                Console.WriteLine("NOT FOUND BOOK WITH THIS CODE: " + isbn);
+                return;
             }
-            AnsiConsole.Write(table);
-            Console.WriteLine("CREATE ORDER: " + (oBL.SaveOrder(o) ? "COMPLETED!" : "NOT COMPLETED!"));
-            Console.WriteLine("\n    PRESS ENTER TO CONTINUE...");
-            Console.ReadLine();
+
+            Console.Write("Do You Want To Continue? (Y/N): ");
+            string? Answer = Console.ReadLine();
+            if (Answer == "y" || Answer == "Y")
+            {
+                CreateNewOrder();
+            }
+            else if (Answer == "n" || Answer == "N")
+            {
+                Console.WriteLine("                         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                Console.WriteLine("                         |               ADD NEW CUSTOMER             |");
+                Console.WriteLine("                         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                Console.Write("CUSTOMER NAME: ");
+                string name = Console.ReadLine() ?? "no name";
+                Console.WriteLine("PHONE NUMBER: ");
+                string phone = Console.ReadLine().Trim() ?? "0";
+                Console.Write("CUSTOMER ADDRESS: ");
+                string address = Console.ReadLine() ?? "";
+                o.OrderCustomer = new Customer { CustomerName = name, PhoneNumber = phone, CustomerAddress = address };
+                Console.Clear();
+                o.OrderStaff = loginStaff;
+                Console.WriteLine("                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                Console.WriteLine("                             STAFF CREATE ORDER: " + o.OrderStaff!.StaffName);
+                Console.WriteLine("                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                Console.WriteLine("CUSTOMER NAME: " + o.OrderCustomer!.CustomerName);
+                Console.WriteLine("PHONE NUMBER: " + o.OrderCustomer.PhoneNumber);
+                Console.WriteLine("CUSTOMER ADDRESS: " + o.OrderCustomer.CustomerAddress);
+                table.AddColumns("BOOK NAME ", "PRICE ", "AMOUNT ", "TOTAL PRICE ");
+                foreach (Book b in o.BooksList)
+                {
+                    table.AddRow("" + b.BookName, "" + b.Price, "" + b.Amount, "" + b.Price * b.Amount);
+                }
+                AnsiConsole.Write(table);
+                Console.WriteLine("CREATE ORDER: " + (oBL.SaveOrder(o) ? "COMPLETED!" : "NOT COMPLETED!" + " WITH ORDER ID: " + o.OrderID));
+                Console.WriteLine("\n    PRESS ESCAPE TO BACK TO CREATE ORDER MENU...");
+                var key = Console.ReadKey(true).Key;
+                if (key == ConsoleKey.Escape)
+                {
+                    BackToCreateOrderMenu();
+                    Console.ReadKey();
+                }
+                else if (key == ConsoleKey.Enter)
+                {
+                    // Handle Enter key if needed, e.g., show more details about the selected book.
+                    Console.ReadKey();
+                }
+            }
         }
-
-
 
         public void Payment()
         {
@@ -454,8 +458,6 @@ namespace Utilities
                 }
             }
 
-            Console.WriteLine("\n    PRESS ESCAPE TO BACK TO CREATE ORDER MENU...");
-            Console.ReadLine();
         }
     }
 }
