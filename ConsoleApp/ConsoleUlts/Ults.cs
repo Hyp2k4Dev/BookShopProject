@@ -18,7 +18,7 @@ namespace Utilities
         int currentPage = 1;
         ConsoleUI consoleUI = new ConsoleUI();
         string[] mainMenu = { ". CREATE ORDER ", ". LOGOUT" };
-        string[] coMenu = { ". SEARCH BOOK BY NAME ", ". SEARCH BOOK BY CODE ", ". ADD TO ORDER", ". PAYMENT", ". BACK TO MAIN MENU" };
+        string[] coMenu = { ". SEARCH BOOK BY NAME ", ". SEARCH BOOK BY CODE ", ". CREATE ORDER", ". PAYMENT", ". BACK TO MAIN MENU" };
         BookBL bBL = new BookBL();
         Staff? loginStaff;
         CustomerBL cBL = new CustomerBL();
@@ -71,7 +71,7 @@ namespace Utilities
                     switch (mainMenuChoice)
                     {
                         case 1:
-                            CreateOrder();
+                            CreateOrderMenu();
                             break;
                         case 2:
                             Main();
@@ -106,7 +106,7 @@ namespace Utilities
                 switch (mainMenuChoice)
                 {
                     case 1:
-                        CreateOrder();
+                        CreateOrderMenu();
                         break;
                     case 2:
                         break;
@@ -115,7 +115,7 @@ namespace Utilities
         }
 
         [Obsolete]
-        public void MainMeN()
+        public void CreateOrderMenu()
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("                                            [ STAFF USING: " + loginStaff!.StaffName + " ]");
@@ -311,7 +311,7 @@ namespace Utilities
         {
             Console.WriteLine("GOING BACK TO CREATE ORDER MENU...");
             Console.Clear();
-            CreateOrder();
+            CreateOrderMenu();
         }
         private int totalPages
         {
