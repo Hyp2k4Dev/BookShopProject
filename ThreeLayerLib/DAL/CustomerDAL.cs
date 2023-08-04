@@ -61,7 +61,10 @@ namespace DAL
                 cmd.ExecuteNonQuery();
                 result = (int?)cmd.Parameters["@customer_ID"].Value ?? 0;
             }
-            catch { }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             finally
             {
                 connection.Close();

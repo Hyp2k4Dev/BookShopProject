@@ -238,30 +238,6 @@ namespace Utilities
             Console.WriteLine("INPUT NAME OF BOOK YOU ARE SEARCHING FOR: ");
             string n = Console.ReadLine() ?? "";
             Console.Clear();
-            //         AnsiConsole.Progress()
-            // .AutoRefresh(false) // Turn off auto refresh
-            // .AutoClear(false)   // Do not remove the task list when done
-            // .HideCompleted(false)   // Hide tasks as they are completed
-            // .Columns(new ProgressColumn[]
-            // {
-            //     new TaskDescriptionColumn(),    // Task description
-            //     new ProgressBarColumn(),        // Progress bar
-            //     new PercentageColumn(),         // Percentage
-            // })
-            // .Start(ctx =>
-            // {
-            //     var task = ctx.AddTask("[green]Finding Book[/]");
-
-            //     while (!ctx.IsFinished)
-            //     {
-            //         // Simulate some work
-            //         Task.Delay(100);
-
-            //         // Increment
-            //         task.Increment(3);
-            //     }
-            // });
-
             lst = bBL.GetByName(n);
             currentPage = 1;
 
@@ -386,10 +362,15 @@ namespace Utilities
         [Obsolete]
         public void CreateNewOrder()
         {
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                                            [ STAFF USING: " + loginStaff!.StaffName + " ]");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine(@"                    ┌─────────────────────────────────────────────────────────────────────────────────────┐
+            Order o = new Order();
+            ConsoleKey answer;
+            var table = new Table();
+            do
+            {
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("                                            [ STAFF USING: " + loginStaff!.StaffName + " ]");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(@"                    ┌─────────────────────────────────────────────────────────────────────────────────────┐
                     │                                                                                     │
                     │ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
                     │ ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║ │
@@ -398,115 +379,127 @@ namespace Utilities
                     │                             [ADD BOOK TO ORDER]                                     │
                     └─────────────────────────────────────────────────────────────────────────────────────┘");
 
-            var table = new Table();
-            Order o = new Order();
-            int isbn = 0;
-            Console.Write("INPUT ORDER ID: ");
-            if (Int32.TryParse(Console.ReadLine(), out isbn))
-            {
-                Book book = bBL.GetBookByISBN(isbn);
-                if (book != null)
+
+                int isbn = 0;
+                Console.Write("INPUT BOOK CODE: ");
+                if (Int32.TryParse(Console.ReadLine(), out isbn))
                 {
-                    if (book.BookStatus == 1 && book.Amount > 0)
+                    Book book = bBL.GetBookByISBN(isbn);
+
+                    if (book != null)
                     {
-                        Console.WriteLine("BOOK NAME: " + book.BookName);
-                        Console.WriteLine("PRICE: " + book.Price);
-                        Console.WriteLine("AMOUNT: " + book.Amount);
-                        do
+                        if (book.BookStatus == 1 && book.Amount > 0)
                         {
-                            Console.Write("ENTER QUANTITY: ");
-                            int.TryParse(Console.ReadLine(), out amount);
-                            if (amount <= 0 || amount > bBL.GetBookByISBN(isbn).Amount)
+                            Console.WriteLine("BOOK NAME: " + book.BookName);
+                            Console.WriteLine("PRICE: " + book.Price);
+                            Console.WriteLine("AMOUNT: " + book.Amount);
+                            do
                             {
-                                Console.WriteLine("INVALID AMOUNT!");
-                            }
-                            else
-                            {
-                                book.Amount = amount;
-                            }
-                        } while (amount <= 0 || amount > bBL.GetBookByISBN(isbn).Amount);
-                        Console.WriteLine("ADD TO ORDER COMPLETED");
-                        o.BooksList.Add(book);
+                                Console.Write("ENTER QUANTITY: ");
+                                int.TryParse(Console.ReadLine(), out amount);
+                                if (amount <= 0 || amount > bBL.GetBookByISBN(isbn).Amount)
+                                {
+                                    Console.WriteLine("INVALID AMOUNT!");
+                                }
+                                else
+                                {
+                                    book.Amount = amount;
+                                    o.BooksList.Add(book);
+                                    Console.WriteLine("ADD TO ORDER COMPLETED");
+                                }
+                            } while (amount <= 0 || amount > bBL.GetBookByISBN(isbn).Amount);
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("THIS BOOK IS OUT OF STOCK!!PLEASE CHOOSE ANOTHER BOOK");
+                            Console.ForegroundColor = ConsoleColor.White;
+                            return;
+                        }
                     }
                     else
                     {
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("THIS BOOK IS OUT OF STOCK!!PLEASE CHOOSE ANOTHER BOOK");
+                        Console.WriteLine("BOOK NOT FOUND!");
                         Console.ForegroundColor = ConsoleColor.White;
                         return;
                     }
                 }
                 else
                 {
-                    Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("BOOK NOT FOUND!");
+                    Console.WriteLine("NOT FOUND BOOK WITH THIS CODE");
                     Console.ForegroundColor = ConsoleColor.White;
                     return;
                 }
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("NOT FOUND BOOK WITH THIS CODE");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("IF YOU WANT TO ADD ANOTHER BOOK PRESS <ESCAPE> OR PRESS <ENTER> TO GO TO ADD CUSTOMER?: ");
                 Console.ForegroundColor = ConsoleColor.White;
-                return;
-            }
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("IF YOU WANT TO ADD ANOTHER BOOK PRESS <ESCAPE> OR PRESS <ENTER> TO GO TO ADD CUSTOMER?: ");
+                answer = Console.ReadKey(true).Key;
+                if (answer == ConsoleKey.Enter) break;
+            } while (answer == ConsoleKey.Escape);
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("                                           [ STAFF USING: " + loginStaff!.StaffName + " ]");
             Console.ForegroundColor = ConsoleColor.White;
-            var answer = Console.ReadKey(true).Key;
-            if (answer == ConsoleKey.Escape)
+            Console.WriteLine("                         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.WriteLine("                         |               ADD NEW CUSTOMER             |");
+            Console.WriteLine("                         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            Console.Write("CUSTOMER NAME: ");
+            string name = Console.ReadLine() ?? "no name";
+            string phone = "";
+            Console.WriteLine("PHONE NUMBER: ");
+            do
             {
-                CreateNewOrder();
+                phone = Console.ReadLine() ?? "";
+                if (!string.IsNullOrEmpty(phone) && phone.Length == 10 && phone.All(char.IsDigit))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("ADD PHONE NUMBER SUCCESS");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    break;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("INVALID PHONE NUMBER! PLEASE CHOOSE AND INPUT CUSTOMER INFORMATION AGAIN!");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            } while (!string.IsNullOrEmpty(phone) && phone.Length == 10 && phone.All(char.IsDigit));
+            Console.Write("CUSTOMER ADDRESS: ");
+            string address = Console.ReadLine() ?? "";
+            o.OrderCustomer = new Customer { CustomerName = name, PhoneNumber = phone, CustomerAddress = address };
+            Console.Clear();
+            o.OrderStaff = loginStaff;
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("                                         [ STAFF CREATE ORDER: " + loginStaff!.StaffName + " ]");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("CUSTOMER NAME: " + o.OrderCustomer!.CustomerName);
+            Console.WriteLine("PHONE NUMBER: " + o.OrderCustomer.PhoneNumber);
+            Console.WriteLine("CUSTOMER ADDRESS: " + o.OrderCustomer.CustomerAddress);
+            table.AddColumns("BOOK NAME ", "PRICE ", "AMOUNT ", "TOTAL PRICE ");
+            foreach (Book b in o.BooksList)
+            {
+                table.AddRow("" + b.BookName, "" + b.Price.ToString("C"), "" + b.Amount, "" + (b.Price * b.Amount).ToString("C"));
             }
-            else if (answer == ConsoleKey.Enter)
+            AnsiConsole.Write(table);
+            Console.WriteLine("CREATE ORDER: " + (oBL.SaveOrder(o) ? "COMPLETED!" + " WITH ORDER ID: " + o.OrderID : "NOT COMPLETED!"));
+            Console.WriteLine("\n    PRESS ESCAPE TO BACK TO CREATE ORDER MENU...");
+            var key = Console.ReadKey(true).Key;
+            if (key == ConsoleKey.Escape)
             {
                 Console.Clear();
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.WriteLine("                                           [ STAFF USING: " + loginStaff!.StaffName + " ]");
-                Console.ResetColor();
-                Console.WriteLine("                         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-                Console.WriteLine("                         |               ADD NEW CUSTOMER             |");
-                Console.WriteLine("                         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-                Console.Write("CUSTOMER NAME: ");
-                string name = Console.ReadLine() ?? "no name";
-                Console.WriteLine("PHONE NUMBER: ");
-                string phone = Console.ReadLine().Trim() ?? "0";
-                Console.Write("CUSTOMER ADDRESS: ");
-                string address = Console.ReadLine() ?? "";
-                o.OrderCustomer = new Customer { CustomerName = name, PhoneNumber = phone, CustomerAddress = address };
-                Console.Clear();
-                o.OrderStaff = loginStaff;
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.WriteLine("                                         [ STAFF CREATE ORDER: " + loginStaff!.StaffName + " ]");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("CUSTOMER NAME: " + o.OrderCustomer!.CustomerName);
-                Console.WriteLine("PHONE NUMBER: " + o.OrderCustomer.PhoneNumber);
-                Console.WriteLine("CUSTOMER ADDRESS: " + o.OrderCustomer.CustomerAddress);
-                table.AddColumns("BOOK NAME ", "PRICE ", "AMOUNT ", "TOTAL PRICE ");
-                foreach (Book b in o.BooksList)
-                {
-                    table.AddRow("" + b.BookName, "" + b.Price.ToString("C"), "" + b.Amount, "" + (b.Price * b.Amount).ToString("C"));
-                }
-                AnsiConsole.Write(table);
-                Console.WriteLine("CREATE ORDER: " + (oBL.SaveOrder(o) ? "COMPLETED!" + " WITH ORDER ID: " + o.OrderID : "NOT COMPLETED!"));
-                Console.WriteLine("\n    PRESS ESCAPE TO BACK TO CREATE ORDER MENU...");
-                var key = Console.ReadKey(true).Key;
-                if (key == ConsoleKey.Escape)
-                {
-                    Console.Clear();
-                    BackToCreateOrderMenu();
-                    Console.ReadKey();
-                }
-                else if (key == ConsoleKey.Enter)
-                {
-                    // Handle Enter key if needed, e.g., show more details about the selected book.
-                    Console.ReadKey();
-                }
+                BackToCreateOrderMenu();
+                Console.ReadKey();
             }
+            else if (key == ConsoleKey.Enter)
+            {
+                Console.ReadKey();
+            }
+
         }
 
         public void Payment()
