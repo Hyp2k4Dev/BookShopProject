@@ -115,7 +115,7 @@ namespace Utilities
         }
 
         [Obsolete]
-        public void CreateOrder()
+        public void MainMeN()
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("                                            [ STAFF USING: " + loginStaff!.StaffName + " ]");
@@ -140,7 +140,7 @@ namespace Utilities
                         SearchBookByISBN();
                         break;
                     case 3:
-                        CreateNewOrder();
+                        CreateOrder();
                         break;
                     case 4:
                         Payment();
@@ -317,7 +317,7 @@ namespace Utilities
         {
             get
             {
-                return (int)Math.Ceiling((double)lst.Count / booksPerPage);
+                return (int)Math.Ceiling((double)lst!.Count / booksPerPage);
             }
         }
         public void AddCustomer()
@@ -360,7 +360,7 @@ namespace Utilities
         }
 
         [Obsolete]
-        public void CreateNewOrder()
+        public void CreateOrder()
         {
             Order o = new Order();
             ConsoleKey answer;
