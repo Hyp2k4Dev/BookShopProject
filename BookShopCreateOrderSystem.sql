@@ -54,7 +54,7 @@ create table Categories(
 
 create table Books(
 	book_ID int not null primary key auto_increment,
-    ISBN int not null,
+    ISBN int not null unique,
     publisher_ID int not null, 
     book_name varchar(50)not null,
     publish_year int,
@@ -90,7 +90,7 @@ create table OrderDetails(
     Book_ID int not null,
     constraint fk_books foreign key(book_ID) references Books(book_ID),
     constraint pk_orders_books primary key (order_ID, book_ID),
-	price decimal(20,2) not null,
+	unit_price decimal(20,2) not null,
     quantity int not null default 1
 );
 
@@ -192,16 +192,16 @@ select * from Publishers;
 
 
 insert into Books(book_name, publisher_ID, ISBN, publish_year, book_description, price, amount, book_status) values
-	('IT Liệu đã hết thời ?', 1, 1234567890, 1990, 'book1', 45.5, 1, 1),
-    ('English book1', 2, 1234527890, 1992, 'book2', 44.5, 2, 1),
-    ('English book2', 3, 1234525890, 1994, 'book3', 56.5, 3, 2),
-    ('EBook 4', 4, 1264527890, 1996, 'book4', 50, 4, 1),
-    ('Book 5', 5, 1237527890, 1997, 'book5', 64.2, 20, 2),
-    ('Book 6', 6, 1237527890, 1997, 'book6', 64.2, 12, 1),
-    ('Book 7', 7, 1237527890, 1997, 'book7', 64.2, 54, 1),
-    ('Book 8', 8, 1237527890, 1997, 'book8', 64.2, 1, 1),
-    ('Book 9', 9, 1237527890, 1997, 'book9', 64.2, 11, 1),
-    ('Book 10', 10, 1237527890, 1997, 'book10', 64.2, 5, 1);
+	('IT Liệu đã hết thời ?', 1, 1, 1990, 'book1', 45.5, 1, 1),
+    ('English book1', 2, 2, 1992, 'book2', 44.5, 2, 1),
+    ('English book2', 3, 3, 1994, 'book3', 56.5, 3, 2),
+    ('EBook 4', 4, 4, 1996, 'book4', 50, 4, 1),
+    ('Book 5', 5, 5, 1997, 'book5', 64.2, 20, 2),
+    ('Book 6', 6, 6, 1997, 'book6', 64.2, 12, 1),
+    ('Book 7', 7, 7, 1997, 'book7', 64.2, 54, 1),
+    ('Book 8', 8, 8, 1997, 'book8', 64.2, 1, 1),
+    ('Book 9', 9, 9, 1997, 'book9', 64.2, 11, 1),
+    ('Book 10', 10, 10, 1997, 'book10', 64.2, 5, 1);
 select * from Books;
 
 insert into Categories(category_name) values
@@ -221,7 +221,7 @@ insert into Orders(staff_ID, customer_ID, order_status) values
 (1, 1, 1), (1, 2, 1), (1, 3, 1);
 select * from Orders;
 
-insert into OrderDetails(order_ID, book_ID, price, quantity) values
+insert into OrderDetails(order_ID, book_ID, unit_price, quantity) values
 	(1, 1, 12.2, 2), (2, 2, 2, 3), (3, 4, 3, 3);
 select * from OrderDetails;
 
@@ -262,4 +262,13 @@ from Books b inner join CategoryDetails cd on b.book_ID=cd.book_ID
 -- select LAST_INSERT_ID();
 -- select customer_id from Customers order by customer_id desc limit 1;
 
--- update Books set amount=10 where book_ID=3;
+update Books set amount=10 where book_ID=1;
+update Books set amount=10 where book_ID=2;
+update Books set amount=10 where book_ID=3;
+update Books set amount=10 where book_ID=4;
+update Books set amount=10 where book_ID=5;
+update Books set amount=10 where book_ID=6;
+update Books set amount=10 where book_ID=7;
+update Books set amount=10 where book_ID=8;
+update Books set amount=10 where book_ID=9;
+update Books set amount=10 where book_ID=10;
