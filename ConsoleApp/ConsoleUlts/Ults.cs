@@ -515,14 +515,16 @@ namespace Utilities
                     Console.WriteLine("PHONE NUMBER: " + o.OrderCustomer.PhoneNumber);
                     Console.WriteLine("CUSTOMER ADDRESS: " + o.OrderCustomer.CustomerAddress);
                     Console.WriteLine("\t");
+
+                    var table = new Table();
+                    table.AddColumns("BOOK NAME ", "PRICE ", "AMOUNT ", "TOTAL PRICE ");
+
                     foreach (Book b in o.BooksList)
                     {
-
-                        Console.WriteLine("BOOK NAME: " + b.BookName);
-                        Console.WriteLine("PRICE: " + b.Price);
-                        Console.WriteLine("AMOUNT: " + b.Amount);
-                        Console.WriteLine($"TOTAL: {(b.Price * b.Amount).ToString("")}");
+                        table.AddRow("" + b.BookName, "" + b.Price.ToString("C"), "" + b.Amount, "" + (b.Price * b.Amount).ToString("C"));
                     }
+
+                    AnsiConsole.Write(table);
                 }
                 else
                 {
@@ -531,7 +533,6 @@ namespace Utilities
                     Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
                 }
             }
-
         }
     }
 }

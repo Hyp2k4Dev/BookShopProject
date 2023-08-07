@@ -12,19 +12,37 @@ namespace DAL
             try
             {
                 query = @"SELECT o.order_ID, o.order_date, c.customer_name, c.phoneNumber, c.customer_address, b.book_name, b.price, b.amount
-                                FROM Orders o
-                                INNER JOIN Customers c ON o.customer_ID = c.customer_ID
-                                INNER JOIN OrderDetails od ON o.order_ID = od.order_ID
-                                INNER JOIN Books b ON b.Book_ID = od.Book_ID
-                                WHERE o.order_ID = @orderId;";
+                        FROM Orders o
+                        INNER JOIN Customers c ON o.customer_ID = c.customer_ID
+                        INNER JOIN OrderDetails od ON o.order_ID = od.order_ID
+                        INNER JOIN Books b ON b.Book_ID = od.Book_ID
+                        WHERE o.order_ID = @orderId;";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@orderId", orderId);
                 MySqlDataReader reader = command.ExecuteReader();
+
+                // Tạo một danh sách sách để lưu tất cả các cuốn sách trong đơn hàng
+                List<Book> booksList = new List<Book>();
+
                 while (reader.Read())
                 {
-                    order = GetOrder(reader);
+                    // Thêm thông tin sách vào danh sách
+                    Book book = new Book();
+                    book.BookName = reader.GetString("book_name");
+                    book.Price = reader.GetDecimal("price");
+                    book.Amount = reader.GetInt32("amount");
+                    booksList.Add(book);
+
+                    // Lấy thông tin đơn hàng (khách hàng và ngày đặt hàng) chỉ một lần
+                    if (order.OrderID == 0)
+                    {
+                        order = GetOrder(reader);
+                    }
                 }
                 reader.Close();
+
+                // Gán danh sách sách vào đơn hàng
+                order.BooksList = booksList;
             }
             catch (MySqlException ex)
             {
