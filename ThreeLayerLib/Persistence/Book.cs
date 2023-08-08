@@ -5,7 +5,7 @@ namespace Persistence
     {
         public int BookID { get; set; }
         public int ISBN { get; set; }
-        public string? BookName { get; set; }
+        public string BookName { get; set; }
         public Category? BookCategory { get; set; }
         public Author? BookAuthor { get; set; }
         public Publisher? BookPublisher { get; set; }
@@ -19,6 +19,7 @@ namespace Persistence
         public Book()
         {
             BookAuthor = new Author();
+            BookName = "";
             BookID = 0;
             BookStatus = 0;
         }

@@ -7,7 +7,7 @@ namespace BL
     public class CustomerBL
     {
         CustomerDAL customerDAL = new CustomerDAL();
-        public Customer GetCustomerById(int customerId)
+        public Customer? GetCustomerById(int customerId)
         {
             return customerDAL.GetCustomerById(customerId);
         }

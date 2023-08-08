@@ -6,6 +6,7 @@ using Persistence;
 using Spectre.Console;
 using UI;
 using System.Linq;
+using System.Globalization;
 
 
 namespace Utilities
@@ -53,9 +54,6 @@ namespace Utilities
             {
 
                 Console.Clear();
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.WriteLine("                                            [ STAFF USING: " + loginStaff!.StaffName + " ]");
-                Console.ResetColor();
                 int mainMenuChoice = consoleUI.Menu(@"
                     ┌─────────────────────────────────────────────────────────────────────────────────────┐
                     │                                                                                     │
@@ -65,6 +63,9 @@ namespace Utilities
                     │─────────────────────────────────────────────────────────────────────────────────────│
                     │                                [MAIN MENU]                                          │
                     └─────────────────────────────────────────────────────────────────────────────────────┘", mainMenu);
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("                                            [ STAFF USING: " + loginStaff!.StaffName + " ]");
+                Console.ResetColor();
                 Console.Clear();
                 do
                 {
@@ -155,9 +156,6 @@ namespace Utilities
         [Obsolete]
         public void SearchBookByISBN()
         {
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                                            [ STAFF USING: " + loginStaff!.StaffName + " ]");
-            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(@"                    ┌─────────────────────────────────────────────────────────────────────────────────────┐
                     │                                                                                     │
                     │ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
@@ -167,6 +165,9 @@ namespace Utilities
                     │                            [SEARCH BOOK BY ISBN]                                    │
                     └─────────────────────────────────────────────────────────────────────────────────────┘   
 ");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("                                            [ STAFF USING: " + loginStaff!.StaffName + " ]");
+            Console.ForegroundColor = ConsoleColor.White;
             var table = new Table();
             table.AddColumns("ID     ", "NAME     ", "CATEGORY  ", " PUBLISHING YEAR ", " DESCRIPTION ", " AUTHOR  ", "    PUBLISHER     ", "  PRICE   ", "AMOUNT ");
             Console.WriteLine("INPUT BOOK'S CODE TO SEARCH: ");
@@ -223,9 +224,6 @@ namespace Utilities
         public void SearchBookByName()
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                                            [ STAFF USING: " + loginStaff!.StaffName + " ]");
-            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(@"                    ┌─────────────────────────────────────────────────────────────────────────────────────┐
                     │                                                                                     │
                     │ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
@@ -235,6 +233,9 @@ namespace Utilities
                     │                            [SEARCH BOOK BY NAME]                                    │
                     └─────────────────────────────────────────────────────────────────────────────────────┘   
 ");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("                                            [ STAFF USING: " + loginStaff!.StaffName + " ]");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("INPUT NAME OF BOOK YOU ARE SEARCHING FOR: ");
             string n = Console.ReadLine() ?? "";
             Console.Clear();
@@ -253,7 +254,6 @@ namespace Utilities
                 }
                 else if (key == ConsoleKey.Enter)
                 {
-                    // Handle Enter key if needed, e.g., show more details about the selected book.
                     Console.ReadKey();
                 }
                 else if (key == ConsoleKey.LeftArrow || key == ConsoleKey.UpArrow)
@@ -265,7 +265,6 @@ namespace Utilities
                 }
                 else if (key == ConsoleKey.RightArrow || key == ConsoleKey.DownArrow)
                 {
-                    // Go to next page if possible
                     if (currentPage < totalPages)
                     {
                         currentPage++;
@@ -322,7 +321,15 @@ namespace Utilities
         }
         public void AddCustomer()
         {
-            Console.WriteLine("ADD NEW CUSTOMER");
+            Console.WriteLine(@"                    ┌─────────────────────────────────────────────────────────────────────────────────────┐
+                    │                                                                                     │
+                    │ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
+                    │ ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║ │
+                    │ ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩ │
+                    │─────────────────────────────────────────────────────────────────────────────────────│
+                    │                             [ADD CUSTOMER INFO]                                     │
+                    └─────────────────────────────────────────────────────────────────────────────────────┘   
+");
             Console.Write("CUSTOMER NAME: ");
             string name = Console.ReadLine() ?? "no name";
             Console.Write("PHONE NUMBER: ");
@@ -393,27 +400,30 @@ namespace Utilities
                             Console.WriteLine("BOOK NAME: " + book.BookName);
                             Console.WriteLine("PRICE: " + book.Price);
                             Console.WriteLine("AMOUNT: " + book.Amount);
+
                             do
                             {
                                 Console.Write("ENTER QUANTITY: ");
-                                int.TryParse(Console.ReadLine(), out amount);
-                                if (amount <= 0 || amount > bBL.GetBookByISBN(isbn).Amount)
+                                int.TryParse(Console.ReadLine(), out int quantity); // Fixed this line
+
+                                if (quantity <= 0 || quantity > book.Amount)
                                 {
                                     Console.WriteLine("INVALID AMOUNT!");
                                 }
                                 else
                                 {
-                                    book.Amount = amount;
+                                    book.Amount = quantity;
+                                    o.Quantity = quantity; // Assign quantity to the order's Quantity property
                                     o.BooksList.Add(book);
                                     Console.WriteLine("ADD TO ORDER COMPLETED");
                                 }
-                            } while (amount <= 0 || amount > bBL.GetBookByISBN(isbn).Amount);
+                            } while (o.Quantity <= 0 || o.Quantity > book.Amount); // Fixed this line
                         }
                         else
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("THIS BOOK IS OUT OF STOCK!!PLEASE CHOOSE ANOTHER BOOK");
+                            Console.WriteLine("THIS BOOK IS OUT OF STOCK!! PLEASE CHOOSE ANOTHER BOOK");
                             Console.ForegroundColor = ConsoleColor.White;
                             return;
                         }
@@ -441,16 +451,21 @@ namespace Utilities
                 if (answer == ConsoleKey.Enter) break;
             } while (answer == ConsoleKey.Escape);
             Console.Clear();
+            Console.WriteLine(@"                    ┌─────────────────────────────────────────────────────────────────────────────────────┐
+                    │                                                                                     │
+                    │ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
+                    │ ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║ │
+                    │ ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩ │
+                    │─────────────────────────────────────────────────────────────────────────────────────│
+                    │                             [ADD NEW CUSTOMER]                                      │
+                    └─────────────────────────────────────────────────────────────────────────────────────┘");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("                                           [ STAFF USING: " + loginStaff!.StaffName + " ]");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("                         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-            Console.WriteLine("                         |               ADD NEW CUSTOMER             |");
-            Console.WriteLine("                         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             Console.Write("CUSTOMER NAME: ");
             string name = Console.ReadLine() ?? "no name";
             string phone = "";
-            Console.WriteLine("PHONE NUMBER: ");
+            Console.Write("PHONE NUMBER: ");
             do
             {
                 phone = Console.ReadLine() ?? "";
@@ -483,9 +498,13 @@ namespace Utilities
             table.AddColumns("BOOK NAME ", "PRICE ", "AMOUNT ", "TOTAL PRICE ");
             foreach (Book b in o.BooksList)
             {
-                table.AddRow("" + b.BookName, "" + b.Price.ToString("C"), "" + b.Amount, "" + (b.Price * b.Amount).ToString("C"));
+                table.AddRow(
+                    "" + b.BookName,
+                    "" + FormatCurrencyToVND(b.Price), // Format the price to VND format
+                    "" + b.Amount,
+                    "" + FormatCurrencyToVND(b.Price * b.Amount) // Format the total price to VND format
+                );
             }
-            AnsiConsole.Write(table);
             Console.WriteLine("CREATE ORDER: " + (oBL.SaveOrder(o) ? "COMPLETED!" + " WITH ORDER ID: " + o.OrderID : "NOT COMPLETED!"));
             Console.WriteLine("\n    PRESS ESCAPE TO BACK TO CREATE ORDER MENU...");
             var key = Console.ReadKey(true).Key;
@@ -502,8 +521,22 @@ namespace Utilities
 
         }
 
+        [Obsolete]
         public void Payment()
         {
+            var table = new Table();
+            decimal totalAmount = 0;
+            Console.WriteLine(@"                    ┌─────────────────────────────────────────────────────────────────────────────────────┐
+                    │                                                                                     │
+                    │ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
+                    │ ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║ │
+                    │ ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩ │
+                    │─────────────────────────────────────────────────────────────────────────────────────│
+                    │                                 [PAYMENT]                                           │
+                    └─────────────────────────────────────────────────────────────────────────────────────┘");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("                                         [ STAFF CREATE ORDER: " + loginStaff!.StaffName + " ]");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("INPUT ORDER ID: ");
             if (Int32.TryParse(Console.ReadLine(), out int orderID))
             {
@@ -516,24 +549,51 @@ namespace Utilities
                     Console.WriteLine("CUSTOMER ADDRESS: " + o.OrderCustomer.CustomerAddress);
                     Console.WriteLine("\t");
 
-                    var table = new Table();
-                    table.AddColumns("BOOK NAME ", "PRICE ", "AMOUNT ", "TOTAL PRICE ");
+
+                    table.AddColumns("BOOK NAME", "PRICE", "AMOUNT", "TOTAL PRICE", "TOTAL AMOUNT");
 
                     foreach (Book b in o.BooksList)
                     {
-                        table.AddRow("" + b.BookName, "" + b.Price.ToString("C"), "" + b.Amount, "" + (b.Price * b.Amount).ToString("C"));
+                        decimal totalPriceForBook = b.Price * b.Amount;
+                        totalAmount += totalPriceForBook;
+                        table.AddRow(
+                            b.BookName,
+                            FormatCurrencyToVND(b.Price), // Format the price to VND format
+                            b.Amount.ToString(),
+                            FormatCurrencyToVND(totalPriceForBook) // Format the total price to VND format
+                        );
                     }
-
+                    table.AddRow("", "", "", "", FormatCurrencyToVND(totalAmount)); // Format the total amount to VND format
                     AnsiConsole.Write(table);
+                    Console.WriteLine("\n    PRESS ESCAPE TO BACK TO CREATE ORDER MENU...");
+                    var key = Console.ReadKey(true).Key;
+                    if (key == ConsoleKey.Escape)
+                    {
+                        Console.Clear();
+                        BackToCreateOrderMenu();
+                        Console.ReadKey();
+                    }
+                    else if (key == ConsoleKey.Enter)
+                    {
+                        Console.ReadKey();
+                    }
                 }
                 else
                 {
-                    Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-                    Console.WriteLine("| Order Not Found With ID: " + orderID + " ┃");
-                    Console.WriteLine(@"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                    table.AddColumn("ORDER NOT FOUND WITH ID : " + orderID);
+
                 }
             }
         }
+        public string FormatCurrencyToVND(decimal amount)
+        {
+            CultureInfo culture = new CultureInfo("vi-VN"); // Vietnamese culture
+            string formattedAmount = string.Format(culture, "{0:C0}", amount); // C0 format specifier for currency without decimal places
+
+            // Replace the currency symbol with VND symbol
+            formattedAmount = formattedAmount.Replace(culture.NumberFormat.CurrencySymbol, "đ");
+
+            return formattedAmount;
+        }
     }
 }
-// mới thêm được 1 sản phẩm vào order, sau khi thêm book 1 thêm book 2 thì chỉ nhận thông tin book2 không thấy thông tin book 1
