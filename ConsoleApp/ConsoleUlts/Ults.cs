@@ -398,8 +398,8 @@ namespace Utilities
                         if (book.BookStatus == 1 && book.Amount > 0)
                         {
                             Console.WriteLine("BOOK NAME: " + book.BookName);
-                            Console.WriteLine("PRICE: " + book.Price);
-                            Console.WriteLine("AMOUNT: " + book.Amount);
+                            Console.WriteLine("PRICE: " + FormatCurrencyToVND(book.Price));
+                            Console.WriteLine("QUANTITY: " + book.Amount);
 
                             do
                             {
@@ -408,7 +408,7 @@ namespace Utilities
 
                                 if (quantity <= 0 || quantity > book.Amount)
                                 {
-                                    Console.WriteLine("INVALID AMOUNT!");
+                                    Console.WriteLine("INVALID QUANTITY!");
                                 }
                                 else
                                 {
@@ -471,8 +471,9 @@ namespace Utilities
                 phone = Console.ReadLine() ?? "";
                 if (!string.IsNullOrEmpty(phone) && phone.Length == 10 && phone.All(char.IsDigit))
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("ADD PHONE NUMBER SUCCESS");
+                    Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.White;
                     break;
                 }
@@ -502,10 +503,12 @@ namespace Utilities
                     "" + b.BookName,
                     "" + FormatCurrencyToVND(b.Price), // Format the price to VND format
                     "" + b.Amount,
-                    "" + FormatCurrencyToVND(b.Price * b.Amount) // Format the total price to VND format
+                    "" + FormatCurrencyToVND(b.Price * b.Amount)// Format the total price to VND format
                 );
             }
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("CREATE ORDER: " + (oBL.SaveOrder(o) ? "COMPLETED!" + " WITH ORDER ID: " + o.OrderID : "NOT COMPLETED!"));
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\n    PRESS ESCAPE TO BACK TO CREATE ORDER MENU...");
             var key = Console.ReadKey(true).Key;
             if (key == ConsoleKey.Escape)
@@ -558,12 +561,12 @@ namespace Utilities
                         totalAmount += totalPriceForBook;
                         table.AddRow(
                             b.BookName,
-                            FormatCurrencyToVND(b.Price), // Format the price to VND format
+                            FormatCurrencyToVND(b.Price),
                             b.Amount.ToString(),
-                            FormatCurrencyToVND(totalPriceForBook) // Format the total price to VND format
+                            FormatCurrencyToVND(totalPriceForBook)
                         );
                     }
-                    table.AddRow("", "", "", "", FormatCurrencyToVND(totalAmount)); // Format the total amount to VND format
+                    table.AddRow("", "", "", "", FormatCurrencyToVND(totalAmount));
                     AnsiConsole.Write(table);
                     Console.WriteLine("\n    PRESS ESCAPE TO BACK TO CREATE ORDER MENU...");
                     var key = Console.ReadKey(true).Key;
@@ -590,8 +593,7 @@ namespace Utilities
             CultureInfo culture = new CultureInfo("vi-VN"); // Vietnamese culture
             string formattedAmount = string.Format(culture, "{0:C0}", amount); // C0 format specifier for currency without decimal places
 
-            // Replace the currency symbol with VND symbol
-            formattedAmount = formattedAmount.Replace(culture.NumberFormat.CurrencySymbol, "đ");
+            formattedAmount = formattedAmount.Replace(culture.NumberFormat.CurrencySymbol, "VND");
 
             return formattedAmount;
         }
