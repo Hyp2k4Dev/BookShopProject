@@ -94,5 +94,38 @@ namespace DAL
             }
             return lb;
         }
+        public List<Book> GetAllBooks(string bookName)
+        {
+            List<Book> allBooks = new List<Book>();
+            try
+            {
+                query = @"select b.book_ID, b.ISBN, b.book_name, c.category_name, b.publish_year, 
+	                    b.book_description, a.author_name, p.publisher_name, b.price, b.amount, b.book_status
+                        from Books b inner join CategoryDetails cd on b.book_ID=cd.book_ID 
+	                    inner join Categories c on c.category_ID=cd.category_ID 
+	                    inner join Authors_Books ab on b.book_ID = ab.book_ID 
+	                    inner join Authors a on ab.author_ID = a.author_ID 
+	                    inner join Publishers p on b.publisher_ID = p.publisher_ID
+                        where (@bookName = '' or b.book_name like concat('%', @bookName, '%'))
+                        and b.book_status = 1;";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@bookName", bookName);
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    allBooks.Add(GetBook(reader));
+                }
+                reader.Close();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return allBooks;
+        }
     }
+
 }

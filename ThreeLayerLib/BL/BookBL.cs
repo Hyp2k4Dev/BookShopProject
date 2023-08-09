@@ -16,5 +16,10 @@ namespace BL
         {
             return bDAL.GetBookByName(bookName);
         }
+
+        public List<Book> GetAllBooks(string bookName)
+        {
+            return bDAL.GetAllBooks(bookName);
+        }
     }
 }
