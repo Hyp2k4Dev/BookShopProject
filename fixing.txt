@@ -1,1 +1,7 @@
+- Create order cần có: 
+search method
+sau search tạo ngay order 
 
+
+order cần hiển thị LOGO, ngày tháng năm, mã order, địa chỉ cửa hàng, cách item,tên người mua, người bán
+                
