@@ -1,11 +1,7 @@
-using System;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using BL;
 using Persistence;
 using Spectre.Console;
 using UI;
-using System.Linq;
 using System.Globalization;
 
 
@@ -18,7 +14,7 @@ namespace Utilities
         int currentPage = 1;
         ConsoleUI consoleUI = new ConsoleUI();
         string[] mainMenu = { ". CREATE ORDER ", ". LOGOUT" };
-        string[] coMenu = { ". SEARCH BOOK BY NAME ", ". SEARCH BOOK BY CODE ", ". CREATE ORDER", ". PAYMENT", ". BACK TO MAIN MENU" };
+        string[] coMenu = { ". CREATE ORDER", ". PAYMENT", ". BACK TO MAIN MENU" };
         BookBL bBL = new BookBL();
         Staff? loginStaff1;
         CustomerBL cBL = new CustomerBL();
@@ -76,8 +72,7 @@ namespace Utilities
                             CreateOrderMenu();
                             break;
                         case 2:
-                            Main();
-                            break;
+                            return;
                     }
                 } while (mainMenuChoice != mainMenu.Length);
             }
@@ -137,15 +132,9 @@ namespace Utilities
                 switch (coChoose)
                 {
                     case 1:
-                        SearchBookByName();
-                        break;
-                    case 2:
-                        SearchBookByISBN();
-                        break;
-                    case 3:
                         CreateOrder();
                         break;
-                    case 4:
+                    case 2:
                         Payment();
                         break;
                     default:
@@ -380,7 +369,7 @@ namespace Utilities
             var table = new Table();
             do
             {
-
+                SearchBookByName();
                 Console.WriteLine(@"                    ┌─────────────────────────────────────────────────────────────────────────────────────┐
                     │                                                                                     │
                     │ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
