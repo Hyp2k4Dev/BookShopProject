@@ -8,9 +8,10 @@ namespace BL
     public class StaffBL
     {
         StaffDAL staffDAL = new StaffDAL();
-
+        public Staff? loginStaff { get; private set; }
         public Staff? LoginAccount()
         {
+
             string userName;
             string password;
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -24,6 +25,7 @@ namespace BL
             Staff staff = staffDAL.GetStaffAccount(userName);
             if (staff.Password == staffDAL.CreateMD5(password) && staff.StaffStatus == 1)
             {
+                loginStaff = staff;
                 return staff;
             }
             else

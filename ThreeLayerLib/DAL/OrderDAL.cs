@@ -4,7 +4,6 @@ namespace DAL
 {
     public class OrderDAL
     {
-        private string query = "";
         private MySqlConnection connection = DbConfig.GetConnection();
         public Order GetOrderByID(int orderId)
         {

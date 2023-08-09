@@ -14,14 +14,13 @@ namespace Utilities
 
     class Ults
     {
-        int amount;
         int booksPerPage = 5;
         int currentPage = 1;
         ConsoleUI consoleUI = new ConsoleUI();
         string[] mainMenu = { ". CREATE ORDER ", ". LOGOUT" };
         string[] coMenu = { ". SEARCH BOOK BY NAME ", ". SEARCH BOOK BY CODE ", ". CREATE ORDER", ". PAYMENT", ". BACK TO MAIN MENU" };
         BookBL bBL = new BookBL();
-        Staff? loginStaff;
+        Staff? loginStaff1;
         CustomerBL cBL = new CustomerBL();
         StaffBL staffBL = new StaffBL();
         OrderBL oBL = new OrderBL();
@@ -49,11 +48,14 @@ namespace Utilities
         [Obsolete]
         public void LoginAccount()
         {
-            loginStaff = staffBL.LoginAccount();
-            if (loginStaff != null)
+            loginStaff1 = staffBL.LoginAccount();
+            if (loginStaff1 != null)
             {
 
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write("                                            [ STAFF USING: " + loginStaff1!.StaffName + " ]");
+                Console.ResetColor();
                 int mainMenuChoice = consoleUI.Menu(@"
                     ┌─────────────────────────────────────────────────────────────────────────────────────┐
                     │                                                                                     │
@@ -64,9 +66,8 @@ namespace Utilities
                     │                                [MAIN MENU]                                          │
                     └─────────────────────────────────────────────────────────────────────────────────────┘", mainMenu);
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.WriteLine("                                            [ STAFF USING: " + loginStaff!.StaffName + " ]");
+                Console.Write("                                            [ STAFF USING: " + loginStaff1!.StaffName + " ]");
                 Console.ResetColor();
-                Console.Clear();
                 do
                 {
                     switch (mainMenuChoice)
@@ -89,8 +90,9 @@ namespace Utilities
         [Obsolete]
         public void MainMenu()
         {
+
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                                            [ STAFF USING: " + loginStaff!.StaffName + " ]");
+            Console.Write("                                            [ STAFF USING: " + loginStaff1!.StaffName + " ]");
             Console.ResetColor();
             int mainMenuChoice = consoleUI.Menu(@"
                     ┌─────────────────────────────────────────────────────────────────────────────────────┐
@@ -101,7 +103,6 @@ namespace Utilities
                     │─────────────────────────────────────────────────────────────────────────────────────│
                     │                                [MAIN MENU]                                          │
                     └─────────────────────────────────────────────────────────────────────────────────────┘", mainMenu);
-            Console.Clear();
             do
             {
                 switch (mainMenuChoice)
@@ -110,7 +111,7 @@ namespace Utilities
                         CreateOrderMenu();
                         break;
                     case 2:
-                        break;
+                        return;
                 }
             } while (mainMenuChoice != mainMenu.Length);
         }
@@ -118,8 +119,9 @@ namespace Utilities
         [Obsolete]
         public void CreateOrderMenu()
         {
+            Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                                            [ STAFF USING: " + loginStaff!.StaffName + " ]");
+            Console.WriteLine("                                              [ STAFF USING: " + loginStaff1!.StaffName + " ]");
             Console.ResetColor();
             int coChoose = consoleUI.Menu(@"                    ┌─────────────────────────────────────────────────────────────────────────────────────┐
                     │                                                                                     │
@@ -127,7 +129,7 @@ namespace Utilities
                     │ ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║ │
                     │ ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩ │
                     │─────────────────────────────────────────────────────────────────────────────────────│
-                    │                                [MAIN MENU]                                          │
+                    │                             [CREATE ORDER MENU]                                     │
                     └─────────────────────────────────────────────────────────────────────────────────────┘   
 ", coMenu);
             do
@@ -166,7 +168,7 @@ namespace Utilities
                     └─────────────────────────────────────────────────────────────────────────────────────┘   
 ");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                                            [ STAFF USING: " + loginStaff!.StaffName + " ]");
+            Console.WriteLine("                                            [ STAFF USING: " + loginStaff1!.StaffName + " ]");
             Console.ForegroundColor = ConsoleColor.White;
             var table = new Table();
             table.AddColumns("ID     ", "NAME     ", "CATEGORY  ", " PUBLISHING YEAR ", " DESCRIPTION ", " AUTHOR  ", "    PUBLISHER     ", "  PRICE   ", "AMOUNT ");
@@ -234,7 +236,7 @@ namespace Utilities
                     └─────────────────────────────────────────────────────────────────────────────────────┘   
 ");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                                            [ STAFF USING: " + loginStaff!.StaffName + " ]");
+            Console.WriteLine("                                            [ STAFF USING: " + loginStaff1!.StaffName + " ]");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("INPUT NAME OF BOOK YOU ARE SEARCHING FOR: ");
             string n = Console.ReadLine() ?? "";
@@ -302,6 +304,7 @@ namespace Utilities
             Console.ForegroundColor = ConsoleColor.White;
             AnsiConsole.Render(table);
             Console.WriteLine($"                                                         Page {currentPage}/{totalPages}");
+            return;
         }
 
 
@@ -330,6 +333,9 @@ namespace Utilities
                     │                             [ADD CUSTOMER INFO]                                     │
                     └─────────────────────────────────────────────────────────────────────────────────────┘   
 ");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("                                            [ STAFF USING: " + loginStaff1!.StaffName + " ]");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("CUSTOMER NAME: ");
             string name = Console.ReadLine() ?? "no name";
             Console.Write("PHONE NUMBER: ");
@@ -374,9 +380,7 @@ namespace Utilities
             var table = new Table();
             do
             {
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.WriteLine("                                            [ STAFF USING: " + loginStaff!.StaffName + " ]");
-                Console.ForegroundColor = ConsoleColor.White;
+
                 Console.WriteLine(@"                    ┌─────────────────────────────────────────────────────────────────────────────────────┐
                     │                                                                                     │
                     │ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
@@ -385,8 +389,9 @@ namespace Utilities
                     │─────────────────────────────────────────────────────────────────────────────────────│
                     │                             [ADD BOOK TO ORDER]                                     │
                     └─────────────────────────────────────────────────────────────────────────────────────┘");
-
-
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("                                            [ STAFF USING: " + loginStaff1!.StaffName + " ]");
+                Console.ForegroundColor = ConsoleColor.White;
                 int isbn = 0;
                 Console.Write("INPUT BOOK CODE: ");
                 if (Int32.TryParse(Console.ReadLine(), out isbn))
@@ -460,7 +465,7 @@ namespace Utilities
                     │                             [ADD NEW CUSTOMER]                                      │
                     └─────────────────────────────────────────────────────────────────────────────────────┘");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                                           [ STAFF USING: " + loginStaff!.StaffName + " ]");
+            Console.WriteLine("                                           [ STAFF USING: " + loginStaff1!.StaffName + " ]");
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("CUSTOMER NAME: ");
             string name = Console.ReadLine() ?? "no name";
@@ -488,10 +493,10 @@ namespace Utilities
             string address = Console.ReadLine() ?? "";
             o.OrderCustomer = new Customer { CustomerName = name, PhoneNumber = phone, CustomerAddress = address };
             Console.Clear();
-            o.OrderStaff = loginStaff;
+            o.OrderStaff = loginStaff1;
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                                         [ STAFF CREATE ORDER: " + loginStaff!.StaffName + " ]");
+            Console.WriteLine("                                         [ STAFF CREATE ORDER: " + loginStaff1!.StaffName + " ]");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("CUSTOMER NAME: " + o.OrderCustomer!.CustomerName);
             Console.WriteLine("PHONE NUMBER: " + o.OrderCustomer.PhoneNumber);
@@ -538,7 +543,7 @@ namespace Utilities
                     │                                 [PAYMENT]                                           │
                     └─────────────────────────────────────────────────────────────────────────────────────┘");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                                         [ STAFF CREATE ORDER: " + loginStaff!.StaffName + " ]");
+            Console.WriteLine("                                         [ STAFF CREATE ORDER: " + loginStaff1!.StaffName + " ]");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("INPUT ORDER ID: ");
             if (Int32.TryParse(Console.ReadLine(), out int orderID))
