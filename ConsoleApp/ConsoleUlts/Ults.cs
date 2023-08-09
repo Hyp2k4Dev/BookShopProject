@@ -507,7 +507,7 @@ namespace Utilities
             Console.WriteLine("PHONE NUMBER: " + o.OrderCustomer.PhoneNumber);
             Console.WriteLine("CUSTOMER ADDRESS: " + o.OrderCustomer.CustomerAddress);
             var addCustomerTable = new Table();
-            addCustomerTable.AddColumns("BOOK NAME ", "PRICE ", "AMOUNT ", "TOTAL PRICE ");
+            addCustomerTable.AddColumns("BOOK NAME ", "PRICE ", "QUANTITY ", "TOTAL AMOUNT ");
             foreach (Book b in o.BooksList)
             {
                 addCustomerTable.AddRow(
