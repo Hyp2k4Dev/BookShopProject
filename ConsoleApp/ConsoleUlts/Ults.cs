@@ -13,7 +13,7 @@ namespace Utilities
         int booksPerPage = 5;
         int currentPage = 1;
         ConsoleUI consoleUI = new ConsoleUI();
-        string[] mainMenu = { ". CREATE ORDER ", ". LOGOUT" };
+        string[] mainMenu = { ". MAIN MENU ", ". LOGOUT" };
         string[] coMenu = { ". CREATE ORDER", ". PAYMENT", ". BACK TO MAIN MENU" };
         BookBL bBL = new BookBL();
         Staff? loginStaff1;
@@ -48,9 +48,8 @@ namespace Utilities
             if (loginStaff1 != null)
             {
 
-                Console.Clear();
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.Write("                                            [ STAFF USING: " + loginStaff1!.StaffName + " ]");
+                Console.Write("[ STAFF USING: " + loginStaff1!.StaffName + " ]");
                 Console.ResetColor();
                 int mainMenuChoice = consoleUI.Menu(@"
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
@@ -61,9 +60,6 @@ namespace Utilities
 │─────────────────────────────────────────────────────────────────────────────────────│
 │                                [MAIN MENU]                                          │
 └─────────────────────────────────────────────────────────────────────────────────────┘", mainMenu);
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.Write("                                            [ STAFF USING: " + loginStaff1!.StaffName + " ]");
-                Console.ResetColor();
                 do
                 {
                     switch (mainMenuChoice)
@@ -72,7 +68,6 @@ namespace Utilities
                             CreateOrderMenu();
                             break;
                         case 2:
-                            Console.Clear();
                             return;
                     }
                 } while (mainMenuChoice != mainMenu.Length);
@@ -88,7 +83,7 @@ namespace Utilities
         {
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.Write("                                            [ STAFF USING: " + loginStaff1!.StaffName + " ]");
+            Console.Write("[ STAFF USING: " + loginStaff1!.StaffName + " ]");
             Console.ResetColor();
             int mainMenuChoice = consoleUI.Menu(@"
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
@@ -107,6 +102,7 @@ namespace Utilities
                         CreateOrderMenu();
                         break;
                     case 2:
+                        Console.Clear();
                         return;
                 }
             } while (mainMenuChoice != mainMenu.Length);
@@ -117,7 +113,7 @@ namespace Utilities
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                                              [ STAFF USING: " + loginStaff1!.StaffName + " ]");
+            Console.WriteLine("[ STAFF USING: " + loginStaff1!.StaffName + " ]");
             Console.ResetColor();
             int coChoose = consoleUI.Menu(@"┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                                                                                     │
@@ -158,7 +154,7 @@ namespace Utilities
 └─────────────────────────────────────────────────────────────────────────────────────┘   
 ");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                                            [ STAFF USING: " + loginStaff1!.StaffName + " ]");
+            Console.WriteLine("[ STAFF USING: " + loginStaff1!.StaffName + " ]");
             Console.ForegroundColor = ConsoleColor.White;
             var table = new Table();
             table.AddColumns("ID     ", "NAME     ", "CATEGORY  ", " PUBLISHING YEAR ", " DESCRIPTION ", " AUTHOR  ", "    PUBLISHER     ", "  PRICE   ", "AMOUNT ");
@@ -226,7 +222,7 @@ namespace Utilities
 └─────────────────────────────────────────────────────────────────────────────────────┘   
 ");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                                            [ STAFF USING: " + loginStaff1!.StaffName + " ]");
+            Console.WriteLine("[ STAFF USING: " + loginStaff1!.StaffName + " ]");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("INPUT NAME OF BOOK YOU ARE SEARCHING FOR: ");
             string n = Console.ReadLine() ?? "";
@@ -324,7 +320,7 @@ namespace Utilities
 └─────────────────────────────────────────────────────────────────────────────────────┘   
 ");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                                            [ STAFF USING: " + loginStaff1!.StaffName + " ]");
+            Console.WriteLine("[ STAFF USING: " + loginStaff1!.StaffName + " ]");
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("CUSTOMER NAME: ");
             string name = Console.ReadLine() ?? "no name";
@@ -517,22 +513,21 @@ namespace Utilities
                     "" + FormatCurrencyToVND(b.Price * b.Amount)// Format the total price to VND format
                 );
             }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("CREATE ORDER: " + (oBL.SaveOrder(o) ? "COMPLETED!" + " WITH ORDER ID: " + o.OrderID : "NOT COMPLETED!"));
-            Console.ForegroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Press <C> to Confirm Order, <X> to Cancel Order...");
             Console.ForegroundColor = ConsoleColor.White;
-            var confirmKey = Console.ReadKey(true).Key;
-
-            if (confirmKey == ConsoleKey.C)
+            var reqKey = Console.ReadKey(true).Key;
+            if (reqKey == ConsoleKey.C)
             {
                 // Proceed with order confirmation
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Order Confirmed!");
+                Console.WriteLine("CREATE ORDER: " + (oBL.SaveOrder(o) ? "COMPLETED!" + " WITH ORDER ID: " + o.OrderID : "NOT COMPLETED!"));
+                Console.ForegroundColor = ConsoleColor.White;
                 // ... (Rest of your code for displaying and confirming the order)
             }
-            else if (confirmKey == ConsoleKey.X)
+            else if (reqKey == ConsoleKey.X)
             {
                 Console.Clear();
                 Console.WriteLine("Order Cancelled!");
@@ -541,8 +536,8 @@ namespace Utilities
                 Console.ReadKey();
             }
             Console.WriteLine("\n    PRESS ESCAPE TO BACK TO CREATE ORDER MENU...");
-            var key = Console.ReadKey(true).Key;
-            if (key == ConsoleKey.Escape)
+            var backKey = Console.ReadKey(true).Key;
+            if (backKey == ConsoleKey.Escape)
             {
                 Console.Clear();
                 CreateOrderMenu();
