@@ -9,8 +9,9 @@ namespace Utilities
 
     class Ults
     {
+
         ConsoleUI consoleUI = new ConsoleUI();
-        string[] mainMenu = { ". MAIN MENU ", ". ORDER STATUS", ". LOGOUT" };
+        string[] mainMenu = { ". MAIN MENU ", ". CHECK ORDER BILL", ". LOGOUT" };
         string[] coMenu = { ". CREATE ORDER", ". PAYMENT", ". BACK TO MAIN MENU" };
         BookBL bBL = new BookBL();
         Staff? loginStaff1;
@@ -150,23 +151,98 @@ namespace Utilities
         [Obsolete]
         public void ViewOrdersStatus()
         {
-            var orderStatusTable = new Table();
-            orderStatusTable.AddColumns("ORDER ID", "STAFF CREATE ORDER", "ORDER DATE", "STATUS");
-
+            decimal totalAmount = 0;
+            Console.WriteLine(@"┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                     │
+│ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
+│ ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║ │
+│ ╚═╝╚═╝╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩    ╚═╝╩╚═╚═╝╩ ╩ ╩ ╚═╝  ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩ │
+│─────────────────────────────────────────────────────────────────────────────────────│
+│                               [CHECK ORDER BILL]                                    │
+└─────────────────────────────────────────────────────────────────────────────────────┘");
+            var check = new Table();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine($"[ STAFF USING: {loginStaff1!.StaffName} ]");
             Console.ForegroundColor = ConsoleColor.White;
-
-            List<Order> orders = oBL.GetAllOrder(""); // Get a list of all orders
-
-            foreach (Order o in orders)
+            Console.WriteLine("INPUT ORDER ID: ");
+            if (Int32.TryParse(Console.ReadLine(), out int orderID))
             {
-                string orderStatusText = o.OrderStatus == 2 ? "COMPLETED" : "PENDING";
-                orderStatusTable.AddRow("" + o.OrderID, "" + loginStaff1!.StaffName, "" + o.OrderDate, "" + orderStatusText);
-            }
+                Order o = oBL.GetOrderByID(orderID);
+                if (o != null)
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(@"
+                            ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔╗ ╦╦  ╦  
+                            ║ ║╠╦╝ ║║║╣ ╠╦╝  ╠╩╗║║  ║  
+                            ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝╩╩═╝╩═╝");
+                    Console.WriteLine("                           ─────────────────────────────");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine("SHOP: H&T BOOK SHOP");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("\t");
+                    Console.WriteLine();
+                    Console.WriteLine("                         ORDER DATE: " + o.OrderDate);
 
-            AnsiConsole.Write(orderStatusTable);
+                    if (o.OrderCustomer != null)
+                    {
+                        Console.WriteLine("CUSTOMER NAME: " + o.OrderCustomer.CustomerName);
+                        Console.WriteLine("PHONE NUMBER: " + o.OrderCustomer.PhoneNumber);
+                        Console.WriteLine("CUSTOMER ADDRESS: " + o.OrderCustomer.CustomerAddress);
+
+                    }
+
+                    Console.WriteLine("\t");
+
+                    check.AddColumns("BOOK NAME", "PRICE", "AMOUNT", "TOTAL PRICE", "TOTAL AMOUNT");
+
+                    if (o.BooksList != null)
+                    {
+                        foreach (Book b in o.BooksList)
+                        {
+                            decimal totalPriceForBook = b.Price * b.Amount;
+                            totalAmount += totalPriceForBook;
+                            check.AddRow(
+                                b.BookName,
+                                FormatCurrencyToVND(b.Price),
+                                b.Amount.ToString(),
+                                FormatCurrencyToVND(totalPriceForBook)
+                            );
+                        }
+
+                        check.AddRow("", "", "", "", FormatCurrencyToVND(totalAmount));
+                        AnsiConsole.Render(check);
+                    }
+                    else
+                    {
+                        Console.WriteLine("No books found in the order.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Order with ID {orderID} not found.");
+                }
+            }
+            Console.WriteLine("\nPress ESC to go back or ENTER to search another id...");
+            while (true)
+            {
+                var key = Console.ReadKey(true).Key;
+                if (key == ConsoleKey.Escape)
+                {
+                    Console.Clear();
+                    MainMenu();
+                    Console.ReadKey();
+                    break;
+                }
+                else if (key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    return;
+                }
+            }
         }
+
 
         [Obsolete]
         public void CreateOrder()
@@ -345,6 +421,7 @@ namespace Utilities
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine("[ STAFF CREATE ORDER: " + loginStaff1!.StaffName + " ]");
                 Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine();
                 Console.WriteLine("CUSTOMER NAME: " + o.OrderCustomer!.CustomerName);
                 Console.WriteLine("PHONE NUMBER: " + o.OrderCustomer.PhoneNumber);
                 Console.WriteLine("CUSTOMER ADDRESS: " + o.OrderCustomer.CustomerAddress);
