@@ -15,6 +15,14 @@ namespace BL
             bool result = orderDAL.CreateOrder(order);
             return result;
         }
+        public Order GetOrder(int orderId)
+        {
+            return orderDAL.UpdateOrderStatus(orderId);
+        }
+        public List<Order> GetAllOrder(string o)
+        {
+            return orderDAL.GetAllOrder(o);
+        }
     }
 
 }

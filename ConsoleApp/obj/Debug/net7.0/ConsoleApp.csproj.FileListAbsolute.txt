@@ -61,3 +61,4 @@ C:\Users\admin\Desktop\AllRelease\ProjectV1.2\BookShopProject\ConsoleApp\obj\Deb
 C:\Users\admin\Desktop\AllRelease\ProjectV1.2\BookShopProject\ConsoleApp\obj\Debug\net7.0\ConsoleApp.pdb
 C:\Users\admin\Desktop\AllRelease\ProjectV1.2\BookShopProject\ConsoleApp\obj\Debug\net7.0\ConsoleApp.genruntimeconfig.cache
 C:\Users\admin\Desktop\AllRelease\ProjectV1.2\BookShopProject\ConsoleApp\obj\Debug\net7.0\ref\ConsoleApp.dll
+C:\Users\admin\Desktop\AllRelease\ProjectV1.2\BookShopProject\ConsoleApp\bin\Debug\net7.0\ConsoleTables.dll

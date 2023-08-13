@@ -1,3 +1,6 @@
 {
-    "dotnet.defaultSolution": "Project.sln"
+    "dotnet.defaultSolution": "Project.sln",
+    "cSpell.words": [
+        "Ults"
+    ]
 }

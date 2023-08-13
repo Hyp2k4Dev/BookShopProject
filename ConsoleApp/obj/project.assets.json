@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net7.0": {
+      "ConsoleTables/2.5.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/ConsoleTables.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/ConsoleTables.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
       "MySqlConnector/2.2.6": {
         "type": "package",
         "compile": {
@@ -57,6 +70,21 @@
     }
   },
   "libraries": {
+    "ConsoleTables/2.5.0": {
+      "sha512": "lfXLGH1coDInONveyIW5ufJWT/P5KbMRRV0cbR7CBnoZLNLZeTY51QUrAmtsX+gIWj7xlY9FSmg1sBYhXMmuuw==",
+      "type": "package",
+      "path": "consoletables/2.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Readme.md",
+        "consoletables.2.5.0.nupkg.sha512",
+        "consoletables.nuspec",
+        "icon.png",
+        "lib/netstandard2.1/ConsoleTables.dll",
+        "lib/netstandard2.1/ConsoleTables.pdb"
+      ]
+    },
     "MySqlConnector/2.2.6": {
       "sha512": "oYHl9TNhJXBEqfuiaEsOdBPkdULOcCCbqZJzYhy0rtREnMVoluG73GM8+gwBCMb1vbjv9K1ehQnhe0cxdxfOCA==",
       "type": "package",
@@ -133,6 +161,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "ConsoleTables >= 2.5.0",
       "MySqlConnector >= 2.2.6",
       "Spectre.Console >= 0.47.0",
       "ThreeLayerLib >= 1.0.0"
@@ -144,11 +173,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj",
+      "projectUniqueName": "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj",
       "projectName": "ConsoleApp",
-      "projectPath": "c:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj",
+      "projectPath": "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ConsoleApp\\obj\\",
+      "outputPath": "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ConsoleApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -163,8 +192,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "c:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj": {
-              "projectPath": "c:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj"
+            "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj": {
+              "projectPath": "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj"
             }
           }
         }
@@ -179,6 +208,10 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
+          "ConsoleTables": {
+            "target": "Package",
+            "version": "[2.5.0, )"
+          },
           "MySqlConnector": {
             "target": "Package",
             "version": "[2.2.6, )"
@@ -204,7 +237,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

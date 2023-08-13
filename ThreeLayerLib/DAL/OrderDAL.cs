@@ -64,6 +64,105 @@ namespace DAL
             o.BooksList.Add(book);
             return o;
         }
+        public Order UpdateOrderStatus(int orderId)
+        {
+            Order o = new Order();
+            try
+            {
+                if (connection.State == System.Data.ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
+
+                string updateQuery = @"UPDATE orders SET order_status = 2 WHERE order_ID = @orderId";
+
+                using MySqlCommand command = new MySqlCommand(updateQuery, connection);
+                command.Parameters.AddWithValue("@orderId", orderId);
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    // Lấy thông tin đơn hàng sau cập nhật
+                    string selectQuery = "SELECT order_ID, order_date, order_status FROM orders WHERE order_ID = @orderId";
+                    using MySqlCommand selectCommand = new MySqlCommand(selectQuery, connection);
+                    selectCommand.Parameters.AddWithValue("@orderId", orderId);
+
+                    using MySqlDataReader reader = selectCommand.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        o.OrderID = reader.GetInt32("order_ID");
+                        o.OrderDate = reader.GetDateTime("order_date");
+                        o.OrderStatus = reader.GetInt16("order_status");
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return o;
+        }
+        public List<Order> GetAllOrder(string o)
+        {
+            List<Order> allOrders = new List<Order>();
+            try
+            {
+                if (connection.State == System.Data.ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
+
+                string query = @"SELECT o.order_ID, o.order_date, o.order_status, c.customer_name, c.phoneNumber, c.customer_address, b.book_name, b.price, od.quantity
+            FROM Orders o
+            INNER JOIN Customers c ON o.customer_ID = c.customer_ID
+            INNER JOIN OrderDetails od ON o.order_ID = od.order_ID
+            INNER JOIN Books b ON b.Book_ID = od.Book_ID";
+
+                // Add a condition to the query based on the parameter
+                if (!string.IsNullOrEmpty(o))
+                {
+                    query += " WHERE ..."; // Add your filter condition here
+                }
+
+                query += " ORDER BY o.order_ID;";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                Order? currentOrder = null; // Add a variable to track the current order
+
+                while (reader.Read())
+                {
+                    int orderId = reader.GetInt32("order_ID");
+                    if (currentOrder == null || currentOrder.OrderID != orderId)
+                    {
+                        currentOrder = GetOrder(reader);
+                        allOrders.Add(currentOrder);
+                    }
+                    Book book = new Book();
+                    book.BookName = reader.GetString("book_name");
+                    book.Price = reader.GetDecimal("price");
+                    book.Amount = reader.GetInt32("quantity");
+                    currentOrder.BooksList.Add(book); // Add the book to the current order
+                }
+                reader.Close();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return allOrders;
+        }
+
 
 
 
@@ -140,7 +239,7 @@ namespace DAL
                         cmd.ExecuteNonQuery();
 
                         // Get new Order_ID
-                        cmd.CommandText = "SELECT LAST_INSERT_ID() AS order_id;";
+                        cmd.CommandText = "SELECT LAST_INSERT_ID() AS order_ID;";
                         order.OrderID = Convert.ToInt32(cmd.ExecuteScalar());
 
                         // Insert Order Details table
