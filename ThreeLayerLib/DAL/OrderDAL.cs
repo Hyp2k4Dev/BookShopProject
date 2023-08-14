@@ -7,6 +7,10 @@ namespace DAL
         private MySqlConnection connection = DbConfig.GetConnection();
         public Order GetOrderByID(int orderId)
         {
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+                connection.Open();
+            }
             Order order = new Order();
             try
             {

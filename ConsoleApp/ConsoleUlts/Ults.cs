@@ -3,6 +3,7 @@ using Persistence;
 using Spectre.Console;
 using UI;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Utilities
 {
@@ -18,7 +19,6 @@ namespace Utilities
         CustomerBL cBL = new CustomerBL();
         StaffBL staffBL = new StaffBL();
         OrderBL oBL = new OrderBL();
-        List<Book>? lst;
 
         [Obsolete]
         public void Main()
@@ -45,7 +45,7 @@ namespace Utilities
             loginStaff1 = staffBL.LoginAccount();
             if (loginStaff1 != null)
             {
-
+                Console.Clear();
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.Write("[ STAFF USING: " + loginStaff1!.StaffName + " ]");
                 Console.ResetColor();
@@ -86,7 +86,7 @@ namespace Utilities
         [Obsolete]
         public void MainMenu()
         {
-
+            Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.Write("[ STAFF USING: " + loginStaff1!.StaffName + " ]");
             Console.ResetColor();
@@ -110,6 +110,7 @@ namespace Utilities
                         ViewOrdersStatus();
                         break;
                     case 3:
+                        LoginAccount();
                         break;
                 }
             } while (mainMenuChoice != mainMenu.Length);
@@ -151,7 +152,10 @@ namespace Utilities
         [Obsolete]
         public void ViewOrdersStatus()
         {
+            Console.Clear();
             decimal totalAmount = 0;
+            Random random = new Random();
+            int orderBillNumber = random.Next(1000, 10000);
             Console.WriteLine(@"┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                                                                                     │
 │ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
@@ -172,32 +176,38 @@ namespace Utilities
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(@"
-                            ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔╗ ╦╦  ╦  
-                            ║ ║╠╦╝ ║║║╣ ╠╦╝  ╠╩╗║║  ║  
-                            ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝╩╩═╝╩═╝");
-                    Console.WriteLine("                           ─────────────────────────────");
+                    Console.WriteLine(@"                                                                                      
+                              ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔╗ ╦╦  ╦                               
+                              ║ ║╠╦╝ ║║║╣ ╠╦╝  ╠╩╗║║  ║                               
+                              ╚═╝╩╚══╩╝╚═╝╩╚═  ╚═╝╩╩═╝╩═╝                             ");
+                    Console.WriteLine("                              ───────────────────────────                             ");
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.ForegroundColor = ConsoleColor.DarkGray;
-                    Console.WriteLine("SHOP: H&T BOOK SHOP");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("\t");
+                    Console.WriteLine("");
+                    Console.WriteLine($"                                                      ORDER BILL NUMBER: {orderBillNumber}");
+                    Console.WriteLine("                                             ORDER DATE: " + o.OrderDate);
+                    Console.WriteLine("");
+                    Console.WriteLine("SHOP: VTC BOOK SHOP");
+                    Console.WriteLine("ADDRESS: 4TH FLOOR, VTC ONLINE BUILDING, 18 TAM TRINH STREET, HAI BA TRUNG, HA NOI");
+                    Console.WriteLine("SHOP PHONE NUMBER: 0971443180 ");
                     Console.WriteLine();
-                    Console.WriteLine("                         ORDER DATE: " + o.OrderDate);
+                    Console.ForegroundColor = ConsoleColor.White;
 
                     if (o.OrderCustomer != null)
                     {
                         Console.WriteLine("CUSTOMER NAME: " + o.OrderCustomer.CustomerName);
-                        Console.WriteLine("PHONE NUMBER: " + o.OrderCustomer.PhoneNumber);
+
+                        Console.WriteLine("CUSTOMER PHONE: " + o.OrderCustomer.PhoneNumber);
+
                         Console.WriteLine("CUSTOMER ADDRESS: " + o.OrderCustomer.CustomerAddress);
 
+                        Console.WriteLine();
                     }
-
-                    Console.WriteLine("\t");
-
-                    check.AddColumns("BOOK NAME", "PRICE", "AMOUNT", "TOTAL PRICE", "TOTAL AMOUNT");
-
-                    if (o.BooksList != null)
+                    check.AddColumn(new TableColumn("BOOK NAME").LeftAligned());
+                    check.AddColumn(new TableColumn("PRICE").Centered());
+                    check.AddColumn(new TableColumn("AMOUNT").Centered());
+                    check.AddColumn(new TableColumn("TOTAL PRICE").RightAligned());
+                    check.AddColumn(new TableColumn("[yellow]TOTAL AMOUNT[/]").RightAligned());
+                    if (o.BooksList.Count() != 0)
                     {
                         foreach (Book b in o.BooksList)
                         {
@@ -211,17 +221,14 @@ namespace Utilities
                             );
                         }
 
-                        check.AddRow("", "", "", "", FormatCurrencyToVND(totalAmount));
+                        check.AddRow("", "", "", "", $"[yellow]{FormatCurrencyToVND(totalAmount)}[/]");
                         AnsiConsole.Render(check);
                     }
-                    else
+                    else if (o.BooksList!.Count() == 0)
                     {
-                        Console.WriteLine("No books found in the order.");
+                        Console.Clear();
+                        Console.WriteLine($"Order with ID {orderID} not found.");
                     }
-                }
-                else
-                {
-                    Console.WriteLine($"Order with ID {orderID} not found.");
                 }
             }
             Console.WriteLine("\nPress ESC to go back or ENTER to search another id...");
@@ -247,9 +254,12 @@ namespace Utilities
         [Obsolete]
         public void CreateOrder()
         {
+            Console.Clear();
+            decimal totalAmount = 0;
             Order o = new Order();
             ConsoleKey answer;
             var showAllTable = new Table();
+            Console.Clear();
             Console.WriteLine(@"┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                                                                                     │
 │ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
@@ -338,7 +348,7 @@ namespace Utilities
                         return;
                     }
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("IF YOU WANT TO ADD ANOTHER BOOK PRESS <ESCAPE> OR PRESS <ANY KEY> TO GO TO ADD CUSTOMER?: ");
+                    Console.WriteLine("IF YOU WANT TO ADD ANOTHER BOOK PRESS <ESCAPE> OR PRESS <ENTER> TO GO TO ADD CUSTOMER?: ");
                     Console.ForegroundColor = ConsoleColor.White;
                     answer = Console.ReadKey(true).Key;
                     if (answer == ConsoleKey.Enter) break;
@@ -381,7 +391,7 @@ namespace Utilities
                     Console.Write("PHONE NUMBER: ");
                     phone = Console.ReadLine() ?? "";
 
-                    if (string.IsNullOrEmpty(phone) || phone.Length != 10 || !phone.All(char.IsDigit))
+                    if (string.IsNullOrEmpty(phone) || phone.Length != 10 || !phone.All(char.IsDigit) || !IsValidPhoneNumber(phone))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("INVALID PHONE NUMBER! PLEASE CHOOSE AND INPUT CUSTOMER INFORMATION AGAIN!");
@@ -393,7 +403,7 @@ namespace Utilities
                         Console.WriteLine("ADD CUSTOMER PHONE NUMBER SUCCESS !");
                         Console.ForegroundColor = ConsoleColor.White;
                     }
-                } while (string.IsNullOrEmpty(phone) || phone.Length != 10 || !phone.All(char.IsDigit));
+                } while (string.IsNullOrEmpty(phone) || phone.Length != 10 || !phone.All(char.IsDigit) || !IsValidPhoneNumber(phone));
                 string address;
                 do
                 {
@@ -426,16 +436,24 @@ namespace Utilities
                 Console.WriteLine("PHONE NUMBER: " + o.OrderCustomer.PhoneNumber);
                 Console.WriteLine("CUSTOMER ADDRESS: " + o.OrderCustomer.CustomerAddress);
                 var addCustomerTable = new Table();
-                addCustomerTable.AddColumns("BOOK NAME ", "PRICE ", "QUANTITY ", "TOTAL AMOUNT ");
+                addCustomerTable.AddColumn(new TableColumn("BOOK NAME").LeftAligned());
+                addCustomerTable.AddColumn(new TableColumn("PRICE").Centered());
+                addCustomerTable.AddColumn(new TableColumn("AMOUNT").Centered());
+                addCustomerTable.AddColumn(new TableColumn("TOTAL PRICE").RightAligned());
+                addCustomerTable.AddColumn(new TableColumn("[yellow]TOTAL AMOUNT[/]").RightAligned());
                 foreach (Book b in o.BooksList)
                 {
+                    decimal totalPriceForBook = b.Price * b.Amount;
+                    totalAmount += totalPriceForBook;
                     addCustomerTable.AddRow(
-                        "" + b.BookName,
-                        "" + FormatCurrencyToVND(b.Price), // Format the price to VND format
-                        "" + b.Amount,
-                        "" + FormatCurrencyToVND(b.Price * b.Amount)// Format the total price to VND format
+                        b.BookName,
+                        FormatCurrencyToVND(b.Price),
+                        b.Amount.ToString(),
+                        FormatCurrencyToVND(totalPriceForBook)
                     );
                 }
+                addCustomerTable.AddRow("", "", "", "", $"[yellow]{FormatCurrencyToVND(totalAmount)}[/]");
+                AnsiConsole.Render(addCustomerTable);
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Press <C> to Confirm Order, <X> to Cancel Order...");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -480,6 +498,7 @@ namespace Utilities
         [Obsolete]
         public void Payment()
         {
+            Console.Clear();
             var table = new Table();
             decimal totalAmount = 0;
 
@@ -518,7 +537,11 @@ namespace Utilities
                         Console.WriteLine("CUSTOMER ADDRESS: " + o.OrderCustomer.CustomerAddress);
                         Console.WriteLine("\t");
 
-                        table.AddColumns("BOOK NAME", "PRICE", "AMOUNT", "TOTAL PRICE", "TOTAL AMOUNT");
+                        table.AddColumn(new TableColumn("BOOK NAME").LeftAligned());
+                        table.AddColumn(new TableColumn("PRICE").Centered());
+                        table.AddColumn(new TableColumn("AMOUNT").Centered());
+                        table.AddColumn(new TableColumn("TOTAL PRICE").RightAligned());
+                        table.AddColumn(new TableColumn("[yellow]TOTAL AMOUNT[/]").RightAligned());
 
                         foreach (Book b in o.BooksList)
                         {
@@ -532,10 +555,8 @@ namespace Utilities
                             );
                         }
 
-                        table.AddRow("", "", "", "", FormatCurrencyToVND(totalAmount));
+                        table.AddRow("", "", "", "", $"[yellow]{FormatCurrencyToVND(totalAmount)}[/]");
                         AnsiConsole.Render(table);
-
-                        Console.WriteLine("\nTOTAL PRICE: " + FormatCurrencyToVND(totalAmount));
                         Console.Write("ENTER PRICE PAID: ");
                         if (decimal.TryParse(Console.ReadLine(), out decimal amountPaid))
                         {
@@ -546,6 +567,13 @@ namespace Utilities
                                 Console.WriteLine("PAYMENT SUCCESSFUL!");
                                 o.OrderStatus = 1;
                                 oBL.GetOrder(o.OrderID);
+
+                                if (change > 0)
+                                {
+                                    Console.WriteLine("PRESS ENTER TO PAID EXCESS MONEY...");
+                                    Console.ReadKey();
+                                    Console.WriteLine("PAID EXCESS MONEY SUCCESSFUL!!");
+                                }
                             }
                             else
                             {
@@ -580,6 +608,13 @@ namespace Utilities
                 Console.WriteLine("INVALID INPUT. PLEASE TRY AGAIN.");
                 Console.ForegroundColor = ConsoleColor.White;
             }
+        }
+        public static bool IsValidPhoneNumber(string phoneNumber)
+        {
+            // Regular expression pattern to match a phone number with '0' as the first digit
+            string pattern = @"^0\d{9,10}$";
+
+            return Regex.IsMatch(phoneNumber, pattern);
         }
 
         public string FormatCurrencyToVND(decimal amount)
