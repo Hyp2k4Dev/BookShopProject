@@ -6,7 +6,7 @@ show tables;
 create table Customers(
 	customer_ID int auto_increment primary key,
     customer_name varchar(50) not null,
-    phoneNumber int,
+    phoneNumber varchar(11),
     customer_address varchar(225)
 );
 
@@ -46,7 +46,7 @@ create table Publishers(
     Website varchar(225)
 );
 
-drop table if exists Categories;
+
 create table Categories(
 	category_ID int primary key auto_increment,
     category_name varchar(100) not null
@@ -88,8 +88,7 @@ create table OrderDetails(
 	order_ID int not null,
     constraint fk_orders foreign key(order_ID) references Orders(order_ID),
     Book_ID int not null,
-    constraint fk_books foreign key(book_ID) references Books(book_ID),
-    constraint pk_orders_books primary key (order_ID, book_ID),
+    constraint fk_books foreign key(book_ID) references Books(book_ID),    
 	unit_price decimal(20,2) not null,
     quantity int not null default 1
 );
@@ -141,9 +140,50 @@ begin
     select max(customer_ID) into customerID from Customers;
 end $$
 delimiter ;
+delimiter $$
+DELIMITER //
 
-call sp_createCustomer('no name','0','any where', @cusId);
-select @cusId;
+CREATE PROCEDURE sp_createBook(
+    IN book_name VARCHAR(255),
+    IN ISBN INT,
+    IN author_name VARCHAR(255),
+    IN amount INT,
+    IN category_name VARCHAR(255),
+    IN publisher_name VARCHAR(255),
+    IN price DECIMAL(10, 2),
+    IN book_description TEXT,
+    IN book_status INT,
+    OUT new_book_id INT
+)
+BEGIN
+    -- Insert the book into the appropriate tables
+    DECLARE category_id INT;
+    DECLARE publisher_id INT;
+    DECLARE author_id INT;
+    
+    -- ... (existing code for getting or inserting Category, Publisher, and Author)
+    
+    -- Insert the book
+    INSERT INTO Books (book_name, ISBN, publisher_ID, price, book_description, amount, book_status)
+    VALUES (book_name, ISBN, publisher_ID, price, book_description, amount, book_status);
+    SET new_book_id = LAST_INSERT_ID();
+
+    -- Associate book with category and author
+    INSERT INTO CategoryDetails (book_ID, category_ID) VALUES (new_book_id, category_id);
+    INSERT INTO Authors_Books (book_ID, author_ID) VALUES (new_book_id, author_id);
+    INSERT INTO Books (book_name, publisher_ID, ISBN, publish_year, book_description, price, amount, book_status)
+VALUES ('Sample Book', 1, 1234567890, 2023, 'A sample book description', 25.99, 50, 1);
+    -- Update book_ID in the CategoryDetails table
+    UPDATE CategoryDetails SET book_ID = new_book_id WHERE book_ID IS NULL AND category_ID = category_id;
+
+END //
+
+DELIMITER ;
+
+
+
+
+
 
 
 insert into Staffs(staff_name, user_name, pass_word, staff_status) values
@@ -173,8 +213,18 @@ insert into Authors(author_name, phoneNumber, author_address) values
     ('Auhtor 6','0987654321', 'Ha Noi'),
     ('Auhtor 7','098765231', 'Da Nang'),
     ('Auhtor 8','097865231', 'Hai Phong'),
-    ('Auhtor 9','988765231', 'Italya'),
-    ('Auhtor 10','123456789', 'Binh Duong');
+    ('Auhtor 9','988765232', 'Italya'),
+    ('Auhtor 10','98855231', 'Italya'),
+    ('Auhtor 11','9065231', 'Italya'),
+    ('Auhtor 12','98265231', 'Italya'),
+    ('Auhtor 13','98876231', 'Italya'),
+    ('Auhtor 14','99765231', 'Italya'),
+    ('Auhtor 15','978765231', 'Italya'),
+    ('Auhtor 16','96765231', 'Italya'),
+    ('Auhtor 17','950765231', 'Italya'),
+    ('Auhtor 18','941765231', 'Italya'),
+    ('Auhtor 19','932765231', 'Italya'),
+    ('Auhtor 20','223456789', 'Binh Duong');
 select * from Authors;
 
 insert into Publishers(publisher_name, phoneNumber, publisher_address, website) values
@@ -192,16 +242,26 @@ select * from Publishers;
 
 
 insert into Books(book_name, publisher_ID, ISBN, publish_year, book_description, price, amount, book_status) values
-	('IT Liệu đã hết thời ?', 1, 1, 1990, 'book1', 45.5, 1, 1),
-    ('English book1', 2, 2, 1992, 'book2', 44.5, 2, 1),
-    ('English book2', 3, 3, 1994, 'book3', 56.5, 3, 2),
-    ('EBook 4', 4, 4, 1996, 'book4', 50, 4, 1),
-    ('Book 5', 5, 5, 1997, 'book5', 64.2, 20, 2),
-    ('Book 6', 6, 6, 1997, 'book6', 64.2, 12, 1),
-    ('Book 7', 7, 7, 1997, 'book7', 64.2, 54, 1),
-    ('Book 8', 8, 8, 1997, 'book8', 64.2, 1, 1),
-    ('Book 9', 9, 9, 1997, 'book9', 64.2, 11, 1),
-    ('Book 10', 10, 10, 1997, 'book10', 64.2, 5, 1);
+	('IT Liệu đã hết thời ?', 1, 1, 1990, 'book1', 45500, 1, 1),
+    ('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 2, 2, 1992, 'book2', 44500, 2, 1),
+    ('English book2', 3, 3, 1994, 'book3', 56500, 3, 2),
+    ('EBook 4', 4, 4, 1996, 'book4', 50000, 4, 1),
+    ('Book 5', 5, 5, 1997, 'book5', 64200, 20, 2),
+    ('Book 6', 6, 6, 1997, 'book6', 64200, 12, 1),
+    ('Book 7', 7, 7, 1997, 'book7', 64200, 54, 1),
+    ('Book 8', 8, 8, 1997, 'book8', 64200, 1, 1),
+    ('Book 9', 9, 9, 1997, 'book9', 64200, 11, 1),
+    ('Book 10', 10, 10, 1997, 'book10', 100200, 5, 1),
+    ('Book 11', 10, 11, 1997, 'book11', 24200, 5, 2),
+    ('Book 12', 10, 12, 1997, 'book12', 14200, 5, 1),
+    ('Book 13', 10, 13, 1997, 'book13', 87200, 5, 1),
+    ('Book 14', 10, 14, 1997, 'book14', 70000, 5, 1),
+    ('Book 15', 10, 15, 1997, 'book15', 0, 5, 2),
+    ('Book 16', 10, 16, 1997, 'book16', 58000, 5, 1),
+    ('Book 17', 10, 17, 1997, 'book17', 64000, 5, 1),
+    ('Book 18', 10, 18, 1997, 'book18', 642200, 5, 2),
+    ('Book 19', 10, 19, 1997, 'book19', 1235000, 5, 1),
+    ('Book 20', 10, 20, 1997, 'book20', 64200, 5, 1);
 select * from Books;
 
 insert into Categories(category_name) values
@@ -214,23 +274,29 @@ insert into Categories(category_name) values
     ('category 7'),
     ('category 8'),
     ('category 9'),
-    ('category 10');
+    ('category 10'),
+    ('category 11'),
+    ('category 12'),
+    ('category 13'),
+    ('category 14'),
+    ('category 15'),
+    ('category 16'),
+    ('category 17'),
+    ('category 18'),
+    ('category 19'),
+    ('category 20');
 select * from Categories;
 
-insert into Orders(staff_ID, customer_ID, order_status) values
-(1, 1, 1), (1, 2, 1), (1, 3, 1);
-select * from Orders;
 
-insert into OrderDetails(order_ID, book_ID, unit_price, quantity) values
-	(1, 1, 12.2, 2), (2, 2, 2, 3), (3, 4, 3, 3);
-select * from OrderDetails;
+
+
 
 insert into CategoryDetails(book_ID, category_ID) values
-	(1, 1), (2, 2), (3, 3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10);
+	(1, 1), (2, 2), (3, 3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11, 11), (12, 12), (13,13), (14,14),(15,15),(16,16),(17,17),(18,18),(19,19),(20,20);
 select * from OrderDetails;
 
 insert into Authors_Books(book_ID, author_ID) values
-	(1, 1), (2, 2), (3, 3), (4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10);
+	(1, 1), (2, 2), (3, 3), (4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11, 11), (12, 12), (13,13), (14,14),(15,15),(16,16),(17,17),(18,18),(19,19),(20,20);
 select * from OrderDetails;
 
 
@@ -262,13 +328,85 @@ from Books b inner join CategoryDetails cd on b.book_ID=cd.book_ID
 -- select LAST_INSERT_ID();
 -- select customer_id from Customers order by customer_id desc limit 1;
 
-update Books set amount=10 where book_ID=1;
-update Books set amount=10 where book_ID=2;
-update Books set amount=10 where book_ID=3;
-update Books set amount=10 where book_ID=4;
-update Books set amount=10 where book_ID=5;
-update Books set amount=10 where book_ID=6;
-update Books set amount=10 where book_ID=7;
-update Books set amount=10 where book_ID=8;
-update Books set amount=10 where book_ID=9;
-update Books set amount=10 where book_ID=10;
+update Books set amount=100 where book_ID=1;
+update Books set amount=100 where book_ID=2;
+update Books set amount=100 where book_ID=3;
+update Books set amount=100 where book_ID=4;
+update Books set amount=100 where book_ID=5;
+update Books set amount=100 where book_ID=6;
+update Books set amount=100 where book_ID=7;
+update Books set amount=100 where book_ID=8;
+update Books set amount=100 where book_ID=9;
+update Books set amount=100 where book_ID=10;
+update Books set amount=100 where book_ID=11;
+update Books set amount=100 where book_ID=12;
+update Books set amount=100 where book_ID=13;
+update Books set amount=100 where book_ID=14;
+update Books set amount=100 where book_ID=15;
+update Books set amount=100 where book_ID=16;
+update Books set amount=100 where book_ID=17;
+update Books set amount=100 where book_ID=18;
+update Books set amount=100 where book_ID=19;
+update Books set amount=100 where book_ID=20;
+
+-- SELECT o.order_ID, o.order_date, c.customer_name, c.phoneNumber, c.customer_address, b.book_name, b.price, b.amount
+-- FROM Orders o INNER JOIN Customers c ON o.customer_ID = c.customer_ID
+-- 	INNER JOIN OrderDetails od ON o.order_ID = od.order_ID
+-- 	INNER JOIN Books b ON b.Book_ID = od.Book_ID
+-- 	WHERE o.order_ID = 1;
+-- SELECT
+--     o.order_ID,
+--     o.order_date,
+--     c.customer_name,
+--     c.phoneNumber,
+--     c.customer_address,
+--     SUM(b.price + od.quantity) AS TotalAmount
+-- FROM
+--     Orders o
+-- INNER JOIN
+--     Customers c ON o.customer_ID = c.customer_ID
+-- INNER JOIN
+--     OrderDetails od ON o.order_ID = od.order_ID
+-- INNER JOIN
+--     Books b ON b.Book_ID = od.Book_ID
+-- WHERE
+--     o.order_ID = 1;
+
+SELECT
+        o.order_ID,
+        o.order_date,
+        c.customer_name,
+        c.phoneNumber,
+        c.customer_address,
+        b.book_name,
+        b.price,
+        od.quantity,
+        SUM(b.price * od.quantity) AS TotalAmount
+    FROM
+        Orders o
+    INNER JOIN
+        Customers c ON o.customer_ID = c.customer_ID
+    INNER JOIN
+        OrderDetails od ON o.order_ID = od.order_ID
+    INNER JOIN
+        Books b ON b.Book_ID = od.Book_ID
+    WHERE
+        o.order_ID = 1
+    GROUP BY
+        o.order_ID,
+        o.order_date,
+        c.customer_name,
+        c.phoneNumber,
+        c.customer_address,
+        b.book_name,
+        b.price,
+        od.quantity;
+        
+        
+        SELECT o.order_ID, o.order_date, o.order_status, s.staff_name, c.customer_name, c.phoneNumber, c.customer_address, b.book_name, b.price, od.quantity
+                FROM Orders o
+                INNER JOIN Staffs s ON o.staff_ID = s.staff_ID
+                INNER JOIN Customers c ON o.customer_ID = c.customer_ID
+                INNER JOIN OrderDetails od ON o.order_ID = od.order_ID
+                INNER JOIN Books b ON b.Book_ID = od.Book_ID
+                WHERE o.staff_ID = 1;
