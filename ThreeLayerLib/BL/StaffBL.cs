@@ -15,12 +15,12 @@ namespace BL
             string userName;
             string password;
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("ENTER YOUR ACCOUNT TO LOGIN INTO SYSTEM !!!");
+            Console.WriteLine("Enter your account to login in to system !!!");
             Console.ResetColor();
-            Console.Write("[ USER NAME ]: ");
+            Console.Write("[ User Name ]: ");
             userName = Console.ReadLine() ?? "";
             Console.WriteLine();
-            Console.Write("[ PASSWORD  ]: ");
+            Console.Write("[ Password  ]: ");
             password = GetPassword();
             Staff staff = staffDAL.GetStaffAccount(userName);
             if (staff.Password == staffDAL.CreateMD5(password) && staff.StaffStatus == 1)

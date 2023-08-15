@@ -99,6 +99,10 @@ namespace DAL
             List<Book> allBooks = new List<Book>();
             try
             {
+                if (connection.State == System.Data.ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
                 query = @"select b.book_ID, b.ISBN, b.book_name, c.category_name, b.publish_year, 
 	                    b.book_description, a.author_name, p.publisher_name, b.price, b.amount, b.book_status
                         from Books b inner join CategoryDetails cd on b.book_ID=cd.book_ID 

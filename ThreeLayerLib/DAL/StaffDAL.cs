@@ -16,6 +16,10 @@ namespace DAL
             Staff s = new Staff();
             try
             {
+                if (connection.State == System.Data.ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
                 {
                     query = @"select * from Staffs where user_name=@user_name;";
                     MySqlCommand command = new MySqlCommand(query, connection);
