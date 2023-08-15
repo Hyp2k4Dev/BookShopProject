@@ -33,6 +33,10 @@ namespace BL
                 return null;
             }
         }
+        public Staff? GetStaffById(int staffId)
+        {
+            return staffDAL.GetStaffById(staffId);
+        }
         public static string GetPassword()
         {
             StringBuilder pass = new StringBuilder();
@@ -61,19 +65,6 @@ namespace BL
             }
             return pass.ToString();
         }
-        public void ProgressAsync()
-        {
-            AnsiConsole.Progress().StartAsync(async ctx =>
-               {
-                   var task1 = ctx.AddTask("[green]Progress[/]");
 
-                   while (!ctx.IsFinished)
-                   {
-                       await Task.Delay(20);
-
-                       task1.Increment(4.5);
-                   }
-               });
-        }
     }
 }

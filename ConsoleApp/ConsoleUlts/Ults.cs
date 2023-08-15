@@ -12,7 +12,7 @@ namespace Utilities
     {
 
         ConsoleUI consoleUI = new ConsoleUI();
-        string[] mainMenu = { ". MAIN MENU ", ". CHECK ORDER BILL", ". LOGOUT" };
+        string[] mainMenu = { ". MAIN MENU ", ". VIEW RENEVUE OF STAFF IN DAY", ". LOGOUT" };
         string[] coMenu = { ". CREATE ORDER", ". PAYMENT", ". BACK TO MAIN MENU" };
         BookBL bBL = new BookBL();
         Staff? loginStaff1;
@@ -66,7 +66,7 @@ namespace Utilities
                             CreateOrderMenu();
                             break;
                         case 2:
-                            ViewOrdersStatus();
+                            ViewStaffRevenueInDay();
                             break;
                         case 3:
                             break;
@@ -107,7 +107,7 @@ namespace Utilities
                         CreateOrderMenu();
                         break;
                     case 2:
-                        ViewOrdersStatus();
+                        ViewStaffRevenueInDay();
                         break;
                     case 3:
                         LoginAccount();
@@ -147,6 +147,11 @@ namespace Utilities
                         break;
                 }
             } while (coChoose != coMenu.Length);
+        }
+
+        public void BookManage()
+        {
+
         }
 
         [Obsolete]
@@ -496,6 +501,60 @@ namespace Utilities
         }
 
         [Obsolete]
+        public void ViewStaffRevenueInDay()
+        {
+            if (loginStaff1! == null)
+            {
+                Console.WriteLine("Please log in first.");
+                return;
+            }
+
+            Console.Write("Enter Staff ID: ");
+            if (int.TryParse(Console.ReadLine(), out int staffId))
+            {
+                Staff staff = staffBL.GetStaffById(staffId);
+
+                if (loginStaff1 != null)
+                {
+                    if (loginStaff1.StaffID == staffId)
+                    {
+                        decimal totalRevenue = 0;
+                        List<Order> staffOrders = oBL.GetOrdersByStaffID(staffId); // Sửa phương thức này dựa trên triển khai thực tế
+                        var revenueTable = new Table();
+                        revenueTable.AddColumn("Order ID");
+                        revenueTable.AddColumn("Date");
+                        revenueTable.AddColumn("Total Amount");
+
+                        foreach (Order order in staffOrders)
+                        {
+                            decimal orderTotal = 0;
+                            foreach (Book book in order.BooksList)
+                            {
+                                orderTotal += book.Price * book.Amount;
+                            }
+
+                            revenueTable.AddRow(order.OrderID.ToString(), order.OrderDate.ToString("yyyy-MM-dd"), FormatCurrencyToVND(orderTotal));
+                            totalRevenue += orderTotal;
+                        }
+
+                        AnsiConsole.Render(revenueTable);
+
+                        Console.WriteLine($"Total Revenue for Staff {loginStaff1.StaffName} (ID: {loginStaff1.StaffID}): {FormatCurrencyToVND(totalRevenue)}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Staff with ID {staffId} not found.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid Staff ID.");
+                }
+            }
+        }
+
+
+        [Obsolete]
         public void Payment()
         {
             Console.Clear();
@@ -616,6 +675,8 @@ namespace Utilities
 
             return Regex.IsMatch(phoneNumber, pattern);
         }
+
+
 
         public string FormatCurrencyToVND(decimal amount)
         {

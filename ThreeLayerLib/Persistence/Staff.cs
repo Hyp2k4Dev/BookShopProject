@@ -7,5 +7,6 @@ public class Staff
     public string? UserName { get; set; }
     public string? Password { get; set; }
     public int StaffStatus { get; set; }
+    public decimal TotalRevenue { get; set; }
 
 }

@@ -167,7 +167,54 @@ namespace DAL
             return allOrders;
         }
 
+        public List<Order> GetOrdersByStaffID(int staffId)
+        {
+            List<Order> orders = new List<Order>();
+            try
+            {
+                if (connection.State == System.Data.ConnectionState.Closed)
+                    connection.Open();
+                string query = @"SELECT o.order_ID, o.order_date, o.order_status, s.staff_name, c.customer_name, c.phoneNumber, c.customer_address, b.book_name, b.price, od.quantity
+                FROM Orders o
+                INNER JOIN Staffs s ON o.staff_ID = s.staff_ID
+                INNER JOIN Customers c ON o.customer_ID = c.customer_ID
+                INNER JOIN OrderDetails od ON o.order_ID = od.order_ID
+                INNER JOIN Books b ON b.Book_ID = od.Book_ID
+                WHERE o.staff_ID = @staffId";
 
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@staffId", staffId);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                Order? currentOrder = null;
+
+                while (reader.Read())
+                {
+                    int orderId = reader.GetInt32("order_ID");
+                    if (currentOrder == null || currentOrder.OrderID != orderId)
+                    {
+                        currentOrder = GetOrder(reader);
+                        orders.Add(currentOrder);
+                    }
+                    Book book = new Book();
+                    book.BookName = reader.GetString("book_name");
+                    book.Price = reader.GetDecimal("price");
+                    book.Amount = reader.GetInt32("quantity");
+                    currentOrder.BooksList.Add(book);
+                }
+
+                reader.Close();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return orders;
+        }
 
 
         public bool CreateOrder(Order order)

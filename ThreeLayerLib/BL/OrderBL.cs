@@ -23,6 +23,10 @@ namespace BL
         {
             return orderDAL.GetAllOrder(o);
         }
+        public List<Order> GetOrdersByStaffID(int staffId)
+        {
+            return orderDAL.GetOrdersByStaffID(staffId);
+        }
     }
 
 }

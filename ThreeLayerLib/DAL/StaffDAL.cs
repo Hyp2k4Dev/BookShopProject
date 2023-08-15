@@ -8,6 +8,7 @@ namespace DAL
 {
     public class StaffDAL
     {
+        private List<Staff> staffList = new List<Staff>();
         private string query = "";
         private MySqlConnection connection = DbConfig.GetConnection();
         public Staff GetStaffAccount(string userName)
@@ -44,23 +45,27 @@ namespace DAL
             s.StaffStatus = reader.GetInt32("staff_Status");
             return s;
         }
-        public  string CreateMD5(string input)
+        public string CreateMD5(string input)
         {
 
-        // Creates an instance of the default implementation of the MD5 hash algorithm.
-        using (var md5Hash = MD5.Create())
-        {
-            // Byte array representation of source string
-            var sourceBytes = Encoding.UTF8.GetBytes(input);
+            // Creates an instance of the default implementation of the MD5 hash algorithm.
+            using (var md5Hash = MD5.Create())
+            {
+                // Byte array representation of source string
+                var sourceBytes = Encoding.UTF8.GetBytes(input);
 
-            // Generate hash value(Byte Array) for input data
-            var hashBytes = md5Hash.ComputeHash(sourceBytes);
+                // Generate hash value(Byte Array) for input data
+                var hashBytes = md5Hash.ComputeHash(sourceBytes);
 
-            // Convert hash byte array to string
-            var hash = BitConverter.ToString(hashBytes).Replace("-", string.Empty);
+                // Convert hash byte array to string
+                var hash = BitConverter.ToString(hashBytes).Replace("-", string.Empty);
 
-            return hash;
+                return hash;
+            }
         }
+        public Staff? GetStaffById(int staffId)
+        {
+            return staffList.FirstOrDefault(staff => staff.StaffID! == staffId);
         }
     }
 }
