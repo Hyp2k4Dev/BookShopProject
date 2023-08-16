@@ -449,6 +449,7 @@ namespace Utilities
                                 Console.WriteLine("Payment Successful!");
                                 o.OrderStatus = 1;
                                 oBL.GetOrder(o.OrderID);
+                                ShowInvoice(orderID);
 
                                 if (change > 0)
                                 {
@@ -688,7 +689,7 @@ namespace Utilities
             CultureInfo culture = new CultureInfo("vi-VN"); // Vietnamese culture
             string formattedAmount = string.Format(culture, "{0:C0}", amount); // C0 format specifier for currency without decimal places
 
-            formattedAmount = formattedAmount.Replace(culture.NumberFormat.CurrencySymbol, "VNĐ");
+            formattedAmount = formattedAmount.Replace(culture.NumberFormat.CurrencySymbol, "VND");
 
             return formattedAmount;
         }
