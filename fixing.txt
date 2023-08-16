@@ -5,3 +5,4 @@ sau search tạo ngay order
 
 order cần hiển thị LOGO, ngày tháng năm, mã order, địa chỉ cửa hàng, cách item,tên người mua, người bán
                 
+https://drive.google.com/file/d/1c_1w13BLgmbg7pt6SrxhQkHrhdfJc3pV/view?usp=sharing
