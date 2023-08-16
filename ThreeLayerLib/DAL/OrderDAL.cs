@@ -130,12 +130,18 @@ namespace DAL
                 // Add a condition to the query based on the parameter
                 if (!string.IsNullOrEmpty(o))
                 {
-                    query += " WHERE ..."; // Add your filter condition here
+                    query += " WHERE DATE(o.order_date) = DATE(@orderDate)"; // Filter by date
                 }
 
                 query += " ORDER BY o.order_ID;";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
+
+                if (!string.IsNullOrEmpty(o))
+                {
+                    command.Parameters.AddWithValue("@orderDate", DateTime.Parse(o));
+                }
+
                 MySqlDataReader reader = command.ExecuteReader();
 
                 Order? currentOrder = null; // Add a variable to track the current order
@@ -166,6 +172,7 @@ namespace DAL
             }
             return allOrders;
         }
+
 
         public List<Order> GetOrdersByStaffID(int staffId)
         {

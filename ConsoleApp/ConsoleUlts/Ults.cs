@@ -126,8 +126,11 @@ namespace Utilities
             Order o = new Order();
             ConsoleKey answer;
             var showAllTable = new Table();
+            var showTimeLine = new Table();
+            var addCusTimeline = new Table();
+
             Console.Clear();
-            Console.WriteLine(@"                             ┌─────────────────────────────────────────────────────────────────────────────────────┐
+            Console.WriteLine(@"                            ┌─────────────────────────────────────────────────────────────────────────────────────┐
                             │                                                                                     │
                             │ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
                             │ ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║ │
@@ -138,6 +141,8 @@ namespace Utilities
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("                                                  [ Staff using: " + loginStaff1!.StaffName + " ]");
             Console.ForegroundColor = ConsoleColor.White;
+            showTimeLine.AddColumns(" [red]=> Choose book [/]", " Add customer information ", " Confirm order ", " Payment ", "Invoice").Centered();
+            AnsiConsole.Render(showTimeLine);
 
             // Display list of books here
             List<Book> availableBooks = bBL.GetAllBooks(""); // Get the list of all available books
@@ -231,7 +236,7 @@ namespace Utilities
                     if (answer == ConsoleKey.Enter) break;
                 } while (answer == ConsoleKey.Escape);
                 Console.Clear();
-                Console.WriteLine(@"                       ┌─────────────────────────────────────────────────────────────────────────────────────┐
+                Console.WriteLine(@"                    ┌─────────────────────────────────────────────────────────────────────────────────────┐
                     │                                                                                     │
                     │ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
                     │ ╠╩╗║ ║║ ║╠╩╗  ╚═╗╠═╣║ ║╠═╝  ║  ╠╦╝║╣ ╠═╣ ║ ║╣   ║ ║╠╦╝ ║║║╣ ╠╦╝  ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║ │
@@ -242,6 +247,8 @@ namespace Utilities
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine("                                        [ Staff using: " + loginStaff1!.StaffName + " ]");
                 Console.ForegroundColor = ConsoleColor.White;
+                addCusTimeline.AddColumns("Choose book", "[red]=> Add customer information [/]", " Confirm order ", " Payment ", "Invoice").Centered();
+                AnsiConsole.Render(addCusTimeline);
                 string? name;
                 do
                 {
@@ -307,6 +314,9 @@ namespace Utilities
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine("                              [ Staff Create Order: " + loginStaff1!.StaffName + " ]");
                 Console.ForegroundColor = ConsoleColor.White;
+                var confirmOrderTimeline = new Table();
+                confirmOrderTimeline.AddColumns("Choose book", " Add customer information ", "[red]=> Confirm order[/] ", " Payment ", "Invoice").Centered();
+                AnsiConsole.Render(confirmOrderTimeline);
                 Console.WriteLine();
                 Console.WriteLine("Customer Name: " + o.OrderCustomer!.CustomerName);
                 Console.WriteLine("Phone Number: " + o.OrderCustomer.PhoneNumber);
@@ -373,7 +383,7 @@ namespace Utilities
         {
             var table = new Table();
             decimal totalAmount = 0;
-
+            var paymentTimeline = new Table();
             Console.WriteLine(@"                            ┌─────────────────────────────────────────────────────────────────────────────────────┐
                             │                                                                                     │
                             │ ╔╗ ╔═╗╔═╗╦╔═  ╔═╗╦ ╦╔═╗╔═╗  ╔═╗╦═╗╔═╗╔═╗╔╦╗╔═╗  ╔═╗╦═╗╔╦╗╔═╗╦═╗  ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗ │
@@ -385,6 +395,8 @@ namespace Utilities
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("                                         [ Staff created the order: " + loginStaff1!.StaffName + " ]");
             Console.ForegroundColor = ConsoleColor.White;
+            paymentTimeline.AddColumns("Choose book", " Add customer information ", " Confirm order ", " [red]=>Payment[/] ", "Invoice").Centered();
+            AnsiConsole.Render(paymentTimeline);
             Console.WriteLine("Press< ENTER > to input Order ID or < ESC > to return Create Order: ");
             var stopPayment = Console.ReadKey(true).Key;
             if (stopPayment == ConsoleKey.Escape)
@@ -441,34 +453,28 @@ namespace Utilities
                                 if (change > 0)
                                 {
                                     Console.ForegroundColor = ConsoleColor.Yellow;
-                                    Console.WriteLine("PRESS ENTER TO PAID EXCESS MONEY...");
+                                    Console.WriteLine("Press < ENTER > paid excess money...");
                                     Console.ReadKey();
                                     Console.ForegroundColor = ConsoleColor.White;
                                     Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.WriteLine("PAID EXCESS MONEY SUCCESSFUL!!");
+                                    Console.WriteLine("Paid excess money successful!!");
                                     Console.ForegroundColor = ConsoleColor.White;
                                     Console.ForegroundColor = ConsoleColor.Yellow;
-                                    Console.WriteLine("PRESS < ANY KEY > TO EXPORT INVOICE!!!");
+                                    Console.WriteLine("Press <ANY KEY> to export Invoice!!!");
                                     Console.ReadKey();
                                     Console.ForegroundColor = ConsoleColor.White;
-                                    ViewOrdersStatus(o.OrderID);
-                                }
-                                else
-                                {
-                                    Console.WriteLine("PRESS < ANY KEY > TO EXPORT INVOICE!!!");
-                                    Console.ReadKey();
-                                    Console.ForegroundColor = ConsoleColor.White;
-                                    ViewOrdersStatus(o.OrderID);
+                                    ShowInvoice(o.OrderID);
                                 }
                             }
                             else
                             {
                                 decimal remainingAmount = totalAmount - amountPaid;
-                                Console.WriteLine("REMAINING AMOUNT PAID: " + FormatCurrencyToVND(remainingAmount));
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                Console.WriteLine("PAYMENT INCOMPLETE !");
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Remaining amount paid: " + FormatCurrencyToVND(remainingAmount));
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Payment incompleted ! Please try again");
                                 Console.ForegroundColor = ConsoleColor.White;
-                                return;
+                                Payment();
                             }
                             Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.WriteLine("\nPress < ESC > to return Create Order ...");
@@ -505,16 +511,18 @@ namespace Utilities
         }
 
         [Obsolete]
-        public void ViewOrdersStatus(int orderID)
+        public void ShowInvoice(int orderID)
         {
             Console.Clear();
             decimal totalAmount = 0;
             var check = new Table();
-
+            var invoiceTimeline = new Table();
             Order o = oBL.GetOrderByID(orderID);
             if (o != null)
             {
                 Console.Clear();
+                invoiceTimeline.AddColumns("Choose book", " Add customer information ", " Confirm order ", " Payment ", "[red]=>Invoice[/]").Centered();
+                AnsiConsole.Render(invoiceTimeline);
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(@"
                                     ╦╔╗╔╦  ╦╔═╗╦╔═╗╔═╗╔═╗
@@ -571,7 +579,7 @@ namespace Utilities
                 else if (o.BooksList!.Count() == 0)
                 {
                     Console.Clear();
-                    Console.WriteLine($"Order ID {o.OrderID} Does'nt exist");
+                    Console.WriteLine($"Order ID {o.OrderID} Doesn't exist");
                 }
             }
             Console.WriteLine("\nPress < ESC > to return to Main Menu");
@@ -620,15 +628,18 @@ namespace Utilities
                     foreach (Order order in staffOrders)
                     {
 
-                        decimal orderTotal = 0;
-                        foreach (Book book in order.BooksList)
+                        if (order.OrderDate.Date == DateTime.Now.Date)
                         {
+                            decimal orderTotal = 0;
+                            foreach (Book book in order.BooksList)
+                            {
 
-                            orderTotal += book.Price * book.Amount;
+                                orderTotal += book.Price * book.Amount;
+                            }
+
+                            revenueTable.AddRow("" + order.OrderID, "" + order.OrderDate, "" + $"[yellow]{FormatCurrencyToVND(orderTotal / 2)}[/]");
+                            totalRevenue += orderTotal;
                         }
-
-                        revenueTable.AddRow("" + order.OrderID, "" + order.OrderDate, "" + $"[yellow]{FormatCurrencyToVND(orderTotal)}[/]");
-                        totalRevenue += orderTotal;
                     }
 
                     AnsiConsole.Render((revenueTable).Centered());
@@ -636,7 +647,7 @@ namespace Utilities
                     Console.WriteLine($"                                                Total Revenue for Staff {loginStaff1.StaffName}: {FormatCurrencyToVND(totalRevenue / 2)}");
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("                                               Press < ENTER > to return to Main Menu.");
+                    Console.WriteLine("                                                  Press < ENTER > to return to Main Menu.");
                     Console.ForegroundColor = ConsoleColor.White;
                     var input = Console.ReadKey(true).Key;
                     if (input == ConsoleKey.Enter)
