@@ -2,5 +2,8 @@
     "dotnet.defaultSolution": "Project.sln",
     "cSpell.words": [
         "Ults"
-    ]
+    ],
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "files.autoSave": "onFocusChange"
 }
