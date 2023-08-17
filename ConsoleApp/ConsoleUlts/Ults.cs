@@ -653,7 +653,7 @@ namespace Utilities
                     var revenueTable = new Table();
                     revenueTable.AddColumn("Order ID");
                     revenueTable.AddColumn("Order Time ");
-                    revenueTable.AddColumn(new TableColumn("[yellow]Total Amount[/]"));
+                    revenueTable.AddColumn(new TableColumn("[yellow]Total Amount[/]").RightAligned());
 
                     foreach (Order order in staffOrders)
                     {
