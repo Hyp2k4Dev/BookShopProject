@@ -306,21 +306,29 @@ namespace Utilities
                     "Invoice"
                 );
                 AnsiConsole.Render(addCusTimeline);
-                string? name;
-                do
-                {
-                    Console.Write("Customer's name: ");
-                    name = Console.ReadLine()?.Trim();
+                string name;
+do
+{
+    Console.Write("Customer's name (press Enter to skip): ");
+    string input = Console.ReadLine()?.Trim()??"";
 
-                    if (string.IsNullOrWhiteSpace(name)) { }
-                    else if (!name!.All(char.IsLetter)) { }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Name must be text! Please try again!");
-                        Console.ForegroundColor = ConsoleColor.White;
-                    }
-                } while (string.IsNullOrWhiteSpace(name) && !name!.All(char.IsLetter));
+    if (string.IsNullOrWhiteSpace(input))
+    {
+        name = "No Name";
+        break;
+    }
+    else if (!input.All(char.IsLetter))
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Name must contain only letters! Please try again.");
+        Console.ForegroundColor = ConsoleColor.White;
+    }
+    else
+    {
+        name = input;
+    }
+} while (true);
+
                 string phone = "";
                 do
                 {
@@ -328,22 +336,14 @@ namespace Utilities
                     phone = Console.ReadLine() ?? "";
 
                     if (
-                        string.IsNullOrEmpty(phone)
-                        || phone.Length != 10
-                        || !phone.All(char.IsDigit)
-                        || !IsValidPhoneNumber(phone)
-                    )
+                        string.IsNullOrEmpty(phone)|| phone.Length != 10|| !phone.All(char.IsDigit)|| !IsValidPhoneNumber(phone))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Invalid phone number! Please try again");
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                 } while (
-                    string.IsNullOrEmpty(phone)
-                    || phone.Length != 10
-                    || !phone.All(char.IsDigit)
-                    || !IsValidPhoneNumber(phone)
-                );
+                    string.IsNullOrEmpty(phone)|| phone.Length != 10|| !phone.All(char.IsDigit)|| !IsValidPhoneNumber(phone));
                 string address;
                 do
                 {
@@ -479,7 +479,7 @@ namespace Utilities
                 .LeftAligned();
             AnsiConsole.Render(paymentTimeline);
             Console.WriteLine(
-                "Press< ENTER > to input Order ID or < ESC > to return Create Order: "
+                "Press< ENTER > to Payment or < ESC > to return Create Order: "
             );
             var stopPayment = Console.ReadKey(true).Key;
             if (stopPayment == ConsoleKey.Escape)
