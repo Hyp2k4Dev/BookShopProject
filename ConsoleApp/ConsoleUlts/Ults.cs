@@ -154,37 +154,8 @@ namespace Utilities
             );
             AnsiConsole.Render(showTimeLine);
 
-            // Display list of books here
             List<Book> availableBooks = bBL.GetAllBooks(""); // Get the list of all available books
-            showAllTable.AddColumn("ID");
-            showAllTable.AddColumn(new TableColumn("Book Name").Centered());
-            showAllTable.AddColumn("Category");
-            showAllTable.AddColumn(new TableColumn("Publish Year").Centered());
-            showAllTable.AddColumn(new TableColumn("Description").Centered());
-            showAllTable.AddColumn("Author");
-            showAllTable.AddColumn("Publisher");
-            showAllTable.AddColumn(new TableColumn("Price").RightAligned());
-            showAllTable.AddColumn(new TableColumn(" Quantity").Centered());
-            foreach (Book availableBook in availableBooks)
-            {
-                showAllTable.AddRow(
-                    "" + availableBook.BookID,
-                    "" + availableBook.BookName,
-                    "" + availableBook.BookCategory!.CategoryName,
-                    "" + availableBook.PublishYear,
-                    "" + availableBook.Description,
-                    "" + availableBook.BookAuthor!.AuthorName,
-                    "" + availableBook.BookPublisher!.PublisherName,
-                    "" + FormatCurrencyToVND(availableBook.Price),
-                    "" + availableBook.Amount
-                );
-            }
-            AnsiConsole.Render(showAllTable);
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(
-                "Press< ENTER > to search book by Code or < ESC > to return Main Menu"
-            );
-            Console.ForegroundColor = ConsoleColor.White;
+            consoleUI.PrintBooksInShop(availableBooks);
             var stopSearch = Console.ReadKey(true).Key;
             if (stopSearch == ConsoleKey.Escape)
             {
@@ -307,27 +278,27 @@ namespace Utilities
                 );
                 AnsiConsole.Render(addCusTimeline);
                 string name;
-do
-{
-    Console.Write("Customer's name (press Enter to skip): ");
-    string input = Console.ReadLine()?.Trim()??"";
+                do
+                {
+                    Console.Write("Customer's name (press Enter to skip): ");
+                    string input = Console.ReadLine()?.Trim() ?? "";
 
-    if (string.IsNullOrWhiteSpace(input))
-    {
-        name = "No Name";
-        break;
-    }
-    else if (!input.All(char.IsLetter))
-    {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("Name must contain only letters! Please try again.");
-        Console.ForegroundColor = ConsoleColor.White;
-    }
-    else
-    {
-        name = input;
-    }
-} while (true);
+                    if (string.IsNullOrWhiteSpace(input))
+                    {
+                        name = "No Name";
+                        break;
+                    }
+                    else if (!input.All(char.IsLetter))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Name must contain only letters! Please try again.");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    else
+                    {
+                        name = input;
+                    }
+                } while (true);
 
                 string phone = "";
                 do
@@ -336,14 +307,22 @@ do
                     phone = Console.ReadLine() ?? "";
 
                     if (
-                        string.IsNullOrEmpty(phone)|| phone.Length != 10|| !phone.All(char.IsDigit)|| !IsValidPhoneNumber(phone))
+                        string.IsNullOrEmpty(phone)
+                        || phone.Length != 10
+                        || !phone.All(char.IsDigit)
+                        || !IsValidPhoneNumber(phone)
+                    )
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Invalid phone number! Please try again");
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                 } while (
-                    string.IsNullOrEmpty(phone)|| phone.Length != 10|| !phone.All(char.IsDigit)|| !IsValidPhoneNumber(phone));
+                    string.IsNullOrEmpty(phone)
+                    || phone.Length != 10
+                    || !phone.All(char.IsDigit)
+                    || !IsValidPhoneNumber(phone)
+                );
                 string address;
                 do
                 {
@@ -478,9 +457,7 @@ do
                 )
                 .LeftAligned();
             AnsiConsole.Render(paymentTimeline);
-            Console.WriteLine(
-                "Press< ENTER > to Payment or < ESC > to return Create Order: "
-            );
+            Console.WriteLine("Press< ENTER > to Payment or < ESC > to return Create Order: ");
             var stopPayment = Console.ReadKey(true).Key;
             if (stopPayment == ConsoleKey.Escape)
             {
