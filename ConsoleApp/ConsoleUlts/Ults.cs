@@ -219,22 +219,14 @@ namespace Utilities
                                     }
                                 } while (o.Quantity <= 0 || o.Quantity > book.Amount); // Fixed this line
                             }
-                            else
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine(
-                                    "This book is out of stock! Please choose another book."
-                                );
-                                Console.ForegroundColor = ConsoleColor.White;
-                                return;
-                            }
                         }
                         else
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Book not found!");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
                             Console.ForegroundColor = ConsoleColor.White;
                             return;
                         }
@@ -279,13 +271,13 @@ namespace Utilities
                 AnsiConsole.Render(addCusTimeline);
                 string name = "No Name";
                 string input;
-                    // 
-                    Console.Write("Customer's name (press Enter to skip): ");
-                    input = Console.ReadLine()??"";
-                    if (string.IsNullOrWhiteSpace(input))
-                    {
-                        name = input = "No Name";
-                    }
+                //
+                Console.Write("Customer's name (press Enter to skip): ");
+                input = Console.ReadLine() ?? "";
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    name = input = "No Name";
+                }
                 string phone = "";
                 do
                 {
@@ -522,9 +514,9 @@ namespace Utilities
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("\nPress < ANYKEY> to export Invoice!!!");
                         Console.ForegroundColor = ConsoleColor.White;
-                            Console.Clear();
-                            ShowInvoice(orderID);
-                            Console.ReadKey();
+                        Console.Clear();
+                        ShowInvoice(orderID);
+                        Console.ReadKey();
                     }
                     else
                     {
