@@ -156,19 +156,19 @@ namespace Utilities
 
             List<Book> availableBooks = bBL.GetAllBooks(""); // Get the list of all available books
             consoleUI.PrintBooksInShop(availableBooks);
-            var stopSearch = Console.ReadKey(true).Key;
-            if (stopSearch == ConsoleKey.Escape)
+            ConsoleKeyInfo keyInfo = Console.ReadKey();
+            if (keyInfo.Key == ConsoleKey.Escape)
             {
                 Console.Clear();
                 MainMenu();
                 Console.ReadKey();
             }
-            else if (stopSearch == ConsoleKey.Enter)
+            else if (keyInfo.Key == ConsoleKey.Enter)
             {
                 do
                 {
                     int isbn = 0;
-                    Console.Write("Input book's code to searching: ");
+                    Console.Write("Input book's ID to searching: ");
                     if (Int32.TryParse(Console.ReadLine(), out isbn))
                     {
                         Book book = bBL.GetBookByISBN(isbn);
@@ -252,8 +252,6 @@ namespace Utilities
                     );
                     Console.ForegroundColor = ConsoleColor.White;
                     answer = Console.ReadKey(true).Key;
-                    if (answer == ConsoleKey.Enter)
-                        break;
                 } while (answer == ConsoleKey.Escape);
                 Console.Clear();
                 Console.WriteLine(

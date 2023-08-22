@@ -2,6 +2,7 @@ using Persistence;
 using Spectre.Console;
 using BL;
 using System.Globalization;
+using Utilities;
 
 namespace UI
 {
@@ -42,44 +43,12 @@ namespace UI
             Console.WriteLine(title);
         }
 
-        public void ProgressAsync()
-        {
-            AnsiConsole
-                .Progress()
-                .StartAsync(async ctx =>
-                {
-                    // Define tasks
-                    var task1 = ctx.AddTask("[green]Progress[/]");
-                    // var task2 = ctx.AddTask("Done!!!");
-
-                    while (!ctx.IsFinished)
-                    {
-                        // Simulate some work
-                        await Task.Delay(20);
-
-                        // Increment
-                        task1.Increment(4.5);
-                        // task2.Increment(2);
-                        // Console.Clear();
-                    }
-                });
-        }
-
         public void PrintBooks(List<Book> lst)
         {
             foreach (var book in lst)
             {
                 PrintBooks(lst);
             }
-        }
-
-        public void Line()
-        {
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine(
-                "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-            );
-            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public void centreLine()
@@ -96,7 +65,6 @@ namespace UI
             int currentPage = 1;
             while (true)
             {
-                Console.Clear();
                 Order o = new Order();
                 var showAllTable = new Table();
                 showAllTable.AddColumn("ID");
@@ -126,32 +94,43 @@ namespace UI
                 }
                 AnsiConsole.Render(showAllTable);
                 Console.WriteLine(
-                    "                                                 Page: " + currentPage + "/" + Math.Ceiling((double)lst.Count / pageSize)
+                    "                                                 Page: "
+                        + currentPage
+                        + "/"
+                        + Math.Ceiling((double)lst.Count / pageSize)
                 );
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Press -> to next page or <- to previous page");
-                Console.WriteLine(
-                    "Press< ENTER > to search book by Code or < ESC > to return Main Menu"
-                );
+                Console.WriteLine("Press '->' to next page or '<-' to previous page or Press 'Spacebar' to Continue or 'BackSpace' to return Main Menu");
                 Console.ForegroundColor = ConsoleColor.White;
-                var stopSearch = Console.ReadKey(true).Key;
-                if (stopSearch == ConsoleKey.LeftArrow)
+                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                if (keyInfo.Key == ConsoleKey.LeftArrow)
                 {
                     if (currentPage > 1)
                     {
+                        Console.Clear();
                         currentPage--;
                     }
                 }
-                else if (stopSearch == ConsoleKey.RightArrow)
+                else if (keyInfo.Key == ConsoleKey.RightArrow)
                 {
                     if (currentPage < Math.Ceiling((double)lst.Count / pageSize))
                     {
+                        Console.Clear();
                         currentPage++;
                     }
                 }
-                else if (stopSearch == ConsoleKey.Enter)
+                else if (keyInfo.Key == ConsoleKey.Spacebar)
                 {
+                    Console.WriteLine("Press Enter then Input Book's Code!!");
                     break;
+                }
+                else if (keyInfo.Key == ConsoleKey.Backspace)
+                {
+                    Console.WriteLine("Press ESC to Back Main Menu");
+                    break;
+                }
+                else{
+                    Console.WriteLine("Invalid key, please try again!");
                 }
             }
         }
