@@ -173,7 +173,7 @@ namespace Utilities
                     {
                         Book book = bBL.GetBookByISBN(isbn);
 
-                        if (book != null)
+                        if (book != null && isbn == book.ISBN)
                         {
                             var bookInfoTable = new Table();
                             bookInfoTable.AddColumn("ID");
@@ -242,7 +242,9 @@ namespace Utilities
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Book not found with this code!");
+                        Console.WriteLine("Book not found with this code " + isbn);
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
                         Console.ForegroundColor = ConsoleColor.White;
                         return;
                     }
@@ -275,29 +277,15 @@ namespace Utilities
                     "Invoice"
                 );
                 AnsiConsole.Render(addCusTimeline);
-                string name;
-                do
-                {
+                string name = "No Name";
+                string input;
+                    // 
                     Console.Write("Customer's name (press Enter to skip): ");
-                    string input = Console.ReadLine()?.Trim() ?? "";
-
+                    input = Console.ReadLine()??"";
                     if (string.IsNullOrWhiteSpace(input))
                     {
-                        name = "No Name";
-                        break;
+                        name = input = "No Name";
                     }
-                    else if (!input.All(char.IsLetter))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Name must contain only letters! Please try again.");
-                        Console.ForegroundColor = ConsoleColor.White;
-                    }
-                    else
-                    {
-                        name = input;
-                    }
-                } while (true);
-
                 string phone = "";
                 do
                 {
@@ -503,8 +491,6 @@ namespace Utilities
                             Console.WriteLine("Payment Successful!");
                             o.OrderStatus = 1;
                             oBL.GetOrder(o.OrderID);
-                            ShowInvoice(orderID);
-
                             if (change > 0)
                             {
                                 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -534,15 +520,11 @@ namespace Utilities
                             Payment(orderID);
                         }
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("\nPress < ESC > to return Create Order ...");
+                        Console.WriteLine("\nPress < ANYKEY> to export Invoice!!!");
                         Console.ForegroundColor = ConsoleColor.White;
-                        var key = Console.ReadKey(true).Key;
-                        if (key == ConsoleKey.Escape)
-                        {
                             Console.Clear();
-                            CreateOrder();
+                            ShowInvoice(orderID);
                             Console.ReadKey();
-                        }
                     }
                     else
                     {
@@ -569,7 +551,6 @@ namespace Utilities
         [Obsolete]
         public void ShowInvoice(int orderID)
         {
-            Console.Clear();
             decimal totalAmount = 0;
             var check = new Table();
             var invoiceTimeline = new Table();
