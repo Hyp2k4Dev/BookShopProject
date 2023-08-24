@@ -276,7 +276,9 @@ namespace Utilities
                 input = Console.ReadLine() ?? "";
                 if (string.IsNullOrWhiteSpace(input))
                 {
-                    name = input = "No Name";
+                    name = "No Name";
+                }else{
+                    name = input;
                 }
                 string phone = "";
                 do
