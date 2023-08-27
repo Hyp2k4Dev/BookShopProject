@@ -157,7 +157,7 @@ namespace Utilities
             List<Book> availableBooks = bBL.GetAllBooks("");
             consoleUI.PrintBooksInShop(availableBooks);
             ConsoleKeyInfo keyInfo = Console.ReadKey();
-            if (keyInfo.Key == ConsoleKey.Escape)
+            if (keyInfo.Key == ConsoleKey.Backspace)
             {
                 Console.Clear();
                 MainMenu();
@@ -223,7 +223,7 @@ namespace Utilities
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Book not found!");
-                            Console.WriteLine("Press any key to continue...");
+                            Console.WriteLine("Press any key to search another book...");
                             Console.ReadKey();
                             Console.ForegroundColor = ConsoleColor.White;
                             return;
@@ -233,7 +233,7 @@ namespace Utilities
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Book not found with this code " + isbn);
-                        Console.WriteLine("Press any key to continue...");
+                        Console.WriteLine("Press any key to search another book...");
                         Console.ReadKey();
                         Console.ForegroundColor = ConsoleColor.White;
                         return;

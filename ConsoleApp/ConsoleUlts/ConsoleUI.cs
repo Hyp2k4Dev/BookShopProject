@@ -123,14 +123,24 @@ namespace UI
                 }
                 else if (keyInfo.Key == ConsoleKey.Spacebar)
                 {
-                    Console.WriteLine("Direction to search book...");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Directing to search book...");
+                    Console.ForegroundColor = ConsoleColor.White;
                     Thread.Sleep(3000);
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Success !!! Press Enter to input code ! ");
+                    Console.ForegroundColor = ConsoleColor.White;
                     break;
                 }
                 else if (keyInfo.Key == ConsoleKey.Backspace)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Exiting...");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Thread.Sleep(3000);
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Press ESC to Back Main Menu");
+                    Console.ForegroundColor = ConsoleColor.White;
                     break;
                 }
                 else
@@ -142,8 +152,8 @@ namespace UI
 
         public string FormatCurrencyToVND(decimal amount)
         {
-            CultureInfo culture = new CultureInfo("vi-VN"); 
-            string formattedAmount = string.Format(culture, "{0:C0}", amount); 
+            CultureInfo culture = new CultureInfo("vi-VN");
+            string formattedAmount = string.Format(culture, "{0:C0}", amount);
 
             formattedAmount = formattedAmount.Replace(culture.NumberFormat.CurrencySymbol, "VND");
 
