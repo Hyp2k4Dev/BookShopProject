@@ -154,7 +154,7 @@ namespace Utilities
             );
             AnsiConsole.Render(showTimeLine);
 
-            List<Book> availableBooks = bBL.GetAllBooks(""); // Get the list of all available books
+            List<Book> availableBooks = bBL.GetAllBooks("");
             consoleUI.PrintBooksInShop(availableBooks);
             ConsoleKeyInfo keyInfo = Console.ReadKey();
             if (keyInfo.Key == ConsoleKey.Escape)
@@ -185,7 +185,6 @@ namespace Utilities
                             bookInfoTable.AddColumn("Publisher");
                             bookInfoTable.AddColumn(new TableColumn("Price"));
                             bookInfoTable.AddColumn(new TableColumn("Quantity").Centered());
-
                             bookInfoTable.AddRow(
                                 book.BookID.ToString(),
                                 book.BookName,
@@ -197,7 +196,6 @@ namespace Utilities
                                 FormatCurrencyToVND(book.Price),
                                 book.Amount.ToString()
                             );
-
                             AnsiConsole.Render(bookInfoTable);
                             if (book.BookStatus == 1 && book.Amount > 0)
                             {
@@ -271,13 +269,14 @@ namespace Utilities
                 AnsiConsole.Render(addCusTimeline);
                 string name = "No Name";
                 string input;
-                //
                 Console.Write("Customer's name (press Enter to skip): ");
                 input = Console.ReadLine() ?? "";
                 if (string.IsNullOrWhiteSpace(input))
                 {
                     name = "No Name";
-                }else{
+                }
+                else
+                {
                     name = input;
                 }
                 string phone = "";
@@ -285,7 +284,6 @@ namespace Utilities
                 {
                     Console.Write("Phone number: ");
                     phone = Console.ReadLine() ?? "";
-
                     if (
                         string.IsNullOrEmpty(phone)
                         || phone.Length != 10

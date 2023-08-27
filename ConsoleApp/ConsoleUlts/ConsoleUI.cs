@@ -100,7 +100,9 @@ namespace UI
                         + Math.Ceiling((double)lst.Count / pageSize)
                 );
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Press '->' to next page or '<-' to previous page or Press 'Spacebar' to Continue or 'BackSpace' to return Main Menu");
+                Console.WriteLine(
+                    "Press '->' to next page or '<-' to previous page or Press 'Spacebar' to Continue or 'BackSpace' to return Main Menu"
+                );
                 Console.ForegroundColor = ConsoleColor.White;
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
                 if (keyInfo.Key == ConsoleKey.LeftArrow)
@@ -121,7 +123,9 @@ namespace UI
                 }
                 else if (keyInfo.Key == ConsoleKey.Spacebar)
                 {
-                    Console.WriteLine("Press Enter then Input Book's Code!!");
+                    Console.WriteLine("Direction to search book...");
+                    Thread.Sleep(3000);
+                    Console.WriteLine("Success !!! Press Enter to input code ! ");
                     break;
                 }
                 else if (keyInfo.Key == ConsoleKey.Backspace)
@@ -129,7 +133,8 @@ namespace UI
                     Console.WriteLine("Press ESC to Back Main Menu");
                     break;
                 }
-                else{
+                else
+                {
                     Console.WriteLine("Invalid key, please try again!");
                 }
             }
@@ -137,8 +142,8 @@ namespace UI
 
         public string FormatCurrencyToVND(decimal amount)
         {
-            CultureInfo culture = new CultureInfo("vi-VN"); // Vietnamese culture
-            string formattedAmount = string.Format(culture, "{0:C0}", amount); // C0 format specifier for currency without decimal places
+            CultureInfo culture = new CultureInfo("vi-VN"); 
+            string formattedAmount = string.Format(culture, "{0:C0}", amount); 
 
             formattedAmount = formattedAmount.Replace(culture.NumberFormat.CurrencySymbol, "VND");
 
