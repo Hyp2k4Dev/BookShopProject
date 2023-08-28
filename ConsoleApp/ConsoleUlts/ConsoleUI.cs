@@ -139,7 +139,7 @@ namespace UI
                     Console.ForegroundColor = ConsoleColor.White;
                     Thread.Sleep(3000);
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Press ESC to Back Main Menu");
+                    Console.WriteLine("Press BackSpace to back Main Menu");
                     Console.ForegroundColor = ConsoleColor.White;
                     break;
                 }

@@ -70,7 +70,8 @@ namespace Utilities
                             ViewStaffRevenueInDay();
                             break;
                         case 3:
-                            MainMenu();
+                            Console.Clear();
+                            LoginAccount();
                             break;
                     }
                 } while (mainMenuChoice != mainMenu.Length);
@@ -114,6 +115,7 @@ namespace Utilities
                         ViewStaffRevenueInDay();
                         break;
                     case 3:
+                        Console.Clear();
                         LoginAccount();
                         break;
                 }
@@ -629,8 +631,11 @@ namespace Utilities
                         "                                                                     "
                             + loginStaff1!.StaffName
                     );
-
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("                           Goodbye and see you again !!!");
+                    Console.WriteLine("                  Email Contact: (+) hiephoang1752004@gmail.com");
+                    Console.WriteLine("                                 (+) tuandt1801@gmail.com");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (o.BooksList!.Count() == 0)
                 {
@@ -751,7 +756,6 @@ namespace Utilities
 
         public static bool IsValidPhoneNumber(string phoneNumber)
         {
-            // Regular expression pattern to match a phone number with '0' as the first digit
             string pattern = @"^0\d{9,10}$";
 
             return Regex.IsMatch(phoneNumber, pattern);
@@ -759,8 +763,8 @@ namespace Utilities
 
         public string FormatCurrencyToVND(decimal amount)
         {
-            CultureInfo culture = new CultureInfo("vi-VN"); // Vietnamese culture
-            string formattedAmount = string.Format(culture, "{0:C0}", amount); // C0 format specifier for currency without decimal places
+            CultureInfo culture = new CultureInfo("vi-VN");
+            string formattedAmount = string.Format(culture, "{0:C0}", amount);
 
             formattedAmount = formattedAmount.Replace(culture.NumberFormat.CurrencySymbol, "VND");
 
