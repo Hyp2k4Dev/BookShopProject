@@ -71,7 +71,6 @@ namespace Utilities
                             break;
                         case 3:
                             Console.Clear();
-                            // System.Environment.Exit(0);
                             LoginAccount();
                             break;
                     }
