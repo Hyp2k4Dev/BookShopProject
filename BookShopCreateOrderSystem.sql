@@ -205,16 +205,16 @@ insert into Customers(customer_name, phoneNumber, customer_address) values
 select * from Customers;
 
 insert into Authors(author_name, phoneNumber, author_address) values
-	('Auhtor 1','0987654321', 'Ha Noi'),
-    ('Auhtor 2','098765231', 'Da Nang'),
-    ('Auhtor 3','097865231', 'Hai Phong'),
-    ('Auhtor 4','988765231', 'Italya'),
-    ('Auhtor 5','123456789', 'Binh Duong'),
-    ('Auhtor 6','0987654321', 'Ha Noi'),
-    ('Auhtor 7','098765231', 'Da Nang'),
-    ('Auhtor 8','097865231', 'Hai Phong'),
-    ('Auhtor 9','988765232', 'Italya'),
-    ('Auhtor 10','98855231', 'Italya'),
+	('Luu Minh Tri','0987654321', 'Ha Noi'),
+	('Stephen hawking','0987654321', 'Mi'),
+    ('Gege Akutami','097865231', 'Nhat ban'),
+    ('Fujiko F Fujio','988765231', 'Nhat ban'),
+    ('Alex Prud’homme','123456789', 'Mi'),
+    ('Shima Mizuki','0987654321', 'Nhat Ban'),
+    ('Nha bao Phan Dang','098765231', 'Ha noi'),
+    ('To Hoai','097865231', 'Ha Noi'),
+    ('Cuong Tuyet An','988765231', 'Hai Phong'),
+    ('Doan Gioi','123456789', 'Ha Noi'),
     ('Auhtor 11','9065231', 'Italya'),
     ('Auhtor 12','98265231', 'Italya'),
     ('Auhtor 13','98876231', 'Italya'),
@@ -228,30 +228,30 @@ insert into Authors(author_name, phoneNumber, author_address) values
 select * from Authors;
 
 insert into Publishers(publisher_name, phoneNumber, publisher_address, website) values
-	('Publisher 1','0987634321', 'Ha Noi', 'pu1.com'),
-    ('Publisher 2','0945765231', 'Da Nang', 'pu2.com'),
-    ('Publisher 3','0978565231', 'Hai Phong', 'pu3.com'),
-    ('Publisher 4','09887656231', 'Italya', 'pu4.com'),
-    ('Publisher 5','9428342058', 'Binh Duong', 'pu5.com'),
-    ('Publisher 6','0670563280', 'Binh Duong', 'pu5.com'),
-    ('Publisher 7','1622026688', 'Binh Duong', 'pu5.com'),
-    ('Publisher 8','3181349953', 'Binh Duong', 'pu5.com'),
-    ('Publisher 9','5006582541', 'Binh Duong', 'pu5.com'),
-    ('Publisher 10','6427637737', 'Binh Duong', 'pu5.com');
+	('Nha Xuat Ban Tre','0987634321', 'Ha Noi', 'nxbtre.com'),
+    ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com'),
+    ('Nha Xuat Ban Ha Noi','0942834205', 'Ha noi', 'nxbHaNoi.com'),
+    ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com'),
+    ('Nha Xuat Ban Tri Thuc', 0237845629, 'Ha Noi','nxbTriThuc.com'),
+    ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com'),
+    ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com'),
+    ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com'),
+    ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com'),
+    ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com');
 select * from Publishers;
 
 
 insert into Books(book_name, publisher_ID, ISBN, publish_year, book_description, price, amount, book_status) values
-	('IT Liệu đã hết thời ?', 1, 1, 1990, 'book1', 45500, 1, 1),
-    ('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 2, 2, 1992, 'book2', 44500, 2, 1),
-    ('English book2', 3, 3, 1994, 'book3', 56500, 3, 2),
-    ('EBook 4', 4, 4, 1996, 'book4', 50000, 4, 1),
-    ('Book 5', 5, 5, 1997, 'book5', 64200, 20, 2),
-    ('Book 6', 6, 6, 1997, 'book6', 64200, 12, 1),
-    ('Book 7', 7, 7, 1997, 'book7', 64200, 54, 1),
-    ('Book 8', 8, 8, 1997, 'book8', 64200, 1, 1),
-    ('Book 9', 9, 9, 1997, 'book9', 64200, 11, 1),
-    ('Book 10', 10, 10, 1997, 'book10', 100200, 5, 1),
+	('LANG CO HA NOI', 3, 1, 2019, 'Bo sach "lang co Ha Noi" la de tai thuoc mang sach kinh te, van hoa, xa hoi của Du an “Tu sach Thang Long ngan nam van hien” (giai doan 2)', 25000, 30, 1),
+    ('BAN THIET KE VI DAI', 1, 2, 2016, 'noi dung cuon sach, nhu tac gia noi ngay dau cua chuong mot, la chuyen "bi an kiep nhan sinh", la nhung cau hoi toi hau ve su song, vu tru va van vat', 100000, 40, 1),
+    ('CHU THUAT HOI CHIEN', 2, 3, 1994, 'chu thuat hoi chien-tap20', 27000, 60, 1),
+    ('DORAEMON', 4, 456789012, 4, 'Doraemon-tap 4', 20000, 50, 1),
+    ('KI NGUYEN KHO HAN', 5, 5, 2022, 'Hang nghin nguoi da song ma khong co tinh yeu - khong mot ai song ma khong co nuoc', 189000, 20, 1),
+    ('THAM TU LUNG DANH CONAN', 6, 6, 2023, 'Tham tu lung danh Conan: tau ngam sat mau den', 45000, 35, 1),
+    ('36 DOAN THIEN DE THAY', 7, 7, 2022, 'La nhung doan van, ghi lai cam nhan cua tac gia bang con mat thien', 125000, 28, 1),
+    ('DE MEN PHIEU LUU KI', 8, 8, 1941, 'De Men Phieu Luu Ki la tac pham van xuoi dac sac va noi tieng nhat của nha van To Hoai viet ve loai vat, danh cho lua tuoi thieu nhi', 45000, 40, 1),
+    ('HO SO TAM LI TOI PHAM', 9, 9, 2023, 'Series Ho So Tam Li Toi Pham (gom 5 tap) la mot bo tieu thuyet viet ve cuoc dieu tra hinh su dua tren tam li toi pham ung dung', 126000, 20, 1),
+    ('DAT RUNG PHUONG NAM', 10, 10, 1957, 'Dat Rung Phuong Nam la mot trong nhung tac pham viet ve Nam Bo xuat sac nhat, lam bat len tron ven ve dep con nguoi va thien nhien noi day', 76000, 34, 1),
     ('Book 11', 10, 11, 1997, 'book11', 24200, 5, 2),
     ('Book 12', 10, 12, 1997, 'book12', 14200, 5, 1),
     ('Book 13', 10, 13, 1997, 'book13', 87200, 5, 1),
@@ -260,21 +260,18 @@ insert into Books(book_name, publisher_ID, ISBN, publish_year, book_description,
     ('Book 16', 10, 16, 1997, 'book16', 58000, 5, 1),
     ('Book 17', 10, 17, 1997, 'book17', 64000, 5, 1),
     ('Book 18', 10, 18, 1997, 'book18', 642200, 5, 2),
-    ('Book 19', 10, 19, 1997, 'book19', 1235000, 5, 1),
+	('Book 19', 10, 19, 1997, 'book19', 1235000, 5, 1),
     ('Book 20', 10, 20, 1997, 'book20', 64200, 5, 1);
 select * from Books;
 
 insert into Categories(category_name) values
-	('category 1'),
-    ('category 2'),
-    ('category 3'),
-    ('category 4'),
-    ('category 5'),
-    ('category 6'),
-    ('category 7'),
-    ('category 8'),
-    ('category 9'),
-    ('category 10'),
+	('Van Hoa-Xa Hoi'),
+    ('Khoa Hoc'),
+    ('Manga'),
+    ('Tieu Thuyet'),
+    ('But Ki'),
+    ('Tam Li'),
+    ('Truyen Ngan'),
     ('category 11'),
     ('category 12'),
     ('category 13'),
@@ -289,10 +286,8 @@ select * from Categories;
 
 
 
-
-
 insert into CategoryDetails(book_ID, category_ID) values
-	(1, 1), (2, 2), (3, 3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11, 11), (12, 12), (13,13), (14,14),(15,15),(16,16),(17,17),(18,18),(19,19),(20,20);
+	(1, 1), (2, 2), (3, 3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11, 11), (12, 12), (13,13), (14,14),(15,15),(16,16),(17,17);
 select * from OrderDetails;
 
 insert into Authors_Books(book_ID, author_ID) values

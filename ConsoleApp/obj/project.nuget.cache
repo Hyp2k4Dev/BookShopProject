@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JLVi3Zo21rytPmxDw+V7lZBNN6L7o21qG7Zvv6klXu6SJ1lptDcL1kzSWER9BvhfYtP3hSOV6pp8U5TScE9o/Q==",
+  "dgSpecHash": "ltdi2D/TUVgIW5KbXtzaPMvLxf7Jcz50qWtJOUhZGMAEvJo+12eRLTVVvgWnsNgmQUx04TzvADqhxx2+rwCNKw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj",
+  "projectFilePath": "c:\\Users\\admin\\Documents\\GitHub\\BookShopProject\\ConsoleApp\\ConsoleApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\consoletables\\2.5.0\\consoletables.2.5.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\mysqlconnector\\2.2.6\\mysqlconnector.2.2.6.nupkg.sha512",
