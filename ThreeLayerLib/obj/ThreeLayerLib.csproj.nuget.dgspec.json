@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\admin\\Documents\\GitHub\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj": {}
+    "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj": {}
   },
   "projects": {
-    "c:\\Users\\admin\\Documents\\GitHub\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj": {
+    "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\admin\\Documents\\GitHub\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj",
         "projectName": "ThreeLayerLib",
-        "projectPath": "c:\\Users\\admin\\Documents\\GitHub\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj",
+        "projectPath": "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\admin\\Documents\\GitHub\\BookShopProject\\ThreeLayerLib\\obj\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ThreeLayerLib\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"

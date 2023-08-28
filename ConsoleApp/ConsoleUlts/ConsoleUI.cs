@@ -32,7 +32,7 @@ namespace UI
             }
             do
             {
-                Console.WriteLine("YOUR CHOOSE: ");
+                Console.Write("YOUR CHOOSE: ");
                 int.TryParse(Console.ReadLine(), out choice);
             } while (choice <= 0 || choice > menuBooks.Count());
             return choice;

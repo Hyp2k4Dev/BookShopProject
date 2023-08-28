@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HJkoNeJ0/RLb3Np0tPSjyIvbxOVAEPn5FX9r7CYR3rlfLWlrSaAjpyZ9I97koL6XYbGHF2yUP1ZHE0zkwNvTXg==",
+  "dgSpecHash": "v3+3JbwN9bsQnyy8qI1K2jVkGz7tv8/rJ3G++OcCus3X65s6frL0ELOhxu3QX2WlxNktrY9IhDEoAa5aSa4FlQ==",
   "success": true,
-  "projectFilePath": "c:\\Users\\admin\\Documents\\GitHub\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj",
+  "projectFilePath": "C:\\Users\\admin\\Desktop\\AllRelease\\ProjectV1.2\\BookShopProject\\ThreeLayerLib\\ThreeLayerLib.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\mysqlconnector\\2.2.5\\mysqlconnector.2.2.5.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\spectre.console\\0.47.0\\spectre.console.0.47.0.nupkg.sha512",
