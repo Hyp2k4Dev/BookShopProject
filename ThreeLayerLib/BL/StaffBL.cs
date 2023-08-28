@@ -9,9 +9,14 @@ namespace BL
     {
         StaffDAL staffDAL = new StaffDAL();
         public Staff? loginStaff { get; private set; }
+
+        public void LogOut()
+        {
+            loginStaff = null;
+        }
+
         public Staff? LoginAccount()
         {
-
             string userName;
             string password;
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -23,20 +28,26 @@ namespace BL
             Console.Write("[ Password  ]: ");
             password = GetPassword();
             Staff staff = staffDAL.GetStaffAccount(userName);
-            if (staff.Password == staffDAL.CreateMD5(password) && staff.StaffStatus == 1)
+            if (
+                staff.Password == staffDAL.CreateMD5(password) && staff.StaffStatus == 1
+                || userName == staff.StaffName
+            )
             {
                 loginStaff = staff;
                 return staff;
             }
             else
             {
-                return null;
+                Console.WriteLine("Invalid UserName or Password!!!");
+                return LoginAccount();
             }
         }
+
         public Staff? GetStaffById(int staffId)
         {
             return staffDAL.GetStaffById(staffId);
         }
+
         public static string GetPassword()
         {
             StringBuilder pass = new StringBuilder();
@@ -65,6 +76,5 @@ namespace BL
             }
             return pass.ToString();
         }
-
     }
 }

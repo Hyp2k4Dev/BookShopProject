@@ -126,7 +126,7 @@ namespace UI
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Directing to search book...");
                     Console.ForegroundColor = ConsoleColor.White;
-                    Thread.Sleep(3000);
+                    Thread.Sleep(1000);
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Success !!! Press Enter to input code ! ");
                     Console.ForegroundColor = ConsoleColor.White;
@@ -137,7 +137,7 @@ namespace UI
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Exiting...");
                     Console.ForegroundColor = ConsoleColor.White;
-                    Thread.Sleep(3000);
+                    Thread.Sleep(1000);
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Press BackSpace to back Main Menu");
                     Console.ForegroundColor = ConsoleColor.White;

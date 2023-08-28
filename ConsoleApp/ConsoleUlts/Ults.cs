@@ -71,6 +71,7 @@ namespace Utilities
                             break;
                         case 3:
                             Console.Clear();
+                            // System.Environment.Exit(0);
                             LoginAccount();
                             break;
                     }
@@ -82,6 +83,7 @@ namespace Utilities
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Invalid User Name/ Password! Please try again.");
                 Console.ForegroundColor = ConsoleColor.White;
+                return;
             }
         }
 
@@ -90,7 +92,8 @@ namespace Utilities
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.Write("[ Staff using: " + loginStaff1!.StaffName + " ]");
+            if (loginStaff1 != null)
+                Console.Write("[ Staff using: " + loginStaff1.StaffName + " ]");
             Console.ResetColor();
             int mainMenuChoice = consoleUI.Menu(
                 @"
@@ -145,7 +148,8 @@ namespace Utilities
 └─────────────────────────────────────────────────────────────────────────────────────┘"
             );
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("[ Staff using: " + loginStaff1!.StaffName + " ]");
+            if (loginStaff1 != null)
+                Console.WriteLine("[ Staff using: " + loginStaff1.StaffName + " ]");
             Console.ForegroundColor = ConsoleColor.White;
             showTimeLine.AddColumns(
                 " [red]=> Choose book [/]",
@@ -395,6 +399,7 @@ namespace Utilities
                 }
                 else
                 {
+                    Console.ReadKey();
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Invalid Choose!!! Try Again");
                     Console.ForegroundColor = ConsoleColor.White;
@@ -592,7 +597,6 @@ namespace Utilities
                 );
                 Console.WriteLine("Hotline: 0971443180 ");
                 Console.WriteLine();
-                Console.WriteLine("Seller: " + loginStaff1!.StaffName);
                 if (o.OrderCustomer != null)
                 {
                     Console.WriteLine("Customer's Name: " + o.OrderCustomer.CustomerName);
@@ -627,20 +631,23 @@ namespace Utilities
                         "         Customer                                                         Seller"
                     );
                     Console.WriteLine("" + o.OrderCustomer!.CustomerName);
-                    Console.WriteLine(
-                        "                                                                     "
-                            + loginStaff1!.StaffName
-                    );
+                    if (loginStaff1 != null)
+                        Console.WriteLine(
+                            "                                                                     "
+                                + loginStaff1.StaffName
+                        );
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("                           Goodbye and see you again !!!");
-                    Console.WriteLine("                  Email Contact: (+) hiephoang1752004@gmail.com");
+                    Console.WriteLine(
+                        "                  Email Contact: (+) hiephoang1752004@gmail.com"
+                    );
                     Console.WriteLine("                                 (+) tuandt1801@gmail.com");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (o.BooksList!.Count() == 0)
                 {
                     Console.Clear();
-                    Console.WriteLine($"Order ID {o.OrderID} Doesn't exist");
+                    Console.WriteLine($"Order ID Doesn't exist");
                 }
             }
             Console.WriteLine("\nPress < ESC > to return to Main Menu");
