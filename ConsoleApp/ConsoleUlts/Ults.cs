@@ -723,7 +723,7 @@ namespace Utilities
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine(
-                        "Press < Spacebar >to view invoice detail < ENTER > to return to Main Menu ."
+                        "Press < Spacebar >to view invoice detail < Enter > to return to Main Menu ."
                     );
                     Console.ForegroundColor = ConsoleColor.White;
                     var input = Console.ReadKey(true).Key;
