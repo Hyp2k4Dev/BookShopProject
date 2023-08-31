@@ -187,8 +187,7 @@ DELIMITER ;
 
 
 insert into Staffs(staff_name, user_name, pass_word, staff_status) values
-		('Dinh Thanh Tuan','staff1', '4D7D719AC0CF3D78EA8A94701913FE47', '1'),
-        ('Nguyen Hoang Hiep','staff2', '8BC01711B8163EC3F2AA0688D12CDF3B', '1');
+		('Dinh Thanh Tuan','staff', '4D7D719AC0CF3D78EA8A94701913FE47', '1');
 select * from Staffs;
 
 insert into Customers(customer_name, phoneNumber, customer_address) values
@@ -215,53 +214,54 @@ insert into Authors(author_name, phoneNumber, author_address) values
     ('To Hoai','097865231', 'Ha Noi'),
     ('Cuong Tuyet An','988765231', 'Hai Phong'),
     ('Doan Gioi','123456789', 'Ha Noi'),
-    ('Auhtor 11','9065231', 'Italya'),
-    ('Auhtor 12','98265231', 'Italya'),
-    ('Auhtor 13','98876231', 'Italya'),
-    ('Auhtor 14','99765231', 'Italya'),
-    ('Auhtor 15','978765231', 'Italya'),
-    ('Auhtor 16','96765231', 'Italya'),
-    ('Auhtor 17','950765231', 'Italya'),
-    ('Auhtor 18','941765231', 'Italya'),
-    ('Auhtor 19','932765231', 'Italya'),
-    ('Auhtor 20','223456789', 'Binh Duong');
+    ('Hwang Sun-mi', '134713912', 'Han Quoc'),
+    ('E.B White','123456789', 'Mi'),
+    ('Atsushi Ohkubo','123456789', 'Nhat Ban'),
+    ('Riichiro Inagaki','123456789', 'Nhat Ban'),
+    ('Kaidou Sakon, Taiki','123456789', 'Nhat Ban'),
+    ('Khuong Le Binh','123456789', 'Ho Chi Minh'),
+    ('Diep Lac Vo Tam','123456789', 'Ho Chi Minh');
 select * from Authors;
 
 insert into Publishers(publisher_name, phoneNumber, publisher_address, website) values
-	('Nha Xuat Ban Tre','0987634321', 'Ha Noi', 'nxbtre.com'),
+	('NXB Tre','0987634321', 'Ha Noi', 'nxbtre.com'),
     ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com'),
-    ('Nha Xuat Ban Ha Noi','0942834205', 'Ha noi', 'nxbHaNoi.com'),
+    ('NXB Ha Noi','0942834205', 'Ha noi', 'nxbHaNoi.com'),
     ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com'),
-    ('Nha Xuat Ban Tri Thuc', 0237845629, 'Ha Noi','nxbTriThuc.com'),
-    ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com'),
-    ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com'),
+    ('NXB Tri Thuc', 0237845629, 'Ha Noi','nxbTriThuc.com'),
     ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com'),
     ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com'),
-    ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com');
+    ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com'),
+    ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com'),
+    ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com'),
+    ('Nha Nam','09887656231', 'Ha Noi', 'nhaNam.com'),
+    ('Nha Nam','09887656231', 'Ha Noi', 'nhaNam.com'),
+    ('NXB Tre','0987634321', 'Ha Noi', 'nxbtre.com'),
+    ('Kim Dong','09887656231', 'Ha Noi', 'nxbKimDong.com'),
+    ('NXB Ha Noi','0942834205', 'Ha noi', 'nxbHaNoi.com'),
+    ('NXB tong hop TPHCM','0942834205', 'Ho Chi Minh', 'nxbHCM.com'),
+    ('Phu nu','0942834205', 'Ho Chi Minh', 'nxbHCM.com');
 select * from Publishers;
 
 
 insert into Books(book_name, publisher_ID, ISBN, publish_year, book_description, price, amount, book_status) values
-	('LANG CO HA NOI', 3, 1, 2019, 'Bo sach "lang co Ha Noi" la de tai thuoc mang sach kinh te, van hoa, xa hoi của Du an “Tu sach Thang Long ngan nam van hien” (giai doan 2)', 25000, 30, 1),
-    ('BAN THIET KE VI DAI', 1, 2, 2016, 'noi dung cuon sach, nhu tac gia noi ngay dau cua chuong mot, la chuyen "bi an kiep nhan sinh", la nhung cau hoi toi hau ve su song, vu tru va van vat', 100000, 40, 1),
-    ('CHU THUAT HOI CHIEN', 2, 3, 1994, 'chu thuat hoi chien-tap20', 27000, 60, 1),
-    ('DORAEMON', 4, 456789012, 4, 'Doraemon-tap 4', 20000, 50, 1),
-    ('KI NGUYEN KHO HAN', 5, 5, 2022, 'Hang nghin nguoi da song ma khong co tinh yeu - khong mot ai song ma khong co nuoc', 189000, 20, 1),
-    ('THAM TU LUNG DANH CONAN', 6, 6, 2023, 'Tham tu lung danh Conan: tau ngam sat mau den', 45000, 35, 1),
-    ('36 DOAN THIEN DE THAY', 7, 7, 2022, 'La nhung doan van, ghi lai cam nhan cua tac gia bang con mat thien', 125000, 28, 1),
-    ('DE MEN PHIEU LUU KI', 8, 8, 1941, 'De Men Phieu Luu Ki la tac pham van xuoi dac sac va noi tieng nhat của nha van To Hoai viet ve loai vat, danh cho lua tuoi thieu nhi', 45000, 40, 1),
-    ('HO SO TAM LI TOI PHAM', 9, 9, 2023, 'Series Ho So Tam Li Toi Pham (gom 5 tap) la mot bo tieu thuyet viet ve cuoc dieu tra hinh su dua tren tam li toi pham ung dung', 126000, 20, 1),
-    ('DAT RUNG PHUONG NAM', 10, 10, 1957, 'Dat Rung Phuong Nam la mot trong nhung tac pham viet ve Nam Bo xuat sac nhat, lam bat len tron ven ve dep con nguoi va thien nhien noi day', 76000, 34, 1),
-    ('Book 11', 10, 11, 1997, 'book11', 24200, 5, 2),
-    ('Book 12', 10, 12, 1997, 'book12', 14200, 5, 1),
-    ('Book 13', 10, 13, 1997, 'book13', 87200, 5, 1),
-    ('Book 14', 10, 14, 1997, 'book14', 70000, 5, 1),
-    ('Book 15', 10, 15, 1997, 'book15', 0, 5, 2),
-    ('Book 16', 10, 16, 1997, 'book16', 58000, 5, 1),
-    ('Book 17', 10, 17, 1997, 'book17', 64000, 5, 1),
-    ('Book 18', 10, 18, 1997, 'book18', 642200, 5, 2),
-	('Book 19', 10, 19, 1997, 'book19', 1235000, 5, 1),
-    ('Book 20', 10, 20, 1997, 'book20', 64200, 5, 1);
+	('LANG CO HA NOI', 3, 1234567890, 2019, 'Bo sach "lang co Ha Noi" la de tai thuoc mang sach kinh te, van hoa, xa hoi của Du an “Tu sach Thang Long ngan nam van hien” (giai doan 2)', 25000, 30, 1),
+    ('BAN THIET KE VI DAI', 1, 234567890, 2016, 'noi dung cuon sach, nhu tac gia noi ngay dau cua chuong mot, la chuyen "bi an kiep nhan sinh", la nhung cau hoi toi hau ve su song, vu tru va van vat', 100000, 40, 1),
+    ('CHU THUAT HOI CHIEN', 2, 345678901, 1994, 'chu thuat hoi chien-tap20', 27000, 60, 1),
+    ('DORAEMON', 4, 456789012, 2006, 'Doraemon-tap 4', 20000, 50, 1),
+    ('KI NGUYEN KHO HAN', 5, 567890123, 2022, 'Hang nghin nguoi da song ma khong co tinh yeu - khong mot ai song ma khong co nuoc', 189000, 20, 1),
+    ('THAM TU LUNG DANH CONAN', 6, 678901234, 2023, 'Tham tu lung danh Conan: tau ngam sat mau den', 45000, 35, 1),
+    ('36 DOAN THIEN DE THAY', 7, 789012345, 2022, 'La nhung doan van, ghi lai cam nhan cua tac gia bang con mat thien', 125000, 28, 1),
+    ('DE MEN PHIEU LUU KI', 8, 890123456, 1941, 'De Men Phieu Luu Ki la tac pham van xuoi dac sac va noi tieng nhat của nha van To Hoai viet ve loai vat, danh cho lua tuoi thieu nhi', 45000, 40, 1),
+    ('HO SO TAM LI TOI PHAM', 9, 901234567, 2023, 'Series Ho So Tam Li Toi Pham (gom 5 tap) la mot bo tieu thuyet viet ve cuoc dieu tra hinh su dua tren tam li toi pham ung dung', 126000, 20, 1),
+    ('DAT RUNG PHUONG NAM', 10, 0123456789, 1957, 'Dat Rung Phuong Nam la mot trong nhung tac pham viet ve Nam Bo xuat sac nhat, lam bat len tron ven ve dep con nguoi va thien nhien noi day', 76000, 34, 1),
+    ('CO GA MAI XONG CHUONG', 11, 893523583, 2023, 'Mot trong nhung tac pham duoc yeu thich nhat cua van hoc thieu nhi han quoc', 87000, 23, 1),
+    ('TIENG KEN THIEN NGA', 12, 893523523, 2023, 'Di dom, dang yeu, tran day tinh yeu gia dinh, ban be va tham dam ve dep thien nhien hoang da, them mot tac pham kinh dien tu E. B. White khien ta nao long', 64000, 60, 1),
+    ('FIRE FORCE', 13, 893497418, 2023, 'Truyen lay boi canh the gioi khi con doi mat voi hien tuong “nhan the boc hoa”, tuc con nguoi tu boc chay' , 40000, 50, 1),
+    ('DR.STONE', 14, 893524487, 2023, 'Dr.STONE - Tap 19: thanh pho ngo 1 trieu dan', 25000, 60, 1),
+    ('INFINITE DENDROGRAM', 15, 1935235237, 2023, 'Infinite Dendrogram - Tap 5 - Nhung nguoi ket noi cac kha nang', 97000, 30, 1),
+    ('GIAO TRINH CHUAN HSK 1', 16, 978604335, 2022, 'Duoc chia thanh sau cap do voi 18 cuon', 1064000, 20, 1),
+    ('NU HON CUA SOI', 17, 893521236, 2023, 'Neu An Di Phong khong tinh la dan ong, tren the gioi nay khong ai dam noi minh la dan ong!', 80000, 10, 1);
 select * from Books;
 
 insert into Categories(category_name) values
@@ -270,28 +270,20 @@ insert into Categories(category_name) values
     ('Manga'),
     ('Tieu Thuyet'),
     ('But Ki'),
-    ('Tam Li'),
     ('Truyen Ngan'),
-    ('category 11'),
-    ('category 12'),
-    ('category 13'),
-    ('category 14'),
-    ('category 15'),
-    ('category 16'),
-    ('category 17'),
-    ('category 18'),
-    ('category 19'),
-    ('category 20');
+    ('Sach hoc ngoai ngu'),
+    ('Ngon tinh'),
+    ('Light novel');
 select * from Categories;
 
 
 
 insert into CategoryDetails(book_ID, category_ID) values
-	(1, 1), (2, 2), (3, 3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11, 11), (12, 12), (13,13), (14,14),(15,15),(16,16),(17,17);
+	(1, 1), (2, 2), (3, 3),(4,3),(5,4),(6,3),(7,1),(8,5),(9,4),(10,4), (11,6), (12,4), (13,3), (14,3), (15,9), (16,7), (17,8);
 select * from OrderDetails;
 
 insert into Authors_Books(book_ID, author_ID) values
-	(1, 1), (2, 2), (3, 3), (4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11, 11), (12, 12), (13,13), (14,14),(15,15),(16,16),(17,17),(18,18),(19,19),(20,20);
+	(1, 1), (2, 2), (3, 3), (4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11,11),(12,12), (13,13), (14,14), (15,15), (16,16), (17,17);
 select * from OrderDetails;
 
 
@@ -323,26 +315,6 @@ from Books b inner join CategoryDetails cd on b.book_ID=cd.book_ID
 -- select LAST_INSERT_ID();
 -- select customer_id from Customers order by customer_id desc limit 1;
 
-update Books set amount=100 where book_ID=1;
-update Books set amount=100 where book_ID=2;
-update Books set amount=100 where book_ID=3;
-update Books set amount=100 where book_ID=4;
-update Books set amount=100 where book_ID=5;
-update Books set amount=100 where book_ID=6;
-update Books set amount=100 where book_ID=7;
-update Books set amount=100 where book_ID=8;
-update Books set amount=100 where book_ID=9;
-update Books set amount=100 where book_ID=10;
-update Books set amount=100 where book_ID=11;
-update Books set amount=100 where book_ID=12;
-update Books set amount=100 where book_ID=13;
-update Books set amount=100 where book_ID=14;
-update Books set amount=100 where book_ID=15;
-update Books set amount=100 where book_ID=16;
-update Books set amount=100 where book_ID=17;
-update Books set amount=100 where book_ID=18;
-update Books set amount=100 where book_ID=19;
-update Books set amount=100 where book_ID=20;
 
 -- SELECT o.order_ID, o.order_date, c.customer_name, c.phoneNumber, c.customer_address, b.book_name, b.price, b.amount
 -- FROM Orders o INNER JOIN Customers c ON o.customer_ID = c.customer_ID
