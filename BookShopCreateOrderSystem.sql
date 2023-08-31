@@ -245,23 +245,23 @@ select * from Publishers;
 
 
 insert into Books(book_name, publisher_ID, ISBN, publish_year, book_description, price, amount, book_status) values
-	('LANG CO HA NOI', 3, 1234567890, 2019, 'Bo sach "lang co Ha Noi" la de tai thuoc mang sach kinh te, van hoa, xa hoi của Du an “Tu sach Thang Long ngan nam van hien” (giai doan 2)', 25000, 30, 1),
-    ('BAN THIET KE VI DAI', 1, 234567890, 2016, 'noi dung cuon sach, nhu tac gia noi ngay dau cua chuong mot, la chuyen "bi an kiep nhan sinh", la nhung cau hoi toi hau ve su song, vu tru va van vat', 100000, 40, 1),
-    ('CHU THUAT HOI CHIEN', 2, 345678901, 1994, 'chu thuat hoi chien-tap20', 27000, 60, 1),
-    ('DORAEMON', 4, 456789012, 2006, 'Doraemon-tap 4', 20000, 50, 1),
-    ('KI NGUYEN KHO HAN', 5, 567890123, 2022, 'Hang nghin nguoi da song ma khong co tinh yeu - khong mot ai song ma khong co nuoc', 189000, 20, 1),
-    ('THAM TU LUNG DANH CONAN', 6, 678901234, 2023, 'Tham tu lung danh Conan: tau ngam sat mau den', 45000, 35, 1),
-    ('36 DOAN THIEN DE THAY', 7, 789012345, 2022, 'La nhung doan van, ghi lai cam nhan cua tac gia bang con mat thien', 125000, 28, 1),
-    ('DE MEN PHIEU LUU KI', 8, 890123456, 1941, 'De Men Phieu Luu Ki la tac pham van xuoi dac sac va noi tieng nhat của nha van To Hoai viet ve loai vat, danh cho lua tuoi thieu nhi', 45000, 40, 1),
-    ('HO SO TAM LI TOI PHAM', 9, 901234567, 2023, 'Series Ho So Tam Li Toi Pham (gom 5 tap) la mot bo tieu thuyet viet ve cuoc dieu tra hinh su dua tren tam li toi pham ung dung', 126000, 20, 1),
-    ('DAT RUNG PHUONG NAM', 10, 0123456789, 1957, 'Dat Rung Phuong Nam la mot trong nhung tac pham viet ve Nam Bo xuat sac nhat, lam bat len tron ven ve dep con nguoi va thien nhien noi day', 76000, 34, 1),
-    ('CO GA MAI XONG CHUONG', 11, 893523583, 2023, 'Mot trong nhung tac pham duoc yeu thich nhat cua van hoc thieu nhi han quoc', 87000, 23, 1),
-    ('TIENG KEN THIEN NGA', 12, 893523523, 2023, 'Di dom, dang yeu, tran day tinh yeu gia dinh, ban be va tham dam ve dep thien nhien hoang da, them mot tac pham kinh dien tu E. B. White khien ta nao long', 64000, 60, 1),
-    ('FIRE FORCE', 13, 893497418, 2023, 'Truyen lay boi canh the gioi khi con doi mat voi hien tuong “nhan the boc hoa”, tuc con nguoi tu boc chay' , 40000, 50, 1),
-    ('DR.STONE', 14, 893524487, 2023, 'Dr.STONE - Tap 19: thanh pho ngo 1 trieu dan', 25000, 60, 1),
-    ('INFINITE DENDROGRAM', 15, 1935235237, 2023, 'Infinite Dendrogram - Tap 5 - Nhung nguoi ket noi cac kha nang', 97000, 30, 1),
-    ('GIAO TRINH CHUAN HSK 1', 16, 978604335, 2022, 'Duoc chia thanh sau cap do voi 18 cuon', 1064000, 20, 1),
-    ('NU HON CUA SOI', 17, 893521236, 2023, 'Neu An Di Phong khong tinh la dan ong, tren the gioi nay khong ai dam noi minh la dan ong!', 80000, 10, 1);
+	('LANG CO HA NOI', 3, 1, 2019, 'Bo sach "lang co Ha Noi" la de tai thuoc mang sach kinh te, van hoa, xa hoi của Du an “Tu sach Thang Long ngan nam van hien” (giai doan 2)', 25000, 30, 1),
+    ('BAN THIET KE VI DAI', 1, 2, 2016, 'noi dung cuon sach, nhu tac gia noi ngay dau cua chuong mot, la chuyen "bi an kiep nhan sinh", la nhung cau hoi toi hau ve su song, vu tru va van vat', 100000, 40, 1),
+    ('CHU THUAT HOI CHIEN', 2, 3, 1994, 'chu thuat hoi chien-tap20', 27000, 60, 1),
+    ('DORAEMON', 4, 4, 2006, 'Doraemon-tap 4', 20000, 50, 1),
+    ('KI NGUYEN KHO HAN', 5, 5, 2022, 'Hang nghin nguoi da song ma khong co tinh yeu - khong mot ai song ma khong co nuoc', 189000, 20, 1),
+    ('THAM TU LUNG DANH CONAN', 6, 6, 2023, 'Tham tu lung danh Conan: tau ngam sat mau den', 45000, 35, 1),
+    ('36 DOAN THIEN DE THAY', 7, 7, 2022, 'La nhung doan van, ghi lai cam nhan cua tac gia bang con mat thien', 125000, 28, 1),
+    ('DE MEN PHIEU LUU KI', 8, 8, 1941, 'De Men Phieu Luu Ki la tac pham van xuoi dac sac va noi tieng nhat của nha van To Hoai viet ve loai vat, danh cho lua tuoi thieu nhi', 45000, 40, 1),
+    ('HO SO TAM LI TOI PHAM', 9, 9, 2023, 'Series Ho So Tam Li Toi Pham (gom 5 tap) la mot bo tieu thuyet viet ve cuoc dieu tra hinh su dua tren tam li toi pham ung dung', 126000, 20, 1),
+    ('DAT RUNG PHUONG NAM', 10, 10, 1957, 'Dat Rung Phuong Nam la mot trong nhung tac pham viet ve Nam Bo xuat sac nhat, lam bat len tron ven ve dep con nguoi va thien nhien noi day', 76000, 34, 1),
+    ('CO GA MAI XONG CHUONG', 11, 11, 2023, 'Mot trong nhung tac pham duoc yeu thich nhat cua van hoc thieu nhi han quoc', 87000, 23, 1),
+    ('TIENG KEN THIEN NGA', 12, 12, 2023, 'Di dom, dang yeu, tran day tinh yeu gia dinh, ban be va tham dam ve dep thien nhien hoang da, them mot tac pham kinh dien tu E. B. White khien ta nao long', 64000, 60, 1),
+    ('FIRE FORCE', 13, 13, 2023, 'Truyen lay boi canh the gioi khi con doi mat voi hien tuong “nhan the boc hoa”, tuc con nguoi tu boc chay' , 40000, 50, 1),
+    ('DR.STONE', 14, 14, 2023, 'Dr.STONE - Tap 19: thanh pho ngo 1 trieu dan', 25000, 60, 1),
+    ('INFINITE DENDROGRAM', 15, 15, 2023, 'Infinite Dendrogram - Tap 5 - Nhung nguoi ket noi cac kha nang', 97000, 30, 1),
+    ('GIAO TRINH CHUAN HSK 1', 16, 16, 2022, 'Duoc chia thanh sau cap do voi 18 cuon', 1064000, 20, 1),
+    ('NU HON CUA SOI', 17, 17, 2023, 'Neu An Di Phong khong tinh la dan ong, tren the gioi nay khong ai dam noi minh la dan ong!', 80000, 10, 1);
 select * from Books;
 
 insert into Categories(category_name) values
