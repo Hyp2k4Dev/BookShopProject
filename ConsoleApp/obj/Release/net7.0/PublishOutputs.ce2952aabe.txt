@@ -1,0 +1,10 @@
+C:\Users\admin\Desktop\AllRelease\BookShopCreateOrderSystem\ConsoleApp.exe
+C:\Users\admin\Desktop\AllRelease\BookShopCreateOrderSystem\ConsoleApp.dll
+C:\Users\admin\Desktop\AllRelease\BookShopCreateOrderSystem\ConsoleApp.deps.json
+C:\Users\admin\Desktop\AllRelease\BookShopCreateOrderSystem\ConsoleApp.runtimeconfig.json
+C:\Users\admin\Desktop\AllRelease\BookShopCreateOrderSystem\ConsoleApp.pdb
+C:\Users\admin\Desktop\AllRelease\BookShopCreateOrderSystem\ConsoleTables.dll
+C:\Users\admin\Desktop\AllRelease\BookShopCreateOrderSystem\MySqlConnector.dll
+C:\Users\admin\Desktop\AllRelease\BookShopCreateOrderSystem\Spectre.Console.dll
+C:\Users\admin\Desktop\AllRelease\BookShopCreateOrderSystem\ThreeLayerLib.dll
+C:\Users\admin\Desktop\AllRelease\BookShopCreateOrderSystem\ThreeLayerLib.pdb

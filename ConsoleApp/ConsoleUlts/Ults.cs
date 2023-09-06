@@ -238,7 +238,7 @@ namespace Utilities
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Book not found with this code " + isbn);
+                        Console.WriteLine("Book not found");
                         Console.WriteLine("Press any key to search another book...");
                         Console.ReadKey();
                         Console.ForegroundColor = ConsoleColor.White;
