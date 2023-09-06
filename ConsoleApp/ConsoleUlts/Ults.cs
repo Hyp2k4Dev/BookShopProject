@@ -173,9 +173,9 @@ namespace Utilities
             {
                 do
                 {
-                    int isbn = 0;
+                    int isbn;
                     Console.Write("Input book's ID to searching: ");
-                    if (Int32.TryParse(Console.ReadLine(), out isbn))
+                    if (Int32.TryParse(Console.ReadLine(), out isbn) && isbn > 0)
                     {
                         Book book = bBL.GetBookByISBN(isbn);
 
